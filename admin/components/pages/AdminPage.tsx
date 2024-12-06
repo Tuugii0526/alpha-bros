@@ -1,7 +1,9 @@
 const AdminPage = () => {
   return (
     <main>
-      <div className="container m-auto">admin page</div>
+      <div className="">
+        <div className="container m-auto border border-black">admin page</div>
+      </div>
     </main>
   );
 };
