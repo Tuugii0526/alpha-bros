@@ -1,6 +1,6 @@
 # booking
 
-Манай figma link
+Манай figma link болно.
 
 1 -> https://www.figma.com/design/jUzNFLfLOHUksREJgBKKl0/75%2B-Car-Dealer-Website-Templates-(Community)?node-id=5-5278&node-type=frame&t=a1UEgyETdPp1r2gc-0
 
