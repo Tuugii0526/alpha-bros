@@ -2,7 +2,7 @@ export const SinglePage = () => {
   return (
     <div>
       <main className="bg-gray-50 pb-8">
-        <div className="max-w-7xl  mx-auto px-4 sm:px-6 lg:px-8">
+        <div className=" container  mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-6">
             <div className="lg:col-span-2 rounded-lg overflow-hidden shadow">
               <img
