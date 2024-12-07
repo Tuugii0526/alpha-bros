@@ -1,9 +1,11 @@
+"use client";
+
+import { AdminPageZone } from "../features/AdminHome";
+
 const AdminPage = () => {
   return (
-    <main>
-      <div className="">
-        <div className="container m-auto border border-black">admin page</div>
-      </div>
+    <main className="h-screen w-screen bg-slate-100">
+      <AdminPageZone />
     </main>
   );
 };
