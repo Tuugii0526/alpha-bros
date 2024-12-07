@@ -14,7 +14,6 @@ export default function HomePage() {
       <Hero />
 =======
     <div className="w-screen flex flex-col justify-center">
-      <Navbar />
       <LogoSection />
 >>>>>>> 24ce1b1 (jack)
     </div>
