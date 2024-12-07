@@ -1,5 +1,4 @@
 import { AdminContent } from "./AdminContent";
-import { AdminHeader } from "./AdminHeader";
 import { AdminSideBar } from "./AdminSideBar";
 
 export const AdminPageZone = () => {

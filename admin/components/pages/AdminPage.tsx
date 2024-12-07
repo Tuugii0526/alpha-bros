@@ -1,4 +1,6 @@
-import { AdminHeader, AdminPageZone } from "../features/AdminHome";
+"use client";
+
+import { AdminPageZone } from "../features/AdminHome";
 
 const AdminPage = () => {
   return (
