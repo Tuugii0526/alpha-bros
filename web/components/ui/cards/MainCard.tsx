@@ -82,7 +82,7 @@ const MainCard = (data: TSpaceMeetingPlace) => {
         <div className="flex gap-4 justify-between">
           <div className="flex items-center justify-center gap-1 border-b border-MainWhite ">
             <MapPinIcon size={16} />
-            <p className="text-MainWhite ">{data.location}</p>
+            <p className="text-MainWhite line-clamp-1">{data.location}</p>
           </div>
           <div className="flex items-center justify-center gap-1 border-b border-MainWhite ">
             <UsersIcon size={16} />
