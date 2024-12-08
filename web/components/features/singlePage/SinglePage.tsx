@@ -1,9 +1,4 @@
-import {
-  GuestsIcon,
-  LocationIcon,
-  PeopleIcon,
-  SeatIcon,
-} from "@/components/ui/icons";
+import { LocationIcon, PeopleIcon, SeatIcon } from "@/components/ui/icons";
 
 export const SinglePage = () => {
   return (
