@@ -1,7 +1,8 @@
 "use client";
 
 import { HeaderButton } from "@/components/ui/buttons";
-import { DashboardIcon } from "@/components/ui/icons/DashboardIcon";
+import { DashboardIcon } from "@/components/ui/Icons";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
