@@ -3,3 +3,8 @@ export type HeaderButtonTypes = {
   pathname?: string;
   path?: string;
 };
+
+export type DashboardIconType = {
+  pathname?: string;
+  path?: string;
+};
