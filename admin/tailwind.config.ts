@@ -10,6 +10,12 @@ export default {
     extend: {
       colors: {
         MainColor: "#050B20",
+        SecondColor: "#405FF2",
+        MainWhite: "#FFFFFF",
+      },
+      fontFamily: {
+        Poppins: ["Poppins", "serif"],
+        Inter: ["Inter", "serif"],
       },
     },
   },
