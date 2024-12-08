@@ -7,7 +7,7 @@ import {
 export const RecommendedSpaces = () => {
   return (
     <div className="w-screen flex justify-center items-center mt-8">
-      <div className="grid sm:grid-cols-3 lg:grid-col-6 gap-7 mx-auto">
+      <div className="grid sm:grid-cols-4 lg:grid-col-6 gap-7 mx-auto">
         {spaceMeetingPlacesData.map((data: TSpaceMeetingPlace) => {
           return (
             <MainCard
