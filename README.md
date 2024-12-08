@@ -10,14 +10,6 @@ FIGMA -> https://www.figma.com/design/kh7aNbWYpoxQMIqtSqKtAx/75%2B-Car-Dealer-We
 -> React.js
 -> Next.js
 -> Tailwind CSS
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
--> MUIdsaccascdasc
->>>>>>> 6d6f98e (test)
-=======
--> MUIdsaccascdasc
->>>>>>> 6d6f98eb4b51dd138bc10f96a5c261b7c1686427
 -> Shadcn UI
 -> Node.js
 -> Express.js
@@ -26,11 +18,5 @@ FIGMA -> https://www.figma.com/design/kh7aNbWYpoxQMIqtSqKtAx/75%2B-Car-Dealer-We
 -> Cloudinary
 
 ## connection url
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-<!-- MONGODB_CONNECT_URL = mongodb+srv://Lhagvaa0102:Lhagvaa.0102@leap0102.k0ghj.mongodb.net -->
-=======
->>>>>>> 6d6f98e (test)
-=======
->>>>>>> 6d6f98eb4b51dd138bc10f96a5c261b7c1686427
+MONGODB_CONNECT_URL = mongodb+srv://Lhagvaa0102:Lhagvaa.0102@leap0102.k0ghj.mongodb.net
