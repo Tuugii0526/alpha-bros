@@ -10,12 +10,13 @@ FIGMA -> https://www.figma.com/design/kh7aNbWYpoxQMIqtSqKtAx/75%2B-Car-Dealer-We
 -> React.js
 -> Next.js
 -> Tailwind CSS
--> MUI
 -> Shadcn UI
 -> Node.js
 -> Express.js
 -> MongoDB
 -> Mongoose OMD
 -> Cloudinary
+
 ## connection url
-MONGODB_CONNECT_URL = mongodb+srv://Lhagvaa0102:Lhagvaa.0102@leap0102.k0ghj.mongodb.net
+
+<!-- MONGODB_CONNECT_URL = mongodb+srv://Lhagvaa0102:Lhagvaa.0102@leap0102.k0ghj.mongodb.net -->
