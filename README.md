@@ -10,7 +10,6 @@ FIGMA -> https://www.figma.com/design/kh7aNbWYpoxQMIqtSqKtAx/75%2B-Car-Dealer-We
 -> React.js
 -> Next.js
 -> Tailwind CSS
-
 -> Shadcn UI
 -> Node.js
 -> Express.js
