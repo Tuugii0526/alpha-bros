@@ -36,7 +36,6 @@ export type TSpaceMeetingPlace = {
     sunday: TWorkingHours;
   };
 };
-
 export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
   {
     id: 10000000,
