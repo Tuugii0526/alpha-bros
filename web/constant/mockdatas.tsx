@@ -37,6 +37,11 @@ export type TSpaceMeetingPlace = {
   };
 };
 
+export type TPlaceCategory = {
+  id: number;
+  type: string;
+};
+
 export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
   {
     id: 10000000,
@@ -205,5 +210,32 @@ export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
       saturday: { open: "09:00", close: "17:00" },
       sunday: { open: "Closed", close: "Closed" },
     },
+  },
+];
+
+export const placeCategory: TPlaceCategory[] = [
+  {
+    id: 45232555556,
+    type: "Meeting",
+  },
+  {
+    id: 4553355557,
+    type: "Dating",
+  },
+  {
+    id: 4554455558,
+    type: "Enjoy",
+  },
+  {
+    id: 4555555559,
+    type: "Seminar",
+  },
+  {
+    id: 4555556660,
+    type: "Training",
+  },
+  {
+    id: 4555556177,
+    type: "Networking",
   },
 ];
