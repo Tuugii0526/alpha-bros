@@ -122,7 +122,7 @@ export const SinglePage = () => {
                   </div>
                 </div>
                 <div className="bg-white border border-[#e5e7eb] max-w-[600px] h-[400px] w-full p-4 rounded-xl shadow-lg">
-                  <div className="w-full border-b">Hours</div>
+                  <div className="w-full border-b ">Hours</div>
                   <div>
                     <div>
                       {Object.entries(data.workingHours).map(([day, hours]) => (
