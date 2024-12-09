@@ -44,7 +44,10 @@ export type TPlaceCategory = {
   type: string;
 };
 
+<<<<<<< HEAD
 >>>>>>> 53c5025 (mainpage)
+=======
+>>>>>>> 137deb73b00dde99ab23924f424d1ebdc6d14203
 export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
   {
     id: 10000000,
