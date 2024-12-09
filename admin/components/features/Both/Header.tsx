@@ -3,7 +3,7 @@
 export const Header = () => {
   return (
     <main>
-      <div className="bg-white border border-SecondColor text-black py-2 mt-4 ml-8 px-4 rounded-xl ">
+      <div className="bg-MainWhite text-black py-2 mt-4 ml-8 px-4 rounded-xl ">
         <div className="">
           <div className="flex justify-end">
             <div className="flex items-center gap-2">
