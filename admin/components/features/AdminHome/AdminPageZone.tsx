@@ -1,19 +1,17 @@
 import { AdminContent } from "./AdminContent";
-import { AdminSideBar } from "./AdminSideBar";
+import { SideBar } from "../Both";
 
 export const AdminPageZone = () => {
   return (
     <main>
-      <main>
-        <div className="w-full fixed z-40 h-full">
-          <div className="container m-auto  h-full rounded-r-3xl">
-            <div className="flex w-full h-full text-white">
-              <AdminSideBar />
-              <AdminContent />
-            </div>
+      <div className="w-full fixed z-40 h-full">
+        <div className="container m-auto  h-full rounded-r-3xl">
+          <div className="flex w-full h-full text-white">
+            <SideBar />
+            <AdminContent />
           </div>
         </div>
-      </main>
+      </div>
     </main>
   );
 };
