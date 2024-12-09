@@ -4,7 +4,7 @@ import {
   AdminIcon,
   DashboardIcon,
   LightHouseIcon,
-} from "@/components/ui/Icons";
+} from "@/components/ui/icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
