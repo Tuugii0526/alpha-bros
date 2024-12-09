@@ -10,7 +10,7 @@ const createUser = async (req, response) => {
       phoneNumber,
     });
     response.status(201).json({
-      succes: true,
+      success: true,
       data: result,
     });
   } catch (error) {
