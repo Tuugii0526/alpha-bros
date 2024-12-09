@@ -1,134 +1,150 @@
+"use client";
+
 import { LocationIcon, PeopleIcon, SeatIcon } from "@/components/ui/icons";
+import { spaceMeetingPlacesData } from "@/constant/mockdatas";
+import { useParams } from "next/navigation";
+import WorkingTimeCard from "./WorkingTimeCard";
 
 export const SinglePage = () => {
+  const params = useParams<{ place: string }>();
+  const singleData = spaceMeetingPlacesData.filter((data) => {
+    return data.id == params.place;
+  });
+
   return (
-    <main>
-      <div className="bg-[#F9FBFC] w-full">
-        <div className="container mx-auto h-full">
-          <div className="grid grid-cols-4 grid-rows-2 gap-2 h-[646px]">
-            <div
-              className="h-auto w-full rounded-2xl col-span-2 row-span-2"
-              style={{
-                background: "url('./1.jpg')",
-                backgroundPosition: "center",
-                backgroundSize: "cover",
-              }}
-            ></div>
-            <div
-              className="h-auto rounded-2xl"
-              style={{
-                background: "url('./1.jpg')",
-                backgroundPosition: "center",
-                backgroundSize: "cover",
-              }}
-            ></div>
-            <div
-              className="h-auto rounded-2xl"
-              style={{
-                background: "url('./1.jpg')",
-                backgroundPosition: "center",
-                backgroundSize: "cover",
-              }}
-            ></div>
-            <div
-              className="h-auto rounded-2xl"
-              style={{
-                background: "url('./1.jpg')",
-                backgroundPosition: "center",
-                backgroundSize: "cover",
-              }}
-            ></div>
-            <div
-              className="h-auto rounded-2xl"
-              style={{
-                background: "url('./1.jpg')",
-                backgroundPosition: "center",
-                backgroundSize: "cover",
-              }}
-            ></div>
-          </div>
-          <div className="flex justify-between mt-12 w-full">
-            <div className="w-full">
-              <div className="pr-10 w-full">
-                <div className="bg-white flex flex-col gap-6 p-4  w-full border border-[#e5e7eb] rounded-xl">
-                  <div className=" flex w-full justify-between">
-                    <div className="py-1 px-[10px] bg-[#405FF212] rounded-full">
-                      <p className="font-Poppins not-italic font-bold text-[#405FF2] text-xs">
-                        Wooden house
+    <>
+      {singleData.map((data) => {
+        return (
+          <div className="bg-[#F9FBFC] w-full " key={data.id}>
+            <div className="container mx-auto h-full">
+              <div className="grid grid-cols-4 grid-rows-2 gap-2 h-[646px]">
+                <div
+                  className="h-auto w-full rounded-2xl col-span-2 row-span-2"
+                  style={{
+                    background: `url(${data.image})`,
+                    backgroundPosition: "center",
+                    backgroundSize: "cover",
+                  }}
+                ></div>
+                <div
+                  className="h-auto rounded-2xl"
+                  style={{
+                    background: `url(${data.image})`,
+                    backgroundPosition: "center",
+                    backgroundSize: "cover",
+                  }}
+                ></div>
+                <div
+                  className="h-auto rounded-2xl"
+                  style={{
+                    background: `url(${data.image})`,
+                    backgroundPosition: "center",
+                    backgroundSize: "cover",
+                  }}
+                ></div>
+                <div
+                  className="h-auto rounded-2xl"
+                  style={{
+                    background: `url(${data.image})`,
+                    backgroundPosition: "center",
+                    backgroundSize: "cover",
+                  }}
+                ></div>
+                <div
+                  className="h-auto rounded-2xl"
+                  style={{
+                    background: `url(${data.image})`,
+                    backgroundPosition: "center",
+                    backgroundSize: "cover",
+                  }}
+                ></div>
+              </div>
+              <div className="flex justify-between mt-12 w-full">
+                <div className="w-full">
+                  <div className="pr-10 w-full">
+                    <div className="bg-white flex flex-col gap-6 p-4  w-full border border-[#e5e7eb] rounded-xl">
+                      <div className=" flex w-full justify-between">
+                        <div className="py-1 px-[10px] bg-[#405FF212] rounded-full">
+                          <p className="font-Poppins not-italic font-bold text-[#405FF2] text-xs">
+                            {data.type}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="">
+                        <p className="font-Poppins font-semibold not-italic text-2xl">
+                          {data.name}
+                        </p>
+                      </div>
+                      <div className="flex gap-2 items-center">
+                        <LocationIcon />
+                        <p className="font-Inter not-italic font-medium text-base">
+                          {data.location}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="flex items-center justify-center w-10 h-10 bg-[#405FF212] rounded-[50%]">
+                          <p className="">Г</p>
+                        </div>
+                        <p className="font-medium font-Inter text-lg text-[#6b7280]">
+                          Customer by
+                        </p>
+                        <span className="font-medium font-Inter text-lg">
+                          Гэрэлтбаатар
+                        </span>
+                      </div>
+                      <div className="w-full border border-[#e5e7eb]"></div>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1">
+                          <PeopleIcon />
+                          <p className="font-Poppins text-base text-[#374151] not-italic ">
+                            {data.capacity}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <SeatIcon />
+                          <p className="font-Poppins text-base text-[#374151] not-italic ">
+                            20
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="w-full mt-12 pr-10">
+                    <div className="bg-white flex flex-col gap-6 p-4  w-full border border-[#e5e7eb] rounded-xl">
+                      <p className="font-Poppins font-semibold not-italic text-2xl">
+                        {data.ambiance}
                       </p>
-                    </div>
-                    <div className="">button</div>
-                  </div>
-                  <div className="">
-                    <p className="font-Poppins font-semibold not-italic text-2xl">
-                      Beach House in Collingwood
-                    </p>
-                  </div>
-                  <div className="flex gap-2 items-center">
-                    <LocationIcon />
-                    <p className="font-Inter not-italic font-medium text-base">
-                      Tokyo, Jappan
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="flex items-center justify-center w-10 h-10 bg-[#405FF212] rounded-[50%]">
-                      <p className="">Г</p>
-                    </div>
-                    <p className="font-medium font-Inter text-lg text-[#6b7280]">
-                      Customer by
-                    </p>
-                    <span className="font-medium font-Inter text-lg">
-                      Гэрэлтбаатар
-                    </span>
-                  </div>
-                  <div className="w-full border border-[#e5e7eb]"></div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-1">
-                      <PeopleIcon />
-                      <p className="font-Poppins text-base text-[#374151] not-italic ">
-                        6 guests
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <SeatIcon />
-                      <p className="font-Poppins text-base text-[#374151] not-italic ">
-                        6 guests
+                      <div className="border border-[e5e7eb] w-16"></div>
+                      <p className="font-Poppins text-base text-[#374151] not-italic">
+                        {data.description}
                       </p>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="w-full mt-12 pr-10">
-                <div className="bg-white flex flex-col gap-6 p-4  w-full border border-[#e5e7eb] rounded-xl">
-                  <p className="font-Poppins font-semibold not-italic text-2xl">
-                    Stay information
-                  </p>
-                  <div className="border border-[e5e7eb] w-16"></div>
-                  <p className="font-Poppins text-base text-[#374151] not-italic">
-                    Providing lake views, The Symphony 9 Tam Coc in Ninh Binh
-                    provides accommodation, an outdoor swimming pool, a bar, a
-                    shared lounge, a garden and barbecue facilities.
-                    Complimentary WiFi is provided.
-                  </p>
-                  <p className="font-Poppins text-base text-[#374151] not-italic">
-                    There is a private bathroom with bidet in all units, along
-                    with a hairdryer and free toiletries.
-                  </p>
-                  <p className="font-Poppins text-base text-[#374151] not-italic">
-                    The Symphony 9 Tam Coc offers a terrace. Both a bicycle
-                    rental service and a car rental service are available at the
-                    accommodation, while cycling can be enjoyed nearby.
-                  </p>
+                <div className="bg-white border border-[#e5e7eb] max-w-[600px] h-[400px] w-full p-4 rounded-xl shadow-lg">
+                  <div className="w-full border-b ">Hours</div>
+                  <div>
+                    <div>
+                      {Object.entries(data.workingHours).map(([day, hours]) => (
+                        <div key={day}>
+                          {
+                            <WorkingTimeCard
+                              day={day.charAt(0).toUpperCase() + day.slice(1)}
+                              open={hours.open}
+                              close={hours.close}
+                            />
+                          }
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="bg-white border border-[#e5e7eb] max-w-[600px] h-[400px] w-full p-4 rounded-xl shadow-lg">
-              asqADWFEG
-            </div>
           </div>
-        </div>
-      </div>
-    </main>
+        );
+      })}
+    </>
   );
 };
 
@@ -136,7 +152,7 @@ export const SinglePage = () => {
   /*
   <div className=" container  mx-auto px-4 sm:px-6 lg:px-8">
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-6">
-      <div className="lg:col-span-2 rounded-lg overflow-hidden shadow">
+    <div className="lg:col-span-2 rounded-lg overflow-hidden shadow">
         <img
           src="https://via.placeholder.com/800x600"
           alt="Large Property Image"

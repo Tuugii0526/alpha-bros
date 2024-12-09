@@ -19,7 +19,7 @@ export type TWorkingHours = {
 };
 
 export type TSpaceMeetingPlace = {
-  id: number;
+  id: string;
   image: string;
   name: string;
   type?: "Meeting" | "Dating";
@@ -45,7 +45,7 @@ export type TPlaceCategory = {
 
 export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
   {
-    id: 10000000,
+    id: "10000000",
     name: "Orbital Rendezvous Lounge",
     type: "Dating",
     capacity: 50,
@@ -66,7 +66,7 @@ export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
     },
   },
   {
-    id: 211111111,
+    id: "211111111",
     name: "Nebula Conference Hub",
     type: "Meeting",
     capacity: 200,
@@ -87,7 +87,7 @@ export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
     },
   },
   {
-    id: 32222222,
+    id: "32222222",
     name: "Stardust Romantic Dome",
     type: "Dating",
     capacity: 30,
@@ -108,7 +108,7 @@ export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
     },
   },
   {
-    id: 45555555,
+    id: "45555555",
     name: "Galactic Summit Center",
     type: "Meeting",
     capacity: 300,
@@ -129,7 +129,7 @@ export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
     },
   },
   {
-    id: 56666666,
+    id: "56666666",
     name: "Quantum Connections Cafe",
     type: "Dating",
     capacity: 40,
@@ -150,7 +150,7 @@ export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
     },
   },
   {
-    id: 6777777777,
+    id: "6777777777",
     name: "Cosmic Collaboration Plaza",
     type: "Meeting",
     capacity: 150,
@@ -171,7 +171,7 @@ export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
     },
   },
   {
-    id: 6777277777,
+    id: "6777277777",
     name: "Cosmic Collaboration Plaza",
     type: "Meeting",
     capacity: 150,
@@ -192,7 +192,7 @@ export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
     },
   },
   {
-    id: 8888888888,
+    id: "8888888888",
     name: "Lunar Innovation Hub",
     type: "Meeting",
     capacity: 100,
