@@ -15,6 +15,7 @@ export default {
       fontFamily: {
         Poppins: ["Poppins", "serif"],
         Inter: ["Inter", "serif"],
+        Roboto: ["Roboto", "serif"],
       },
     },
   },
