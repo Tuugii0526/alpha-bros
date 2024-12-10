@@ -1,6 +1,7 @@
 import { Hero } from "../features/homepage/Hero";
 import { LogoSection } from "../features/homepage/LogoSection";
 import { RecommendedSpaces } from "../features/homepage/RecommendedSpaces";
+import { Footer } from "../footer/Footer";
 
 export default function HomePage() {
   return (
@@ -8,6 +9,7 @@ export default function HomePage() {
       <Hero />
       <LogoSection />
       <RecommendedSpaces />
+      <Footer />
     </div>
   );
 }
