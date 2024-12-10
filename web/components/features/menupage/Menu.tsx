@@ -9,7 +9,7 @@ import {
 import { useState } from "react";
 import { VibeCard } from "./VibeCategoryCard";
 
-export const MenuPage = () => {
+export const Menu = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   return (
     <main>
@@ -18,10 +18,10 @@ export const MenuPage = () => {
         {placeCategory.map((data: TPlaceCategory) => {
           return (
             <button
-              onClick={() => setSelectedCategory(`${data.type}`)}
+              onClick={() => setSelectedCategory(`${data.category}`)}
               key={data.id}
             >
-              <VibeCard vibe={`${data.type}`} />
+              <VibeCard vibe={`${data.category}`} />
             </button>
           );
         })}
@@ -30,7 +30,7 @@ export const MenuPage = () => {
         {selectedCategory &&
           spaceMeetingPlacesData
             .filter((fdata) => {
-              return fdata.type == selectedCategory;
+              return fdata.category == selectedCategory;
             })
             .map((data: TSpaceMeetingPlace) => {
               return (

@@ -1,3 +1,5 @@
+export const BACKEND_ENDPOINT = "http://localhost:8000";
+
 export type TDistributor = {
   id: number;
   name: string;
@@ -22,7 +24,7 @@ export type TSpaceMeetingPlace = {
   id: string;
   image: string;
   name: string;
-  type?: "Meeting" | "Dating";
+  category?: "Meeting" | "Dating";
   capacity: number;
   description: string;
   location: string;
@@ -40,14 +42,14 @@ export type TSpaceMeetingPlace = {
 
 export type TPlaceCategory = {
   id: number;
-  type: string;
+  category: string;
 };
 
 export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
   {
     id: "10000000",
     name: "Orbital Rendezvous Lounge",
-    type: "Dating",
+    category: "Dating",
     capacity: 50,
     description:
       "An intimate space-themed venue with panoramic starry views and zero-gravity cocktail zones",
@@ -68,7 +70,7 @@ export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
   {
     id: "211111111",
     name: "Nebula Conference Hub",
-    type: "Meeting",
+    category: "Meeting",
     capacity: 200,
     description:
       "High-tech conference center with holographic presentation capabilities and interstellar connectivity",
@@ -89,7 +91,7 @@ export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
   {
     id: "32222222",
     name: "Stardust Romantic Dome",
-    type: "Dating",
+    category: "Dating",
     capacity: 30,
     description:
       "Intimate geodesic dome with simulated celestial environments and personalized star projection",
@@ -110,7 +112,7 @@ export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
   {
     id: "45555555",
     name: "Galactic Summit Center",
-    type: "Meeting",
+    category: "Meeting",
     capacity: 300,
     description:
       "Massive multi-species conference facility with universal translation services and adaptive environments",
@@ -131,7 +133,7 @@ export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
   {
     id: "56666666",
     name: "Quantum Connections Cafe",
-    type: "Dating",
+    category: "Dating",
     capacity: 40,
     description:
       "Trendy meeting spot with AI-powered matchmaking and immersive holographic date experiences",
@@ -152,7 +154,7 @@ export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
   {
     id: "6777777777",
     name: "Cosmic Collaboration Plaza",
-    type: "Meeting",
+    category: "Meeting",
     capacity: 150,
     description:
       "Flexible meeting space with adaptive architecture and real-time interplanetary communication systems",
@@ -173,7 +175,7 @@ export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
   {
     id: "6777277777",
     name: "Cosmic Collaboration Plaza",
-    type: "Meeting",
+    category: "Meeting",
     capacity: 150,
     description:
       "Flexible meeting space with adaptive architecture and real-time interplanetary communication systems",
@@ -194,7 +196,7 @@ export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
   {
     id: "8888888888",
     name: "Lunar Innovation Hub",
-    type: "Meeting",
+    category: "Meeting",
     capacity: 100,
     description:
       "A futuristic workshop space equipped with cutting-edge tools for lunar engineering and creative prototyping",
@@ -217,26 +219,26 @@ export const spaceMeetingPlacesData: TSpaceMeetingPlace[] = [
 export const placeCategory: TPlaceCategory[] = [
   {
     id: 45232555556,
-    type: "Meeting",
+    category: "Meeting",
   },
   {
     id: 4553355557,
-    type: "Dating",
+    category: "Dating",
   },
   {
     id: 4554455558,
-    type: "Enjoy",
+    category: "Enjoy",
   },
   {
     id: 4555555559,
-    type: "Seminar",
+    category: "Seminar",
   },
   {
     id: 4555556660,
-    type: "Training",
+    category: "Training",
   },
   {
     id: 4555556177,
-    type: "Networking",
+    category: "Networking",
   },
 ];
