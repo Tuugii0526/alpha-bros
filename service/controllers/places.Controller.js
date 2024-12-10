@@ -53,4 +53,52 @@ const getAllPlaces = async (req, res) => {
   }
 };
 
-export { createPlaces, getAllPlaces };
+const updatePlaces = async (req, res) => {
+  try {
+    const {
+      name,
+      image,
+      category,
+      capacity,
+      description,
+      location,
+      ambiance,
+      workingHours: {
+        weekdays: { open: weekdaysOpen, close: weekdaysClose },
+        weekend: { open: weekendOpen, close: weekendClose },
+      },
+    } = req.body;
+    const placesId = req.params["id"];
+    const result = await Places.findByIdAndUpdate(placesId, {
+      name,
+      image,
+      category,
+      capacity,
+      description,
+      location,
+      ambiance,
+      workingHours: {
+        weekdays: { open: weekdaysOpen, close: weekdaysClose },
+        weekend: { open: weekendOpen, close: weekendClose },
+      },
+    });
+    res.status(201).json({ success: true, data: result });
+  } catch (error) {
+    res.status(501).json({ success: false, error: error.message });
+  }
+};
+
+const deletePlaces = async (req, res) => {
+  try {
+    const placesId = req.params["id"];
+    const result = await Places.findByIdAndDelete(placesId);
+    res.status(201).json({
+      success: true,
+      data: result,
+    });
+  } catch (error) {
+    res.status(501).json({ success: false, error: error.message });
+  }
+};
+
+export { createPlaces, getAllPlaces, updatePlaces, deletePlaces };
