@@ -38,6 +38,34 @@ const createPlaces = async (req, res) => {
   }
 };
 
+
+const getSelectedPlaces = async (req, res) => {
+  try {
+    const { categorizedPlaces, locationPlaces, capacity } = req.query;
+    const result = await Places.find().populate("Category");
+    const CategorizedPlaces = result.filter((place) => {
+      if (place?.category?.name === categorizedPlaces) {
+        return place;
+      }
+    });
+    res.status(201).json({ success: true, data: CategorizedPlaces });
+  } catch (error) {
+    res.status(501).json({ success: false, error: error.message });
+  }
+};
+
+// const getLocationizedPlaces = async (req, res) => {
+//   try {
+//     const { category, capacity, loc } = req.query;
+//     if(category)
+//       if(capacity)
+//     const result = await Places.find().populate("Location");
+//     const LocationizedPlaces = result.
+//   } catch (error) {
+
+//   }
+// }
+
 const getAllPlaces = async (req, res) => {
   try {
     const result = await Places.find()
@@ -101,4 +129,10 @@ const deletePlaces = async (req, res) => {
   }
 };
 
-export { createPlaces, getAllPlaces, updatePlaces, deletePlaces };
+export {
+  createPlaces,
+  getAllPlaces,
+  updatePlaces,
+  deletePlaces,
+  getCategorizedPlaces,
+};
