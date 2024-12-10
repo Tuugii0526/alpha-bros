@@ -19,7 +19,7 @@ const paths = [
 export const Navbar = () => {
   const router = useRouter();
   return (
-    <div className="py-8 px-2 flex justify-around items-center">
+    <div className="py-2 px-2 flex justify-around items-center">
       <div className="flex gap-4">
         {paths.map((path) => (
           <button onClick={() => router.push(`${path.path}`)} key={path.id}>
@@ -27,7 +27,12 @@ export const Navbar = () => {
           </button>
         ))}
       </div>
-      <LightTower />
+      <div className="flex justify-center items-end">
+        <div className="flex items-center ">
+          <LightTower />
+        </div>
+        <span>Lighthouse</span>
+      </div>
       <div className="flex items-center gap-4">
         <div className="flex gap-2 border border-white hover:border-green-500 rounded-md p-1 items-center">
           <User />
