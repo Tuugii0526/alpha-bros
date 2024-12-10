@@ -20,7 +20,9 @@ export const Hero = () => {
                 Plan, Meet, reach your success
               </p>
             </div>
+            {/*  */}
             <Search />
+            {/*  */}
           </div>
         </div>
         <div className="w-full h-[80px] bg-[#F9FBFC] rounded-t-[60px]"></div>

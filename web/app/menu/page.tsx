@@ -1,5 +1,5 @@
-import { MenuPage } from "@/components/features/menupage/Menu";
+import Menupage from "@/components/pages/MenuPage";
 
 export default function Page() {
-  return <MenuPage />;
+  return <Menupage />;
 }
