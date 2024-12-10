@@ -3,7 +3,7 @@ import { DashboardIconType } from "@/data/DataTypes";
 export const AdminIcon = ({ pathname, path }: DashboardIconType) => {
   return (
     <svg
-      className={`${pathname === path ? "fill-MainColor" : "fill-SecondColor"}`}
+      className={`${pathname === path ? "fill-MainWhite" : "fill-SecondColor"}`}
       height="20px"
       width="20px"
       version="1.1"
