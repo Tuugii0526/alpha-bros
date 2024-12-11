@@ -82,7 +82,4 @@ const placesSchema = new mongoose.Schema({
   },
 });
 
-
-
-
 export const Places = mongoose.model("Places", placesSchema);
