@@ -1,6 +1,7 @@
 "use client";
 
 import { LightTower } from "@/components/ui/icons/LightTower";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import { User } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -34,13 +35,24 @@ export const Navbar = () => {
         <span>Lighthouse</span>
       </div>
       <div className="flex items-center gap-4">
-        <div className="flex gap-2 border border-white hover:border-green-500 rounded-md p-1 items-center">
-          <User />
-          <button onClick={() => router.push("/sign-in")}>Sign in</button>
-        </div>
-        <div className="border border-white  rounded-md p-1 items-center">
-          90914944
-        </div>
+        <SignedOut>
+          <SignInButton>
+            <button className="p-1 border border-green-200 rounded-md">
+              Sign in
+            </button>
+          </SignInButton>
+        </SignedOut>
+
+        <SignedIn>
+          <UserButton
+            showName
+            appearance={{
+              elements: {
+                userButtonBox: "bg-green-200 border border-2 rounded-md",
+              },
+            }}
+          />
+        </SignedIn>
       </div>
     </div>
   );

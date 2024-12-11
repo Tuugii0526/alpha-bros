@@ -1,26 +1,31 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-  name: {
+  clerk_id: {
+    type: String,
+  },
+  first_name: {
     type: String,
     required: true,
   },
-  email: {
+  last_name: {
     type: String,
     required: true,
   },
-  password: {
-    type: String,
+  emails: {
+    type: [String],
     required: true,
   },
-  phoneNumber: {
-    type: Number,
-    required: true,
+  image_url: {
+    type: String,
   },
   role: {
     type: String,
-    enum: ["admin", "user"],
-    default: "user",
+    enum: {
+      values: ["admin", "member"],
+      message: "{VALUE} is not a valid role",
+    },
+    default: "member",
   },
 });
 
