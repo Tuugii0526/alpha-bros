@@ -1,6 +1,6 @@
 "use client";
-import { TSpaceMeetingPlace, TWorkingHours } from "@/constant/mockdatas";
 
+import { TPlaces } from "@/data/DataTypes";
 import {
   BookOpenTextIcon,
   MapPinIcon,
@@ -8,7 +8,7 @@ import {
   UsersIcon,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-const MainCard = (data: TSpaceMeetingPlace) => {
+const MainCard = (data: TPlaces) => {
   const router = useRouter();
   const date = new Date();
   const day = date.getDay();
@@ -82,7 +82,7 @@ const MainCard = (data: TSpaceMeetingPlace) => {
         <div className="flex gap-4 justify-between">
           <div className="flex items-center justify-center gap-1 border-b border-MainWhite ">
             <MapPinIcon size={16} />
-            <p className="text-MainWhite line-clamp-1">{data.location}</p>
+            <p className="text-MainWhite line-clamp-1">{}</p>
           </div>
           <div className="flex items-center justify-center gap-1 border-b border-MainWhite ">
             <UsersIcon size={16} />
@@ -94,7 +94,7 @@ const MainCard = (data: TSpaceMeetingPlace) => {
             Venue is {venueIsOpen ? "Open" : "Closed"}
           </div>
           <div
-            onClick={() => router.push(`/place/${data.id}`)}
+            onClick={() => router.push(`/place/${data._id}`)}
             className="flex gap-1 items-center justify-center  cursor-pointer   "
           >
             <button>View details</button>

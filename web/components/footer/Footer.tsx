@@ -6,7 +6,7 @@ import { INIcon } from "../ui/icons/INIcon";
 
 export const Footer = () => {
   return (
-    <div className="bg-gray-900 w-full text-gray-300 py-8">
+    <div className="bg-gray-900 w-full text-gray-300 py-8 mt-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center flex justify-between mb-8">
           <div>

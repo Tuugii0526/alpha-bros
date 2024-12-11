@@ -4,9 +4,10 @@ import { Hero } from "../features/homepage/Hero";
 import { LogoSection } from "../features/homepage/LogoSection";
 import { RecommendedSpaces } from "../features/homepage/RecommendedSpaces";
 import { BACKEND_ENDPOINT } from "@/constant/mockdatas";
+import { TPlaces } from "@/data/DataTypes";
 
 export default function HomePage() {
-  const [fetchData, setFetchData] = useState();
+  const [fetchData, setFetchData] = useState<TPlaces[]>([]);
 
   const fetchdataFunc = async () => {
     try {
@@ -17,7 +18,6 @@ export default function HomePage() {
       throw new Error();
     }
   };
-  console.log(fetchData);
 
   useEffect(() => {
     fetchdataFunc();
@@ -26,7 +26,7 @@ export default function HomePage() {
     <div className="w-screen flex flex-col justify-center">
       <Hero />
       <LogoSection />
-      <RecommendedSpaces />
+      <RecommendedSpaces data={fetchData} />
     </div>
   );
 }
