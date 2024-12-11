@@ -1,4 +1,4 @@
-import { SinglePage } from "@/components/features/singlePage/SinglePage";
+import SinglePage from "@/components/pages/SinglePage";
 
 export default function Page() {
   return <SinglePage />;
