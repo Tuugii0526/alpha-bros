@@ -1,10 +1,10 @@
 import { Places } from "../model/places.model.js";
+import { v2 as cloudinary } from "cloudinary";
 
 const createPlaces = async (req, res) => {
   try {
     const {
       name,
-      image,
       category,
       capacity,
       description,
@@ -20,10 +20,21 @@ const createPlaces = async (req, res) => {
         sunday: { open: sundayOpen, close: sundayClose },
       },
     } = req.body;
+    const file = req.file;
+
+    if (!file) {
+      return response
+        .status(400)
+        .json({ success: false, message: "Image is required" });
+    }
+
+    const uploadResult = await cloudinary.uploader.upload(file.path, {
+      folder: "foods",
+    });
 
     const result = await Places.create({
       name,
-      image,
+      image: uploadResult.url,
       category,
       capacity,
       description,
