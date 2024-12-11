@@ -10,7 +10,7 @@ export const Hero = () => {
           backgroundImage: "url('./mainpageBG.jpg')",
         }}
       >
-        <div className="container mx-auto ">
+        <div className="container mx-auto max-w-screen-xl">
           <div className="text-white pt-[180px]">
             <div className="flex flex-col gap-6 max-w-[559px]">
               <p className="font-Poppins text-7xl not-italic font-semibold leading-[80px] text-white">

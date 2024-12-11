@@ -5,7 +5,6 @@ import { TPlaces } from "@/data/DataTypes";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { PageBuild } from "../features/singlePage/PageBuild";
-// import { PageBuild } from "../features/singlePage/PageBuild";
 
 export default function SinglePage() {
   const params = useParams<{ place: string }>();
