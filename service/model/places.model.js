@@ -30,14 +30,49 @@ const placesSchema = new mongoose.Schema({
   ambiance: String,
 
   workingHours: {
-    weekdays: {
+    monday: {
       open: {
         type: String,
         required: true,
       },
       close: { type: String, required: true },
     },
-    weekend: {
+    tuesday: {
+      open: {
+        type: String,
+        required: true,
+      },
+      close: { type: String, required: true },
+    },
+    wednesday: {
+      open: {
+        type: String,
+        required: true,
+      },
+      close: { type: String, required: true },
+    },
+    thursday: {
+      open: {
+        type: String,
+        required: true,
+      },
+      close: { type: String, required: true },
+    },
+    friday: {
+      open: {
+        type: String,
+        required: true,
+      },
+      close: { type: String, required: true },
+    },
+    saturday: {
+      open: {
+        type: String,
+        required: true,
+      },
+      close: { type: String, required: true },
+    },
+    sunday: {
       open: {
         type: String,
         required: true,
