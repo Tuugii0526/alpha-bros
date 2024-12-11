@@ -11,8 +11,13 @@ const createPlaces = async (req, res) => {
       location,
       ambiance,
       workingHours: {
-        weekdays: { open: weekdaysOpen, close: weekdaysClose },
-        weekend: { open: weekendOpen, close: weekendClose },
+        monday: { open: mondayOpen, close: mondayClose },
+        tuesday: { open: tuesdayOpen, close: tuesdayClose },
+        wednesday: { open: wednesdayOpen, close: wednesdayClose },
+        thursday: { open: thursdayOpen, close: thursdayClose },
+        friday: { open: fridayOpen, close: fridayClose },
+        saturday: { open: saturdayOpen, close: saturdayClose },
+        sunday: { open: sundayOpen, close: sundayClose },
       },
     } = req.body;
 
@@ -25,8 +30,13 @@ const createPlaces = async (req, res) => {
       location,
       ambiance,
       workingHours: {
-        weekdays: { open: weekdaysOpen, close: weekdaysClose },
-        weekend: { open: weekendOpen, close: weekendClose },
+        monday: { open: mondayOpen, close: mondayClose },
+        tuesday: { open: tuesdayOpen, close: tuesdayClose },
+        wednesday: { open: wednesdayOpen, close: wednesdayClose },
+        thursday: { open: thursdayOpen, close: thursdayClose },
+        friday: { open: fridayOpen, close: fridayClose },
+        saturday: { open: saturdayOpen, close: saturdayClose },
+        sunday: { open: sundayOpen, close: sundayClose },
       },
     });
     res.status(201).json({
@@ -38,33 +48,43 @@ const createPlaces = async (req, res) => {
   }
 };
 
-
 const getSelectedPlaces = async (req, res) => {
-  try {
-    const { categorizedPlaces, locationPlaces, capacity } = req.query;
-    const result = await Places.find().populate("Category");
-    const CategorizedPlaces = result.filter((place) => {
-      if (place?.category?.name === categorizedPlaces) {
-        return place;
-      }
-    });
-    res.status(201).json({ success: true, data: CategorizedPlaces });
-  } catch (error) {
-    res.status(501).json({ success: false, error: error.message });
+  const { categorizedPlaces, placesLocation, capacity } = req.query;
+  if (categorizedPlaces) {
+    try {
+      const result = await Places.find().populate("category");
+      const CategorizedPlaces = result.filter((place) => {
+        if (place?.category?.name === categorizedPlaces) {
+          return place;
+        }
+      });
+      res.status(201).json({ success: true, data: CategorizedPlaces });
+    } catch (error) {
+      res.status(501).json({ success: false, error: error.message });
+    }
+  }
+  if (placesLocation) {
+    try {
+      const result = await Places.find().populate("location");
+      const PlacesLocation = result.filter((place) => {
+        if (place?.location?.district === placesLocation) {
+          return place;
+        }
+      });
+      res.status(201).json({ success: true, data: PlacesLocation });
+    } catch (error) {
+      res.status(501).json({ success: false, error: error.message });
+    }
+  }
+  if (capacity) {
+    try {
+      const result = await Places.find(capacity <= Places.capacity);
+      res.status(201).json({ success: true, data: result });
+    } catch (error) {
+      res.status(501).json({ success: false, error: error.message });
+    }
   }
 };
-
-// const getLocationizedPlaces = async (req, res) => {
-//   try {
-//     const { category, capacity, loc } = req.query;
-//     if(category)
-//       if(capacity)
-//     const result = await Places.find().populate("Location");
-//     const LocationizedPlaces = result.
-//   } catch (error) {
-
-//   }
-// }
 
 const getAllPlaces = async (req, res) => {
   try {
@@ -92,8 +112,13 @@ const updatePlaces = async (req, res) => {
       location,
       ambiance,
       workingHours: {
-        weekdays: { open: weekdaysOpen, close: weekdaysClose },
-        weekend: { open: weekendOpen, close: weekendClose },
+        monday: { open: mondayOpen, close: mondayClose },
+        tuesday: { open: tuesdayOpen, close: tuesdayClose },
+        wednesday: { open: wednesdayOpen, close: wednesdayClose },
+        thursday: { open: thursdayOpen, close: thursdayClose },
+        friday: { open: fridayOpen, close: fridayClose },
+        saturday: { open: saturdayOpen, close: saturdayClose },
+        sunday: { open: sundayOpen, close: sundayClose },
       },
     } = req.body;
     const placesId = req.params["id"];
@@ -106,8 +131,13 @@ const updatePlaces = async (req, res) => {
       location,
       ambiance,
       workingHours: {
-        weekdays: { open: weekdaysOpen, close: weekdaysClose },
-        weekend: { open: weekendOpen, close: weekendClose },
+        monday: { open: mondayOpen, close: mondayClose },
+        tuesday: { open: tuesdayOpen, close: tuesdayClose },
+        wednesday: { open: wednesdayOpen, close: wednesdayClose },
+        thursday: { open: thursdayOpen, close: thursdayClose },
+        friday: { open: fridayOpen, close: fridayClose },
+        saturday: { open: saturdayOpen, close: saturdayClose },
+        sunday: { open: sundayOpen, close: sundayClose },
       },
     });
     res.status(201).json({ success: true, data: result });
@@ -134,5 +164,5 @@ export {
   getAllPlaces,
   updatePlaces,
   deletePlaces,
-  getCategorizedPlaces,
+  getSelectedPlaces,
 };
