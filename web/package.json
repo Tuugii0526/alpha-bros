@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.9.0",
     "@radix-ui/react-select": "^2.1.2",
     "clsx": "^2.1.1",
     "lucide-react": "^0.468.0",

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-  id: {
+  clerk_id: {
     type: String,
   },
   first_name: {
@@ -12,8 +12,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  email_address: {
-    type: String,
+  emails: {
+    type: [String],
     required: true,
   },
   image_url: {
@@ -21,7 +21,10 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["admin", "member"],
+    enum: {
+      values: ["admin", "member"],
+      message: "{VALUE} is not a valid role",
+    },
     default: "member",
   },
 });
