@@ -1,6 +1,6 @@
 import { Places } from "../model/places.model.js";
 import { v2 as cloudinary } from "cloudinary";
-
+import { Location } from "../model/location.model.js";
 const createPlaces = async (req, res) => {
   try {
     const {
@@ -8,7 +8,11 @@ const createPlaces = async (req, res) => {
       category,
       capacity,
       description,
-      location,
+      province,
+      district,
+      street,
+      latitude,
+      longitude,
       ambiance,
       workingHours: {
         monday: { open: mondayOpen, close: mondayClose },
@@ -32,13 +36,21 @@ const createPlaces = async (req, res) => {
       folder: "foods",
     });
 
+    const addLocation = await Location.create({
+      province,
+      district,
+      street,
+      latitude,
+      longitude,
+    });
+    res.status(201).json({ success: true, data: addLocation });
     const result = await Places.create({
       name,
       image: uploadResult.url,
       category,
       capacity,
       description,
-      location,
+      location: addLocation?._id,
       ambiance,
       workingHours: {
         monday: { open: mondayOpen, close: mondayClose },
