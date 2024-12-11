@@ -1,11 +1,12 @@
 import { Places } from "../model/places.model.js";
 import { v2 as cloudinary } from "cloudinary";
 import { Location } from "../model/location.model.js";
+import { Category } from "../model/category.model.js";
 const createPlaces = async (req, res) => {
   try {
     const {
       name,
-      category,
+      CategoryName,
       capacity,
       description,
       province,
@@ -43,11 +44,15 @@ const createPlaces = async (req, res) => {
       latitude,
       longitude,
     });
-    res.status(201).json({ success: true, data: addLocation });
+
+    const addCategory = await Category.create({
+      CategoryName,
+    });
+
     const result = await Places.create({
       name,
       image: uploadResult.url,
-      category,
+      category: addCategory?._id,
       capacity,
       description,
       location: addLocation?._id,
@@ -62,50 +67,85 @@ const createPlaces = async (req, res) => {
         sunday: { open: sundayOpen, close: sundayClose },
       },
     });
-    res.status(201).json({
+    res.status(200).json({
       success: true,
-      data: result,
+      data: {
+        location: addLocation,
+        category: addCategory,
+        places: result,
+      },
     });
   } catch (error) {
-    res.status(501).json({ success: false, error: error });
+    res.status(500).json({ success: false, error: error.message });
   }
 };
 
+//
 const getSelectedPlaces = async (req, res) => {
-  const { categorizedPlaces, placesLocation, capacity } = req.query;
-  if (categorizedPlaces) {
-    try {
-      const result = await Places.find().populate("category");
-      const CategorizedPlaces = result.filter((place) => {
-        if (place?.category?.name === categorizedPlaces) {
-          return place;
-        }
+  try {
+    const { categorizedPlaces, placesLocation, capacity } = req.query;
+    const query = {};
+    let filterApplied = false;
+    if (categorizedPlaces) {
+      const categoryFilter = await Category.findOne({
+        CategoryName: categorizedPlaces,
       });
-      res.status(201).json({ success: true, data: CategorizedPlaces });
-    } catch (error) {
-      res.status(501).json({ success: false, error: error.message });
+      if (categoryFilter) {
+        query.category = categoryFilter._id;
+        filterApplied = true;
+      }
     }
-  }
-  if (placesLocation) {
-    try {
-      const result = await Places.find().populate("location");
-      const PlacesLocation = result.filter((place) => {
-        if (place?.location?.district === placesLocation) {
-          return place;
-        }
+
+    if (placesLocation) {
+      const locationFilter = await Location.findOne({
+        district: placesLocation,
       });
-      res.status(201).json({ success: true, data: PlacesLocation });
-    } catch (error) {
-      res.status(501).json({ success: false, error: error.message });
+      if (locationFilter) {
+        query.location = locationFilter._id;
+        filterApplied = true;
+      }
     }
+
+    if (capacity) {
+      query.capacity = { $lte: Number(capacity) };
+      filterApplied = true;
+    }
+
+    if (!filterApplied) {
+      return res.status(200).json({
+        success: true,
+        count: 0,
+        data: [],
+      });
+    }
+
+    const result = await Places.find(query)
+      .populate("category")
+      .populate("location");
+
+    res.status(200).json({
+      success: true,
+      count: result.length,
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
   }
-  if (capacity) {
-    try {
-      const result = await Places.find(capacity <= Places.capacity);
-      res.status(201).json({ success: true, data: result });
-    } catch (error) {
-      res.status(501).json({ success: false, error: error.message });
-    }
+};
+
+const getSinglePagePlaces = async (req, res) => {
+  try {
+    const PlacesId = req.params["id"];
+    const result = await Places.findById(PlacesId)
+      .populate("category")
+      .populate("location");
+
+    res.status(200).json({ success: true, data: result });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
   }
 };
 
@@ -115,12 +155,12 @@ const getAllPlaces = async (req, res) => {
       .populate("category")
       .populate("location");
 
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       data: result,
     });
   } catch (error) {
-    res.status(501).json({ success: false, error: error.message });
+    res.status(500).json({ success: false, error: error.message });
   }
 };
 
@@ -163,9 +203,9 @@ const updatePlaces = async (req, res) => {
         sunday: { open: sundayOpen, close: sundayClose },
       },
     });
-    res.status(201).json({ success: true, data: result });
+    res.status(200).json({ success: true, data: result });
   } catch (error) {
-    res.status(501).json({ success: false, error: error.message });
+    res.status(500).json({ success: false, error: error.message });
   }
 };
 
@@ -173,12 +213,12 @@ const deletePlaces = async (req, res) => {
   try {
     const placesId = req.params["id"];
     const result = await Places.findByIdAndDelete(placesId);
-    res.status(201).json({
+    res.status(200).json({
       success: true,
       data: result,
     });
   } catch (error) {
-    res.status(501).json({ success: false, error: error.message });
+    res.status(500).json({ success: false, error: error.message });
   }
 };
 
@@ -188,4 +228,5 @@ export {
   updatePlaces,
   deletePlaces,
   getSelectedPlaces,
+  getSinglePagePlaces,
 };

@@ -5,6 +5,7 @@ import {
   deletePlaces,
   getAllPlaces,
   getSelectedPlaces,
+  getSinglePagePlaces,
   updatePlaces,
 } from "../controllers/places.Controller.js";
 
@@ -16,5 +17,6 @@ placesRoute.get("/places", getAllPlaces);
 placesRoute.put("/places/:id", updatePlaces);
 placesRoute.delete("/places/:id", deletePlaces);
 placesRoute.get("/selected", getSelectedPlaces);
+placesRoute.get("/places/:id", getSinglePagePlaces);
 
 export default placesRoute;
