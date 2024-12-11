@@ -4,7 +4,7 @@ import {
   AdminIcon,
   DashboardIcon,
   LightHouseIcon,
-} from "@/components/ui/Icons";
+} from "@/components/ui/icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -24,7 +24,7 @@ export const SideBar = () => {
             <div
               className={`${
                 pathname === "/"
-                  ? "border-SecondColor bg-SecondColor text-MainWhite"
+                  ? "border-SecondColor bg-SecondColor/60 text-MainWhite"
                   : " text-SecondColor border-MainWhite  bg-MainWhite"
               }   hover:border-SecondColor border border-r-0 py-2 px-3 rounded-l-full    duration-200 `}
             >
@@ -40,7 +40,7 @@ export const SideBar = () => {
             <div
               className={`${
                 pathname === "/dashboard"
-                  ? "border-SecondColor bg-SecondColor text-MainWhite"
+                  ? "border-SecondColor bg-SecondColor/60 text-MainWhite"
                   : " text-SecondColor border-MainWhite  bg-MainWhite"
               } border hover:border-SecondColor border-r-0 py-2 px-3 rounded-l-full  duration-200`}
             >
