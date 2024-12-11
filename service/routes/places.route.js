@@ -17,10 +17,7 @@ placesRoute.get("/places", getAllPlaces);
 // placesRoute.get("/place/:id", getPlace);
 placesRoute.put("/places/:id", updatePlaces);
 placesRoute.delete("/places/:id", deletePlaces);
-<<<<<<< HEAD
 placesRoute.get("/selected", getSelectedPlaces);
 placesRoute.get("/places/:id", getSinglePagePlaces);
-=======
->>>>>>> f6b12c4 (connected)
 
 export default placesRoute;
