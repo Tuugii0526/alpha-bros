@@ -7,6 +7,7 @@ import userRouter from "./routes/user.route.js";
 import placesRoute from "./routes/places.route.js";
 import categoryRouter from "./routes/category.route.js";
 import locationRouter from "./routes/location.route.js";
+import cloudinary from "cloudinary";
 
 const server = express();
 const Port = 8000;
@@ -14,6 +15,12 @@ dotenv.config;
 mongoose.connect(
   `mongodb+srv://Lhagvaa0102:Lhagvaa.0102@leap0102.k0ghj.mongodb.net/TEAM-Project`
 );
+
+cloudinary.config({
+  cloud_name: "dl5irqaz6",
+  api_key: "434461591186227",
+  api_secret: "aGk_UYX9uk6E2zgNu7W6rCxjpqs",
+});
 
 server.use(cors());
 server.use(bodyParser.json());
