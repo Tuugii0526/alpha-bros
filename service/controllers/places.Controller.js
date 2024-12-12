@@ -10,7 +10,7 @@ const createPlaces = async (req, res) => {
       capacity,
       description,
       province,
-      district,
+      distruct,
       street,
       latitude,
       longitude,
@@ -39,7 +39,7 @@ const createPlaces = async (req, res) => {
 
     const addLocation = await Location.create({
       province,
-      district,
+      distruct,
       street,
       latitude,
       longitude,
@@ -84,50 +84,44 @@ const createPlaces = async (req, res) => {
 const getSelectedPlaces = async (req, res) => {
   try {
     const { categorizedPlaces, placesLocation, capacity } = req.query;
-    const query = {};
-    let filterApplied = false;
-    if (categorizedPlaces) {
-      const categoryFilter = await Category.findOne({
-        CategoryName: categorizedPlaces,
-      });
-      if (categoryFilter) {
-        query.category = categoryFilter._id;
-        filterApplied = true;
-      }
-    }
 
-    if (placesLocation) {
-      const locationFilter = await Location.findOne({
-        district: placesLocation,
-      });
-      if (locationFilter) {
-        query.location = locationFilter._id;
-        filterApplied = true;
-      }
-    }
+    const parsedCapacity = capacity ? parseInt(capacity, 10) : null;
 
-    if (capacity) {
-      query.capacity = { $lte: Number(capacity) };
-      filterApplied = true;
-    }
-
-    if (!filterApplied) {
-      return res.status(200).json({
-        success: true,
-        count: 0,
-        data: [],
-      });
-    }
-
-    const result = await Places.find(query)
+    const filteredPlaces = await Places.find()
       .populate("category")
       .populate("location");
 
-    res.status(200).json({
-      success: true,
-      count: result.length,
-      data: result,
-    });
+    if (categorizedPlaces && placesLocation && parsedCapacity !== null) {
+      const filteredByCategory = filteredPlaces.filter((places) => {
+        const categoryMatch =
+          places.category &&
+          places.category.CategoryName &&
+          places.category.CategoryName.toLowerCase() ===
+            categorizedPlaces.toLowerCase();
+
+        const locationMatch =
+          places.location &&
+          places.location.district &&
+          places.location.district.toLowerCase() ===
+            placesLocation.toLowerCase();
+
+        const capacityMatch = places.capacity >= parsedCapacity;
+
+        return categoryMatch && locationMatch && capacityMatch;
+      });
+
+      if (filteredByCategory.length > 0) {
+        res.status(200).json({ success: true, data: filteredByCategory });
+      } else {
+        res.status(200).json({ success: false, data: "Places not found" });
+      }
+    } else {
+      res.status(400).json({
+        success: false,
+        message:
+          "Please provide all required parameters: categorizedPlaces, placesLocation, and capacity.",
+      });
+    }
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -135,6 +129,9 @@ const getSelectedPlaces = async (req, res) => {
     });
   }
 };
+
+
+
 
 const getSinglePagePlaces = async (req, res) => {
   try {
