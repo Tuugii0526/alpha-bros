@@ -87,23 +87,23 @@ export const AddSpaceButton = () => {
     <Dialog>
       <DialogTrigger>
         <div className="py-2 px-4 bg-SecondColor text-white rounded">
-          <div className="font-normal leading-normal not-italic text-base">
+          <span className="font-normal leading-normal not-italic text-base">
             Газар нэмэх
-          </div>
+          </span>
         </div>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <form action="" onSubmit={formik.handleSubmit}>
             <DialogTitle>
-              <div className="font-bold leading-[130%] text-2xl">
+              <span className="font-bold leading-[130%] text-2xl">
                 Газар үүсгэх
-              </div>
+              </span>
             </DialogTitle>
             <DialogDescription>
-              <div className="pt-1 pb-3">
+              <span className="pt-1 pb-3">
                 Шинэ газар үүсгэхийн тулд доорх талбаруудыг бөглөнө үү.
-              </div>
+              </span>
             </DialogDescription>
             <div className="flex flex-col gap-4 p-6 border border-[#E0E0E0] border-x-0">
               <Input
@@ -199,7 +199,7 @@ export const AddSpaceButton = () => {
                 )}
               </div>
             </div>
-            <div className="flex items-center justify-end gap-4 pt-6">
+            <div className="flex items-center justhttps://maps.app.goo.gl/zvSvHgsGKiC4cLHM6yarify-end gap-4 pt-6">
               <button
                 type="button"
                 className="p-2 text-SecondColor font-inter text-base font-bold"

@@ -1,5 +1,10 @@
 import { Header } from "../Both";
-import { AddSpaceButton, EditButton } from "@/components/ui/buttons";
+import {
+  AddPlaceButton,
+  AddSpaceButton,
+  EditButton,
+  TabsAddPlaceButton,
+} from "@/components/ui/buttons";
 import { AdminPlaceCard, MainCard } from "@/components/ui/cards";
 import { TPlaces } from "@/data/DataTypes";
 
@@ -18,8 +23,10 @@ export const AdminContent = ({ placesData }: TMenuProps) => {
               <p className="font-Poppins font-bold leading-normal not-italic text-[22px]">
                 Space's
               </p>
-              <AddSpaceButton />
+              {/* <TabsAddPlaceButton /> */}
+              {/* <AddSpaceButton /> */}
               {/* <EditButton /> */}
+              <AddPlaceButton />
             </div>
           </div>
           <div className="px-6 w-full h-full overflow-hidden">
