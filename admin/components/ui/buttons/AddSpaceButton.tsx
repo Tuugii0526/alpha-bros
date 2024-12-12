@@ -87,28 +87,30 @@ export const AddSpaceButton = () => {
     <Dialog>
       <DialogTrigger>
         <div className="py-2 px-4 bg-SecondColor text-white rounded">
-          <p className="font-Poppins font-normal leading-normal not-italic text-base">
-            Add space
-          </p>
+          <div className="font-normal leading-normal not-italic text-base">
+            Газар нэмэх
+          </div>
         </div>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <form action="" onSubmit={formik.handleSubmit}>
             <DialogTitle>
-              <p className="font-Poppins font-bold leading-[130%] text-2xl">
-                Create space
-              </p>
+              <div className="font-bold leading-[130%] text-2xl">
+                Газар үүсгэх
+              </div>
             </DialogTitle>
             <DialogDescription>
-              Please fill out the fields below to create a new space.
+              <div className="pt-1 pb-3">
+                Шинэ газар үүсгэхийн тулд доорх талбаруудыг бөглөнө үү.
+              </div>
             </DialogDescription>
             <div className="flex flex-col gap-4 p-6 border border-[#E0E0E0] border-x-0">
               <Input
                 id="name"
                 name="name"
                 type="text"
-                placeholder="Name"
+                placeholder="Нэр"
                 className="px-3 h-10 rounded-lg w-full"
                 value={formik.values.name}
                 onChange={formik.handleChange}
@@ -117,7 +119,7 @@ export const AddSpaceButton = () => {
                 id="capacity"
                 name="capacity"
                 type="number"
-                placeholder="Capacity"
+                placeholder="Хүний багтаамж"
                 className="px-3 h-10 rounded-lg w-full"
                 value={formik.values.capacity}
                 onChange={formik.handleChange}
@@ -126,7 +128,7 @@ export const AddSpaceButton = () => {
                 id="description"
                 name="description"
                 type="text"
-                placeholder="Description"
+                placeholder="Тайлбар"
                 className="px-3 h-10 rounded-lg w-full"
                 value={formik.values.description}
                 onChange={formik.handleChange}
@@ -135,7 +137,7 @@ export const AddSpaceButton = () => {
                 id="location"
                 name="location"
                 type="text"
-                placeholder="Location"
+                placeholder="Байршил"
                 className="px-3 h-10 rounded-lg w-full"
                 value={formik.values.location}
                 onChange={formik.handleChange}
@@ -144,7 +146,7 @@ export const AddSpaceButton = () => {
                 id="ambiance"
                 name="ambiance"
                 type="text"
-                placeholder="Ambiance"
+                placeholder="Нэмэлт"
                 className="px-3 h-10 rounded-lg w-full"
                 value={formik.values.ambiance}
                 onChange={formik.handleChange}
@@ -153,14 +155,14 @@ export const AddSpaceButton = () => {
                 id="workingHours"
                 name="workingHours"
                 type="text"
-                placeholder="WorkingHours"
+                placeholder="Ажлын цаг"
                 className="px-3 h-10 rounded-lg w-full"
                 value={formik.values.workingHours}
                 onChange={formik.handleChange}
               />
               <Select>
                 <SelectTrigger className="w-full px-3 h-10 rounded-lg placeholder-gray-500">
-                  <SelectValue placeholder="Catergory" />
+                  <SelectValue placeholder="Ангилал" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="Meeting">Meeting</SelectItem>
@@ -169,8 +171,8 @@ export const AddSpaceButton = () => {
               </Select>
               <div className="grid grid-cols-2">
                 <div className="max-w-[210px] w-full h-[122px] p-2 flex flex-col justify-center items-center gap-2 border border-dashed border-[#D6D7DC] bg-[rgba(186,188,196,0.12)] rounded-lg">
-                  <p className="text-[#525252] font-poppins text-base font-bold ">
-                    Add image for the food
+                  <p className="text-[#525252] font-poppins text-base font-bold text-center">
+                    Газрын зураг аа нэмнэ үү
                   </p>
                   <input
                     type="file"
@@ -183,7 +185,7 @@ export const AddSpaceButton = () => {
                     htmlFor="uploadFile1"
                     className="px-3 py-2 rounded-lg bg-SecondColor text-white font-inter text-base font-bold cursor-pointer"
                   >
-                    Add image
+                    Зураг нэмэх
                   </label>
                 </div>
                 {imagePreview && (
@@ -197,7 +199,7 @@ export const AddSpaceButton = () => {
                 )}
               </div>
             </div>
-            <div className="flex items-center justify-end gap-4">
+            <div className="flex items-center justify-end gap-4 pt-6">
               <button
                 type="button"
                 className="p-2 text-SecondColor font-inter text-base font-bold"
@@ -206,13 +208,13 @@ export const AddSpaceButton = () => {
                   setImagePreview(null);
                 }}
               >
-                Clear
+                Арилгах
               </button>
               <button
                 type="submit"
                 className="px-4 py-2 rounded-[4px] bg-SecondColor text-white font-inter text-base font-bold"
               >
-                Continue
+                Үргэлжлүүлэх
               </button>
             </div>
           </form>

@@ -31,8 +31,8 @@ export const SideBar = () => {
               <Link href={"/"}>
                 <div className="flex items-center gap-2">
                   <AdminIcon pathname={pathname} path="/" />
-                  <p className="font-Poppins font-bold text-sm w-full not-italic leading-normal">
-                    ADMIN
+                  <p className="font-bold text-sm leading-4 tracking-[-0.2px] w-full">
+                    АДМИН
                   </p>
                 </div>
               </Link>
@@ -47,8 +47,8 @@ export const SideBar = () => {
               <Link href={"/dashboard"}>
                 <div className="flex items-center gap-2">
                   <DashboardIcon pathname={pathname} path="/dashboard" />
-                  <p className="font-Poppins font-bold text-sm w-full not-italic leading-normal">
-                    DASHBOARD
+                  <p className="font-bold text-sm leading-4 tracking-[-0.2px] w-full">
+                    ХЯНАЛТЫН САМБАР
                   </p>
                 </div>
               </Link>
