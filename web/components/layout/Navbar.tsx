@@ -7,12 +7,12 @@ import { useRouter } from "next/navigation";
 const paths = [
   {
     id: 1,
-    name: "Home",
+    name: "Нүүр хуудас",
     path: "/",
   },
   {
     id: 2,
-    name: "Menu",
+    name: "Орчиноор хайх",
     path: "/menu",
   },
 ];
@@ -23,7 +23,11 @@ export const Navbar = () => {
       <div className="max-w-screen-xl container justify-between w-full flex">
         <div className="flex gap-4 justify-start">
           {paths.map((path) => (
-            <button onClick={() => router.push(`${path.path}`)} key={path.id}>
+            <button
+              className="border p-2 rounded-lg"
+              onClick={() => router.push(`${path.path}`)}
+              key={path.id}
+            >
               {path.name}
             </button>
           ))}
@@ -32,7 +36,7 @@ export const Navbar = () => {
           <div className="flex items-center ">
             <LightTower />
           </div>
-          <span>Lighthouse</span>
+          <span>Луужин</span>
         </div>
         <div className="flex items-center justify-end gap-4">
           <SignedOut>

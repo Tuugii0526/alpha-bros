@@ -6,7 +6,7 @@ export type PathType = {
 
 export type TCategories = {
   _id: string;
-  name: string;
+  CategoryName: string;
   icon?: string;
 };
 
