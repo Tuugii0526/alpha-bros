@@ -1,4 +1,4 @@
-export const BACKEND_ENDPOINT = "http://localhost:8000";
+export const BACKEND_ENDPOINT = "http:/localhost:8000";
 
 export type TDistributor = {
   id: number;

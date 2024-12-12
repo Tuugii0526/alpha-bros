@@ -2,7 +2,6 @@
 
 import { LightTower } from "@/components/ui/icons/LightTower";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-import { User } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const paths = [
@@ -20,39 +19,41 @@ const paths = [
 export const Navbar = () => {
   const router = useRouter();
   return (
-    <div className="py-2 px-2 flex justify-around items-center">
-      <div className="flex gap-4">
-        {paths.map((path) => (
-          <button onClick={() => router.push(`${path.path}`)} key={path.id}>
-            {path.name}
-          </button>
-        ))}
-      </div>
-      <div className="flex justify-center items-end">
-        <div className="flex items-center ">
-          <LightTower />
-        </div>
-        <span>Lighthouse</span>
-      </div>
-      <div className="flex items-center gap-4">
-        <SignedOut>
-          <SignInButton>
-            <button className="p-1 border border-green-200 rounded-md">
-              Sign in
+    <div className="w-screen flex  justify-center bg-[#F9FBFC] py-2">
+      <div className="max-w-screen-xl container justify-between w-full flex">
+        <div className="flex gap-4 justify-start">
+          {paths.map((path) => (
+            <button onClick={() => router.push(`${path.path}`)} key={path.id}>
+              {path.name}
             </button>
-          </SignInButton>
-        </SignedOut>
+          ))}
+        </div>
+        <div className="flex justify-center items-end">
+          <div className="flex items-center ">
+            <LightTower />
+          </div>
+          <span>Lighthouse</span>
+        </div>
+        <div className="flex items-center justify-end gap-4">
+          <SignedOut>
+            <SignInButton>
+              <button className="p-1 border border-green-200 rounded-md">
+                Sign in
+              </button>
+            </SignInButton>
+          </SignedOut>
 
-        <SignedIn>
-          <UserButton
-            showName
-            appearance={{
-              elements: {
-                userButtonBox: "bg-green-200 border border-2 rounded-md",
-              },
-            }}
-          />
-        </SignedIn>
+          <SignedIn>
+            <UserButton
+              showName
+              appearance={{
+                elements: {
+                  userButtonBox: "bg-green-200 border border-2 rounded-md",
+                },
+              }}
+            />
+          </SignedIn>
+        </div>
       </div>
     </div>
   );

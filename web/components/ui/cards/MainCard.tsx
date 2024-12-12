@@ -56,18 +56,18 @@ const MainCard = (data: TPlaces) => {
 
   const venueIsOpen = isworking();
   return (
-    <div className="w-[328px] h-[500px] rounded-xl flex flex-col items-center">
+    <div className="w-[300px] h-[500px] rounded-xl flex flex-col items-center">
       <div
         className="rounded-t-xl"
         style={{
           backgroundImage: `url(${data.image})`,
-          width: "328px",
+          width: "300px",
           height: "300px",
           backgroundPosition: "center",
           backgroundSize: "cover",
         }}
       ></div>
-      <div className="bg-MainColor p-4 w-[328px] h-[200px] flex flex-col gap-4 text-MainWhite rounded-b-xl">
+      <div className="bg-MainColor p-4 w-[300px] h-[200px] flex flex-col gap-4 text-MainWhite rounded-b-xl">
         <div className="flex flex-col border-b border-white">
           <p className="text-2xl">{data.name}</p>
           <div>

@@ -8,10 +8,13 @@ type TSinglePageProps = {
 
 export const PageBuild = ({ place }: TSinglePageProps) => {
   return (
-    <>
+    <div className="w-screen flex justify-center bg-[#F9FBFC] border-t ">
       {place.map((data) => {
         return (
-          <div className="bg-[#F9FBFC] w-full pt-20" key={data._id}>
+          <div
+            className="w-full container max-w-screen-xl py-10"
+            key={data._id}
+          >
             <div className="container mx-auto h-full">
               <div className="grid grid-cols-4 grid-rows-2 gap-2 h-[646px]">
                 <div
@@ -149,6 +152,6 @@ export const PageBuild = ({ place }: TSinglePageProps) => {
           </div>
         );
       })}
-    </>
+    </div>
   );
 };
