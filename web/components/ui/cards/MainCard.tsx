@@ -86,7 +86,7 @@ const MainCard = (data: TPlaces) => {
           </div>
           <div className="flex items-center justify-center gap-1 border-b border-MainWhite ">
             <UsersIcon size={16} />
-            <p className="">{data.capacity}</p>
+            <p className="">хүний багтаамж {data.capacity}</p>
           </div>
         </div>
         <div className={`flex justify-between`}>
