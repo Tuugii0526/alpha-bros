@@ -8,7 +8,8 @@ import {
   UsersIcon,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-const MainCard = (data: TPlaces) => {
+
+export const MainCard = (data: TPlaces) => {
   const router = useRouter();
   const date = new Date();
   const day = date.getDay();
@@ -61,13 +62,13 @@ const MainCard = (data: TPlaces) => {
         className="rounded-t-xl"
         style={{
           backgroundImage: `url(${data.image})`,
-          width: "300px",
+          width: "328px",
           height: "300px",
           backgroundPosition: "center",
           backgroundSize: "cover",
         }}
       ></div>
-      <div className="bg-MainColor p-4 w-[300px] h-[200px] flex flex-col gap-4 text-MainWhite rounded-b-xl">
+      <div className="bg-[#050B20] p-4 w-[328px] h-[200px] flex flex-col gap-4 text-MainWhite rounded-b-xl">
         <div className="flex flex-col border-b border-white">
           <p className="text-2xl">{data.name}</p>
           <div>
@@ -86,7 +87,7 @@ const MainCard = (data: TPlaces) => {
           </div>
           <div className="flex items-center justify-center gap-1 border-b border-MainWhite ">
             <UsersIcon size={16} />
-            <p className="">хүний багтаамж {data.capacity}</p>
+            <p className="">{data.capacity}</p>
           </div>
         </div>
         <div className={`flex justify-between`}>
@@ -105,4 +106,3 @@ const MainCard = (data: TPlaces) => {
     </div>
   );
 };
-export default MainCard;
