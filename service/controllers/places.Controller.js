@@ -6,22 +6,20 @@ const createPlaces = async (req, response) => {
   try {
     const {
       name,
-
       category,
       capacity,
       description,
-
       province,
       district,
       street,
       latitude,
       longitude,
       ambiance,
-      workingHours: {
-        weekdays: { open: weekdaysOpen, close: weekdaysClose },
-        weekend: { open: weekendOpen, close: weekendClose },
-        closedday,
-      },
+      weekdaysOpen,
+      weekdaysClose,
+      weekendOpen,
+      weekendClose,
+      closedDay,
     } = req.body;
     const file = req.file;
 
@@ -46,17 +44,15 @@ const createPlaces = async (req, response) => {
     const result = await Places.create({
       name,
       image: uploadResult.url,
-      image,
       category,
       capacity,
       description,
-      location,
       location: addLocation?._id,
       ambiance,
       workingHours: {
         weekdays: { open: weekdaysOpen, close: weekdaysClose },
         weekend: { open: weekendOpen, close: weekendClose },
-        closedday,
+        closedDay,
       },
     });
     response.status(200).json({
