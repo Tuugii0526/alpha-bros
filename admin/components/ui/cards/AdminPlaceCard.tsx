@@ -1,12 +1,6 @@
 "use client";
 
 import { TPlaces } from "@/data/DataTypes";
-import {
-  BookOpenTextIcon,
-  MapPinIcon,
-  MoveUpRight,
-  UsersIcon,
-} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { EDButton } from "../buttons";
 
@@ -37,23 +31,23 @@ export const AdminPlaceCard = (data: TPlaces) => {
   const isworking = () => {
     const workingTime = getDayWorkingHours(day);
 
-    const [nowHours, nowMinutes] = now.split(":").map(Number);
-    const [openHours, openMinutes] = workingTime.open.split(":").map(Number);
-    const [closeHours, closeMinutes] = workingTime.close.split(":").map(Number);
+    // const [nowHours, nowMinutes] = now.split(":").map(Number);
+    // const [openHours, openMinutes] = workingTime.open.split(":").map(Number);
+    // const [closeHours, closeMinutes] = workingTime.close.split(":").map(Number);
 
-    const nowTotalMinutes = nowHours * 60 + nowMinutes;
-    const openTotalMinutes = openHours * 60 + openMinutes;
-    const closeTotalMinutes = closeHours * 60 + closeMinutes;
-    if (closeTotalMinutes < openTotalMinutes) {
-      return (
-        nowTotalMinutes >= openTotalMinutes ||
-        nowTotalMinutes < closeTotalMinutes
-      );
-    }
+    // const nowTotalMinutes = nowHours * 60 + nowMinutes;
+    // const openTotalMinutes = openHours * 60 + openMinutes;
+    // const closeTotalMinutes = closeHours * 60 + closeMinutes;
+    // if (closeTotalMinutes < openTotalMinutes) {
+    //   return (
+    //     nowTotalMinutes >= openTotalMinutes ||
+    //     nowTotalMinutes < closeTotalMinutes
+    //   );
+    // }
 
-    return (
-      nowTotalMinutes >= openTotalMinutes && nowTotalMinutes < closeTotalMinutes
-    );
+    // return (
+    //   nowTotalMinutes >= openTotalMinutes && nowTotalMinutes < closeTotalMinutes
+    // );
   };
 
   const venueIsOpen = isworking();
@@ -81,7 +75,7 @@ export const AdminPlaceCard = (data: TPlaces) => {
           <p className="font-Inter text-sm font-semibold not-italic leading-5 tracking-[-0.28px] ">
             Төрөл:{" "}
             <span className="text-[#121316] font-normal">
-              {data?.category?.name ? data?.category?.name : "Хоосон байна"}
+              {data?.category?.name ? data?.category?.name : "Хоосоn"}
             </span>
           </p>
         </div>

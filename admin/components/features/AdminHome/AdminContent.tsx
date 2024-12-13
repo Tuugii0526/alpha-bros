@@ -7,12 +7,17 @@ import {
 } from "@/components/ui/buttons";
 import { AdminPlaceCard, MainCard } from "@/components/ui/cards";
 import { TPlaces } from "@/data/DataTypes";
+import { TCategories } from "@/data/DataTypes";
 
-type TMenuProps = {
+type AdminContentProps = {
   placesData: TPlaces[];
+  categoryData: TCategories[];
 };
 
-export const AdminContent = ({ placesData }: TMenuProps) => {
+export const AdminContent = ({
+  placesData,
+  categoryData,
+}: AdminContentProps) => {
   return (
     <main className="w-full h-[90%] pb-3">
       <Header />
@@ -26,7 +31,7 @@ export const AdminContent = ({ placesData }: TMenuProps) => {
               {/* <TabsAddPlaceButton /> */}
               {/* <AddSpaceButton /> */}
               {/* <EditButton /> */}
-              <AddPlaceButton />
+              <AddPlaceButton categoryData={categoryData} />
             </div>
           </div>
           <div className="px-6 w-full h-full overflow-hidden">
