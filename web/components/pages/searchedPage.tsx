@@ -4,6 +4,7 @@ import { TPlaces } from "@/data/DataTypes";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import MainCard from "../ui/cards/MainCard";
+import Link from "next/link";
 
 export const SearchedPage = () => {
   const searchParams = useSearchParams();
@@ -32,10 +33,16 @@ export const SearchedPage = () => {
   useEffect(() => {
     SearchedDataFetch();
   }, []);
-  if (!searchedData) {
+  if (searchedData.length == 0) {
     return (
-      <div className="w-screen h-screen flex justify-center items-center py-20 text-black">
-        data is not found
+      <div className="w-screen h-screen flex flex-col justify-center items-center gap-4 text-[#333]">
+        Хайлтын илэрч байхгүй байна.
+        <Link
+          href="/menu"
+          className="px-4 py-2 rounded-lg bg-MainColor text-MainWhite"
+        >
+          Бүх газрыг үзэх
+        </Link>
       </div>
     );
   }
@@ -46,13 +53,13 @@ export const SearchedPage = () => {
           return (
             <div key={data._id + "searched"}>
               <MainCard
-                _id={data._id}
-                name={data.name}
-                description={data.description}
-                capacity={data.capacity}
-                image={data.image}
-                category={data.category}
-                workingHours={data.workingHours}
+                _id={data?._id}
+                name={data?.name}
+                description={data?.description}
+                capacity={data?.capacity}
+                image={data?.image}
+                category={data?.category}
+                workingHours={data?.workingHours}
               />
             </div>
           );

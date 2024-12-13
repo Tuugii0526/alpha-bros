@@ -6,8 +6,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.hero-background {
-  background-image: url("/mongolia.jpeg");
-  background-size: cover;
-  background-position: center;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

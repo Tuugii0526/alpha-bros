@@ -25,7 +25,6 @@ export const Search = () => {
   const [location, setLocation] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [peopleCount, setPeopleCount] = useState<string>("");
-  const [fetchedCategories, setFetchedCategies] = useState<TCategories[]>([]);
   // //////////////////////////////////////////////////////////
   const [categories, setCategories] = useState<TCategories[]>([]);
   // //////////////////////////////////////////////////////////
@@ -73,10 +72,10 @@ export const Search = () => {
                 return (
                   <SelectItem
                     className="w-[200px] font-Poppins text-lg border-none font-thin leading-7  text-[#333] outline-none bg-MainWhite"
-                    key={`${discrict.name}` + discrict.id + Date.now()}
-                    value={discrict.idName}
+                    key={`${discrict?.name}` + discrict?.id + Date.now()}
+                    value={discrict?.idName}
                     onClick={() => {
-                      setLocation(discrict.idName);
+                      setLocation(discrict?.idName);
                     }}
                   >
                     {discrict.name}
@@ -101,17 +100,17 @@ export const Search = () => {
               <SelectValue placeholder="Орчиноо сонгоно уу" />
             </SelectTrigger>
             <SelectContent>
-              {categories.map((category) => {
+              {categories?.map((category) => {
                 return (
                   <SelectItem
                     className="w-[180px] font-Poppins text-lg !border-none  leading-7 not-italic text-[#222] outline-none bg-MainWhite"
                     key={category._id}
-                    value={category.CategoryName}
+                    value={category?.name}
                     onClick={() => {
-                      setCategory(category?.CategoryName);
+                      setCategory(category?.name);
                     }}
                   >
-                    {category.CategoryName}
+                    {category?.name}
                   </SelectItem>
                 );
               })}

@@ -10,7 +10,7 @@ export const distributorData: TDistributor[] = [
   { id: 1, name: "Зоог", icon: "aa" },
   { id: 2, name: "Амрах", icon: "ass" },
   { id: 3, name: "Адал явдал", icon: "sds" },
-  { id: 4, name: "Уянгалах", icon: "dsad" },
+  { id: 4, name: "Намуухан", icon: "dsad" },
   { id: 5, name: "Уулзалт", icon: "dsd" },
   { id: 6, name: "Хөгжилдөх", icon: "dsad" },
 ];

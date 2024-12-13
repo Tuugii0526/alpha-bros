@@ -17,44 +17,7 @@ const MainCard = (data: TPlaces) => {
   const now = `${hour.toString().padStart(2, "0")}:${min
     .toString()
     .padStart(2, "0")}`;
-  const workingHour = data.workingHours;
 
-  const getDayWorkingHours = (day: number) => {
-    const days = [
-      workingHour.monday,
-      workingHour.tuesday,
-      workingHour.wednesday,
-      workingHour.thursday,
-      workingHour.friday,
-      workingHour.saturday,
-      workingHour.sunday,
-    ];
-    return days[day];
-  };
-
-  const isworking = () => {
-    const workingTime = getDayWorkingHours(day);
-
-    const [nowHours, nowMinutes] = now.split(":").map(Number);
-    const [openHours, openMinutes] = workingTime.open.split(":").map(Number);
-    const [closeHours, closeMinutes] = workingTime.close.split(":").map(Number);
-
-    const nowTotalMinutes = nowHours * 60 + nowMinutes;
-    const openTotalMinutes = openHours * 60 + openMinutes;
-    const closeTotalMinutes = closeHours * 60 + closeMinutes;
-    if (closeTotalMinutes < openTotalMinutes) {
-      return (
-        nowTotalMinutes >= openTotalMinutes ||
-        nowTotalMinutes < closeTotalMinutes
-      );
-    }
-
-    return (
-      nowTotalMinutes >= openTotalMinutes && nowTotalMinutes < closeTotalMinutes
-    );
-  };
-
-  const venueIsOpen = isworking();
   return (
     <div className="w-[300px] h-[500px] rounded-xl flex flex-col items-center">
       <div
@@ -82,22 +45,24 @@ const MainCard = (data: TPlaces) => {
         <div className="flex gap-4 justify-between">
           <div className="flex items-center justify-center gap-1 border-b border-MainWhite ">
             <MapPinIcon size={16} />
-            <p className="text-MainWhite line-clamp-1">{}</p>
+            <p className="text-MainWhite line-clamp-1">
+              {data.location?.district}
+            </p>
           </div>
           <div className="flex items-center justify-center gap-1 border-b border-MainWhite ">
             <UsersIcon size={16} />
-            <p className="">хүний багтаамж {data.capacity}</p>
+            <p className="">{data.capacity}</p>
           </div>
         </div>
         <div className={`flex justify-between`}>
-          <div className={`${venueIsOpen ? "text-green-600" : "text-red-600"}`}>
-            Venue is {venueIsOpen ? "Open" : "Closed"}
-          </div>
+          {/* <div className={`${ ? "text-green-600" : "text-red-600"}`}>
+            { ? "Нээлттэй" : "Хаалттай"}
+          </div> */}
           <div
             onClick={() => router.push(`/place/${data._id}`)}
             className="flex gap-1 items-center justify-center  cursor-pointer   "
           >
-            <button>View details</button>
+            <button>Дэлгэрэнгүй үзэх</button>
             <MoveUpRight />
           </div>
         </div>
