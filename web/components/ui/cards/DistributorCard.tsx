@@ -1,13 +1,12 @@
-import { BrandIcon } from "../icons";
-
 type DistributerTypeProps = {
   name: string;
+  icon: string;
 };
 
-export const DistributorCard = ({ name }: DistributerTypeProps) => {
+export const DistributorCard = ({ name, icon }: DistributerTypeProps) => {
   return (
     <main className="h-[200px] w-[200px] flex flex-col justify-center items-center gap-4 rounded-lg bg-MainWhite">
-      <BrandIcon />
+      <div className="size-5 w-5 h-5">{icon}</div>
       <p>{name}</p>
     </main>
   );

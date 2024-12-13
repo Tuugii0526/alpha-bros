@@ -28,10 +28,10 @@ export const Menu = ({
           {categories.map((data: TCategories) => {
             return (
               <button
-                onClick={() => setSelectedCategory(`${data.name}`)}
+                onClick={() => setSelectedCategory(`${data.CategoryName}`)}
                 key={data._id}
               >
-                <VibeCard vibe={`${data.name}`} />
+                <VibeCard vibe={`${data.CategoryName}`} />
               </button>
             );
           })}
@@ -40,7 +40,7 @@ export const Menu = ({
           {selectedCategory
             ? places
                 .filter((filtData) => {
-                  return filtData.category.name === selectedCategory;
+                  return filtData.category.CategoryName === selectedCategory;
                 })
                 .map((data: TPlaces) => {
                   return (

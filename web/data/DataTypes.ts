@@ -14,19 +14,15 @@ export type TWorkingHours = {
   open: string;
   close: string;
 };
-export type TWeeklyhours = {
-  monday: TWorkingHours;
-  tuesday: TWorkingHours;
-  wednesday: TWorkingHours;
-  thursday: TWorkingHours;
-  friday: TWorkingHours;
-  saturday: TWorkingHours;
-  sunday: TWorkingHours;
+export type TWeekhours = {
+  weekdays: TWorkingHours;
+  weekend: TWorkingHours;
+  closedDay: string;
 };
 
 export type TLocation = {
   _id: string;
-  distruct: string;
+  district: string;
   latitude: string;
   longitude: string;
   province: string;
@@ -42,5 +38,5 @@ export type TPlaces = {
   image: string;
   category: TCategories;
   location?: TLocation;
-  workingHours: TWeeklyhours;
+  workingHours?: TWeekhours;
 };
