@@ -6,7 +6,7 @@ const createPlaces = async (req, res) => {
   try {
     const {
       name,
-      CategoryName,
+      category,
       capacity,
       description,
       province,
@@ -16,13 +16,9 @@ const createPlaces = async (req, res) => {
       longitude,
       ambiance,
       workingHours: {
-        monday: { open: mondayOpen, close: mondayClose },
-        tuesday: { open: tuesdayOpen, close: tuesdayClose },
-        wednesday: { open: wednesdayOpen, close: wednesdayClose },
-        thursday: { open: thursdayOpen, close: thursdayClose },
-        friday: { open: fridayOpen, close: fridayClose },
-        saturday: { open: saturdayOpen, close: saturdayClose },
-        sunday: { open: sundayOpen, close: sundayClose },
+        weekdays: { open: weekdaysOpen, close: weekdaysClose },
+        weekend: { open: weekendOpen, close: weekendClose },
+        closedday,
       },
     } = req.body;
     const file = req.file;
@@ -45,33 +41,24 @@ const createPlaces = async (req, res) => {
       longitude,
     });
 
-    const addCategory = await Category.create({
-      CategoryName,
-    });
-
     const result = await Places.create({
       name,
       image: uploadResult.url,
-      category: addCategory?._id,
+      category,
       capacity,
       description,
       location: addLocation?._id,
       ambiance,
       workingHours: {
-        monday: { open: mondayOpen, close: mondayClose },
-        tuesday: { open: tuesdayOpen, close: tuesdayClose },
-        wednesday: { open: wednesdayOpen, close: wednesdayClose },
-        thursday: { open: thursdayOpen, close: thursdayClose },
-        friday: { open: fridayOpen, close: fridayClose },
-        saturday: { open: saturdayOpen, close: saturdayClose },
-        sunday: { open: sundayOpen, close: sundayClose },
+        weekdays: { open: weekdaysOpen, close: weekdaysClose },
+        weekend: { open: weekendOpen, close: weekendClose },
+        closedday,
       },
     });
     res.status(200).json({
       success: true,
       data: {
         location: addLocation,
-        category: addCategory,
         places: result,
       },
     });
@@ -95,8 +82,8 @@ const getSelectedPlaces = async (req, res) => {
       const filteredByCategory = filteredPlaces.filter((places) => {
         const categoryMatch =
           places.category &&
-          places.category.CategoryName &&
-          places.category.CategoryName.toLowerCase() ===
+          places.category.name &&
+          places.category.name.toLowerCase() ===
             categorizedPlaces.toLowerCase();
 
         const locationMatch =
@@ -129,9 +116,6 @@ const getSelectedPlaces = async (req, res) => {
     });
   }
 };
-
-
-
 
 const getSinglePagePlaces = async (req, res) => {
   try {
@@ -172,13 +156,9 @@ const updatePlaces = async (req, res) => {
       location,
       ambiance,
       workingHours: {
-        monday: { open: mondayOpen, close: mondayClose },
-        tuesday: { open: tuesdayOpen, close: tuesdayClose },
-        wednesday: { open: wednesdayOpen, close: wednesdayClose },
-        thursday: { open: thursdayOpen, close: thursdayClose },
-        friday: { open: fridayOpen, close: fridayClose },
-        saturday: { open: saturdayOpen, close: saturdayClose },
-        sunday: { open: sundayOpen, close: sundayClose },
+        weekdays: { open: weekdaysOpen, close: weekdaysClose },
+        weekend: { open: weekendOpen, close: weekendClose },
+        closedday,
       },
     } = req.body;
     const placesId = req.params["id"];
@@ -191,13 +171,9 @@ const updatePlaces = async (req, res) => {
       location,
       ambiance,
       workingHours: {
-        monday: { open: mondayOpen, close: mondayClose },
-        tuesday: { open: tuesdayOpen, close: tuesdayClose },
-        wednesday: { open: wednesdayOpen, close: wednesdayClose },
-        thursday: { open: thursdayOpen, close: thursdayClose },
-        friday: { open: fridayOpen, close: fridayClose },
-        saturday: { open: saturdayOpen, close: saturdayClose },
-        sunday: { open: sundayOpen, close: sundayClose },
+        weekdays: { open: weekdaysOpen, close: weekdaysClose },
+        weekend: { open: weekendOpen, close: weekendClose },
+        closedday,
       },
     });
     res.status(200).json({ success: true, data: result });

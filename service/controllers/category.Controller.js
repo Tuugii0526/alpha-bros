@@ -2,9 +2,9 @@ import { Category } from "../model/category.model.js";
 
 const createCategory = async (req, res) => {
   try {
-    const { CategoryName } = req.body;
+    const { name } = req.body;
     const result = await Category.create({
-      CategoryName,
+      name,
     });
     res.status(201).json({
       success: true,
@@ -34,10 +34,10 @@ const getAllCategory = async (req, res) => {
 
 const updateCategory = async (req, res) => {
   try {
-    const { CategoryName } = req.body;
+    const { name } = req.body;
     const Id = req.params["id"];
     const result = await Category.findByIdAndUpdate(Id, {
-      CategoryName,
+      name,
     });
     res.status(201).json({ success: true, data: result });
   } catch (error) {
