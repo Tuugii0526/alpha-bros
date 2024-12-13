@@ -1,11 +1,6 @@
 import { Header } from "../Both";
-import {
-  AddPlaceButton,
-  AddSpaceButton,
-  EditButton,
-  TabsAddPlaceButton,
-} from "@/components/ui/buttons";
-import { AdminPlaceCard, MainCard } from "@/components/ui/cards";
+import { AddPlaceButton } from "@/components/ui/buttons";
+import { AdminPlaceCard } from "@/components/ui/cards";
 import { TPlaces } from "@/data/DataTypes";
 import { TCategories } from "@/data/DataTypes";
 
@@ -25,12 +20,9 @@ export const AdminContent = ({
         <div className="bg-white h-full rounded-xl">
           <div className="py-5 px-6">
             <div className="flex justify-between items-center">
-              <p className="font-Poppins font-bold leading-normal not-italic text-[22px]">
-                Space's
+              <p className="font-bold leading-normal not-italic text-[22px]">
+                Миний бүх газрууд
               </p>
-              {/* <TabsAddPlaceButton /> */}
-              {/* <AddSpaceButton /> */}
-              {/* <EditButton /> */}
               <AddPlaceButton categoryData={categoryData} />
             </div>
           </div>
@@ -47,6 +39,7 @@ export const AdminContent = ({
                     capacity={data.capacity}
                     description={data.description}
                     workingHours={data.workingHours}
+                    location={data.location}
                   />
                 );
               })}
