@@ -1,5 +1,7 @@
 "use client";
 
+import { SignedIn, UserButton } from "@clerk/nextjs";
+
 export const Header = () => {
   return (
     <main>
@@ -7,12 +9,23 @@ export const Header = () => {
         <div className="">
           <div className="flex justify-end">
             <div className="flex items-center gap-2">
-              <span className="font-medium font-Inter text-lg">
+              {/* <span className="font-medium font-Inter text-lg">
                 Гэрэлтбаатар
-              </span>
-              <div className="flex items-center justify-center w-10 h-10 bg-[#405FF212] rounded-[50%]">
+              </span> */}
+              {/* <div className="flex items-center justify-center w-10 h-10 bg-[#405FF212] rounded-[50%]">
                 <p className="">Г</p>
-              </div>
+              </div> */}
+
+              <SignedIn>
+                <UserButton
+                  showName
+                  appearance={{
+                    elements: {
+                      userButtonBox: "bg-green-200 border border-2 rounded-md",
+                    },
+                  }}
+                />
+              </SignedIn>
             </div>
           </div>
         </div>
