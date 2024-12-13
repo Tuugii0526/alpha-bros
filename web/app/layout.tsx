@@ -5,7 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ClerkProvider } from "@clerk/nextjs";
 import { NuqsAdapter } from "nuqs/adapters/next";
-
+import { Toaster } from "@/components/ui/sonner";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -39,6 +39,7 @@ export default function RootLayout({
           </NuqsAdapter>
           {children}
           <Footer />
+          <Toaster position="top-right" />
         </body>
       </html>
     </ClerkProvider>
