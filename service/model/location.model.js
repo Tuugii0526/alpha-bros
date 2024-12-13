@@ -13,8 +13,8 @@ const locationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  latitude: Number,
-  longitude: Number,
+  latitude: String,
+  longitude: String,
 });
 
 export const Location = mongoose.model("Location", locationSchema);

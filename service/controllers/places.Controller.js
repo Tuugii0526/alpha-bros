@@ -1,16 +1,18 @@
 import { Places } from "../model/places.model.js";
 import { v2 as cloudinary } from "cloudinary";
 import { Location } from "../model/location.model.js";
-import { Category } from "../model/category.model.js";
-const createPlaces = async (req, res) => {
+
+const createPlaces = async (req, response) => {
   try {
     const {
       name,
+
       category,
       capacity,
       description,
+
       province,
-      distruct,
+      district,
       street,
       latitude,
       longitude,
@@ -35,7 +37,7 @@ const createPlaces = async (req, res) => {
 
     const addLocation = await Location.create({
       province,
-      distruct,
+      district,
       street,
       latitude,
       longitude,
@@ -44,9 +46,11 @@ const createPlaces = async (req, res) => {
     const result = await Places.create({
       name,
       image: uploadResult.url,
+      image,
       category,
       capacity,
       description,
+      location,
       location: addLocation?._id,
       ambiance,
       workingHours: {
@@ -55,7 +59,7 @@ const createPlaces = async (req, res) => {
         closedday,
       },
     });
-    res.status(200).json({
+    response.status(200).json({
       success: true,
       data: {
         location: addLocation,
@@ -63,7 +67,7 @@ const createPlaces = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
+    response.status(500).json({ success: false, error: error.message });
   }
 };
 
