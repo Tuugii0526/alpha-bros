@@ -15,7 +15,7 @@ const placesSchema = new mongoose.Schema({
     required: true,
   },
   capacity: {
-    type: Number,
+    type: String,
     required: true,
   },
   description: {
@@ -30,7 +30,7 @@ const placesSchema = new mongoose.Schema({
   ambiance: String,
 
   workingHours: {
-    weekday: {
+    weekdays: {
       open: {
         type: String,
         required: true,
