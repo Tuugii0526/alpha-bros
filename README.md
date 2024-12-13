@@ -25,5 +25,9 @@ MONGODB_CONNECT_URL = mongodb+srv://Lhagvaa0102:Lhagvaa.0102@leap0102.k0ghj.mong
 
 qwdefrgback
 
+```
+CLERK:
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY='pk_test_b3V0Z29pbmctdGFycG9uLTguY2xlcmsuYWNjb3VudHMuZGV2JA'
+CLERK_SECRET_KEY='sk_test_7zcaxhfm6GhdENn7OjVpfX4sBKGgvJBiphPoO3geOW'
 
-
+```
