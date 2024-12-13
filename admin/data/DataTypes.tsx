@@ -38,7 +38,7 @@ export type TSpaceMeetingPlace = {
   };
 };
 
-export type SpaceImageType = {
+export type PlaceImageType = {
   image: File | null;
 };
 

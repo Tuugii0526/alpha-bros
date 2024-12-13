@@ -19,11 +19,11 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
-import { SpaceImageType } from "@/data/DataTypes";
+import { PlaceImageType } from "@/data/DataTypes";
 import { useFormik } from "formik";
 
 export const AddSpaceButton = () => {
-  const [spaceImage, setSpaceImage] = useState<SpaceImageType>({ image: null });
+  const [spaceImage, setSpaceImage] = useState<PlaceImageType>({ image: null });
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const BACKEND_END_POINT = process.env.BACKEND_URL;
@@ -65,7 +65,6 @@ export const AddSpaceButton = () => {
 
       if (spaceImage.image) {
         formData.append("image", spaceImage.image);
-        // console.log("ajilah shuu append");
       }
 
       try {
