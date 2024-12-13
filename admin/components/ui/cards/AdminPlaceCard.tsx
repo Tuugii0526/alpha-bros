@@ -1,56 +1,10 @@
 "use client";
 
 import { TPlaces } from "@/data/DataTypes";
-import { useRouter } from "next/navigation";
 import { EDButton } from "../buttons";
+import { TLocation } from "@/data/DataTypes";
 
 export const AdminPlaceCard = (data: TPlaces) => {
-  const router = useRouter();
-  const date = new Date();
-  const day = date.getDay();
-  const hour = date.getHours();
-  const min = date.getMinutes();
-  const now = `${hour.toString().padStart(2, "0")}:${min
-    .toString()
-    .padStart(2, "0")}`;
-  const workingHour = data.workingHours;
-
-  const getDayWorkingHours = (day: number) => {
-    const days = [
-      workingHour.monday,
-      workingHour.tuesday,
-      workingHour.wednesday,
-      workingHour.thursday,
-      workingHour.friday,
-      workingHour.saturday,
-      workingHour.sunday,
-    ];
-    return days[day];
-  };
-
-  const isworking = () => {
-    const workingTime = getDayWorkingHours(day);
-
-    // const [nowHours, nowMinutes] = now.split(":").map(Number);
-    // const [openHours, openMinutes] = workingTime.open.split(":").map(Number);
-    // const [closeHours, closeMinutes] = workingTime.close.split(":").map(Number);
-
-    // const nowTotalMinutes = nowHours * 60 + nowMinutes;
-    // const openTotalMinutes = openHours * 60 + openMinutes;
-    // const closeTotalMinutes = closeHours * 60 + closeMinutes;
-    // if (closeTotalMinutes < openTotalMinutes) {
-    //   return (
-    //     nowTotalMinutes >= openTotalMinutes ||
-    //     nowTotalMinutes < closeTotalMinutes
-    //   );
-    // }
-
-    // return (
-    //   nowTotalMinutes >= openTotalMinutes && nowTotalMinutes < closeTotalMinutes
-    // );
-  };
-
-  const venueIsOpen = isworking();
   return (
     <div className="w-full border border-spacing-x-7 py-3 px-5 flex gap-2 justify-between rounded-lg">
       <div className="flex gap-3 items-center">

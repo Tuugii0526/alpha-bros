@@ -53,23 +53,11 @@ export const SideBar = () => {
                 </div>
               </Link>
             </div>
-            {/* <div
-              className={`${
-                pathname === "/"
-                  ? "border-slate-100 bg-slate-100 text-MainWhite"
-                  : " text-SecondColor border-MainWhite  bg-MainWhite"
-              } border border-l-0 py-2 px-3 rounded-l-full `}
-            >
-              qwertyui
-            </div>
-            <div
-              className={`${
-                pathname === "/"
-                  ? "border-slate-100 bg-slate-100 text-MainWhite"
-                  : " text-SecondColor border-MainWhite  bg-MainWhite"
-              } border border-l-0 py-2 px-3 rounded-l-full `}
-            >
-              qwertyui
+            {/* <div className="py-3 flex flex-col gap-10">
+              <p className="font-bold text-[22px] not-italic leading-normal w-full">
+                Category fillter
+              </p>
+              <div className="py-3">qdeWFR</div>
             </div> */}
           </div>
         </div>
