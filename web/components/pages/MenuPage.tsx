@@ -1,7 +1,7 @@
 "use client";
 
-import { BACKEND_ENDPOINT } from "@/constant/mockdatas";
-import { TCategories, TPlaces } from "@/data/DataTypes";
+import { BACKEND_ENDPOINT, mockPlaces } from "@/constant/mockdatas";
+import { TCategories, TPlaces } from "@/types/DataTypes";
 import { Menu } from "../features/menupage/Menu";
 import { useEffect, useState } from "react";
 
@@ -37,7 +37,7 @@ export default function Menupage() {
   return (
     <div>
       <Menu
-        places={places}
+        places={mockPlaces}
         categories={categories}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}

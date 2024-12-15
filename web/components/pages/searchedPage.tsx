@@ -1,6 +1,6 @@
 "use client";
 import { BACKEND_ENDPOINT } from "@/constant/mockdatas";
-import { TPlaces } from "@/data/DataTypes";
+import { TPlaces } from "@/types/DataTypes";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import MainCard from "../ui/cards/MainCard";

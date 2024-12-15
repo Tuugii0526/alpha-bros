@@ -2,6 +2,7 @@
 
 import { LightTower } from "@/components/ui/icons/LightTower";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const paths = [
@@ -33,10 +34,10 @@ export const Navbar = () => {
           ))}
         </div>
         <div className="flex justify-center items-end">
-          <div className="flex items-center ">
+          <Link href="/" className="flex items-center ">
             <LightTower />
-          </div>
-          <span>Луужин</span>
+            <span>Луужин</span>
+          </Link>
         </div>
         <div className="flex items-center justify-end gap-4">
           <SignedOut>
