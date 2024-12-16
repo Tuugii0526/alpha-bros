@@ -19,12 +19,15 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import { TCategories } from "@/data/DataTypes";
-import { useFormik, Field } from "formik";
+import { ErrorMessage, useFormik } from "formik";
 import { PlaceImageType } from "@/data/DataTypes";
 import { TDistrict } from "@/data/DataTypes";
 import { restDayType } from "@/data/DataTypes";
+import { AddImageIcon } from "../icons";
+import * as Yup from "yup";
+import { Label } from "@radix-ui/react-select";
 
-const districts: TDistrict[] = [
+export const districts: TDistrict[] = [
   { id: 1, name: "Сүхбаатар", idName: "Sukhbaatar" },
   { id: 2, name: "Чингэлтэй", idName: "chingeltei" },
   { id: 3, name: "Баянзүрх", idName: "baynzurkh" },
@@ -71,9 +74,11 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
     }
   };
 
-  console.log(categoryId, "categoryId");
-  console.log(restDayData, "restDayData");
-  console.log(districtData, "districtData");
+  const validationSchema = Yup.object({
+    name: Yup.string().required("ene name - iig bogoln uu"),
+  });
+
+  console.log(validationSchema, "validationSchema");
 
   const formik = useFormik({
     initialValues: {
@@ -117,9 +122,9 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
         formData.append("category", categoryId);
       }
 
-      if (placeImage.image) {
-        formData.append("image", placeImage.image);
-      }
+      // if (placeImage.image) {
+      //   formData.append("image", placeImage.image);
+      // }
 
       try {
         const response = await fetch(`${BACKEND_END_POINT}/places`, {
@@ -159,132 +164,86 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                 Шинэ газар үүсгэхийн тулд доорх талбаруудыг бөглөнө үү.
               </span>
             </DialogDescription>
-            <div className="w-full flex gap-4 p-6 border border-[#E0E0E0] border-x-0 h-[400px]">
+            <div className="flex gap-4 p-6 border border-[#E0E0E0] border-x-0 h-[430px] w-full">
               <Tabs defaultValue="account" className="w-full">
                 <TabsList className="w-full flex">
                   <TabsTrigger value="Place">Газрын мэдээлэл</TabsTrigger>
                   <TabsTrigger value="Location">Байршил</TabsTrigger>
-                  <TabsTrigger value="Workinghours">Ажиллах цаг</TabsTrigger>
                   <TabsTrigger value="Image">Зураг</TabsTrigger>
                 </TabsList>
-                <TabsContent
-                  value="Place"
-                  className="w-[400px] flex flex-col gap-4"
-                >
-                  <Input
-                    id="name"
-                    name="name"
-                    type="text"
-                    placeholder="Нэр"
-                    className="px-3 h-10 rounded-lg w-full"
-                    value={formik.values.name}
-                    onChange={formik.handleChange}
-                  />
-                  <Input
-                    id="capacity"
-                    name="capacity"
-                    type="number"
-                    placeholder="Хүний багтаамж"
-                    className="px-3 h-10 rounded-lg w-full"
-                    value={formik.values.capacity}
-                    onChange={formik.handleChange}
-                  />
-                  <Input
-                    id="description"
-                    name="description"
-                    type="text"
-                    placeholder="Тайлбар"
-                    className="px-3 h-10 rounded-lg w-full"
-                    value={formik.values.description}
-                    onChange={formik.handleChange}
-                  />
-                  <Input
-                    id="ambiance"
-                    name="ambiance"
-                    type="text"
-                    placeholder="Нэмэлт"
-                    className="px-3 h-10 rounded-lg w-full"
-                    value={formik.values.ambiance}
-                    onChange={formik.handleChange}
-                  />
-                  <Select onValueChange={(value) => setCategoryId(value)}>
-                    <SelectTrigger className="w-full px-3 h-10 rounded-lg placeholder-gray-500">
-                      <SelectValue placeholder="Ангилал" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {categoryData.map((category) => {
-                        return (
-                          <SelectItem
-                            key={category?._id}
-                            value={category?._id}
-                            // onChange={() => {
-                            //   setCategoryId(category?._id);
-                            // }}
-                          >
-                            {category?.name}
-                          </SelectItem>
-                        );
-                      })}
-                    </SelectContent>
-                  </Select>
-                </TabsContent>
-                <TabsContent
-                  value="Location"
-                  className="w-[400px] flex flex-col gap-4"
-                >
-                  <Input
-                    id="province"
-                    name="province"
-                    type="text"
-                    placeholder="Хот, аймаг"
-                    className="px-3 h-10 rounded-lg w-full"
-                    value={formik.values.province}
-                    onChange={formik.handleChange}
-                  />
-                  <Select onValueChange={(value) => setDistrictData(value)}>
-                    <SelectTrigger className="w-full px-3 h-10 rounded-lg placeholder-gray-500">
-                      <SelectValue placeholder="Дүүрэг" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {districts.map((district) => {
-                        return (
-                          <SelectItem
-                            key={district?.idName}
-                            value={district?.idName}
-                            onClick={() => setDistrictData(district?.idName)}
-                          >
-                            {district?.name}
-                          </SelectItem>
-                        );
-                      })}
-                    </SelectContent>
-                  </Select>
-                  <Input
-                    id="street"
-                    name="street"
-                    type="text"
-                    placeholder="Гудамж"
-                    className="px-3 h-10 rounded-lg w-full"
-                    value={formik.values.street}
-                    onChange={formik.handleChange}
-                  />
-                </TabsContent>
-                <TabsContent
-                  value="Workinghours"
-                  className="w-full flex flex-col items-center justify-center gap-4"
-                >
-                  <div className="flex flex-col gap-4 w-full">
-                    <div className="flex flex-col gap-3">
-                      <p className="w-full text-black font-poppins text-base font-bold text-center">
+                <TabsContent value="Place" className="grid grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-4">
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      placeholder="Нэр"
+                      className="px-3 h-10 rounded-lg w-full"
+                      value={formik.values.name}
+                      onChange={formik.handleChange}
+                    />
+                    {/* <ErrorMessage
+                      name="name"
+                      component="div"
+                      className="error"
+                    /> */}
+                    <Input
+                      id="capacity"
+                      name="capacity"
+                      type="number"
+                      placeholder="Хүний багтаамж"
+                      className="px-3 h-10 rounded-lg w-full"
+                      value={formik.values.capacity}
+                      onChange={formik.handleChange}
+                    />
+                    <Input
+                      id="description"
+                      name="description"
+                      type="text"
+                      placeholder="Тайлбар"
+                      className="px-3 h-10 rounded-lg w-full"
+                      value={formik.values.description}
+                      onChange={formik.handleChange}
+                    />
+                    <Input
+                      id="ambiance"
+                      name="ambiance"
+                      type="text"
+                      placeholder="Нэмэлт"
+                      className="px-3 h-10 rounded-lg w-full"
+                      value={formik.values.ambiance}
+                      onChange={formik.handleChange}
+                    />
+                    <Select onValueChange={(value) => setCategoryId(value)}>
+                      <SelectTrigger className="w-full px-3 h-10 rounded-lg placeholder-gray-500">
+                        <SelectValue placeholder="Ангилал" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {categoryData.map((category) => {
+                          return (
+                            <SelectItem
+                              key={category?._id}
+                              value={category?._id}
+                            >
+                              {category?.name}
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="px-4 flex flex-col gap-4">
+                    <div className="flex flex-col">
+                      <p className="font-poppins text-base font-bold text-center">
                         Ажлын өдрүүд
                       </p>
-                      <div className="flex justify-between px-3">
-                        <div className="flex items-center justify-center">
+                      <div className="flex items-center justify-between">
+                        <div className="flex flex-col gap-2">
                           <label
-                            className="w-24 text-[#525252] font-poppins text-base font-bold text-center"
+                            className="w-full text-sm font-medium not-italic leading-[140%] flex items-center justify-center"
                             htmlFor="weekdaysOpen"
                           >
-                            Нээх цаг:
+                            Нээх цаг
                           </label>
                           <Input
                             type="time"
@@ -293,12 +252,12 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                             {...formik.getFieldProps("weekdaysOpen")} // Зөв хэрэглээ
                           />
                         </div>
-                        <div className="flex items-center justify-center">
+                        <div className="flex flex-col gap-2">
                           <label
-                            className="w-24 text-[#525252] font-poppins text-base font-bold text-center"
+                            className="w-full text-sm font-medium not-italic leading-[140%] flex items-center justify-center"
                             htmlFor="weekdaysClose"
                           >
-                            Хаах цаг:
+                            Хаах цаг
                           </label>
                           <Input
                             type="time"
@@ -309,17 +268,17 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col gap-3">
-                      <p className="w-full text-black font-poppins text-base font-bold text-center">
+                    <div className="flex flex-col">
+                      <p className="font-poppins text-base font-bold text-center">
                         Амралтын өдрүүд
                       </p>
-                      <div className="flex justify-between px-3">
-                        <div className="flex items-center justify-center">
+                      <div className="flex items-center justify-between">
+                        <div className="flex flex-col gap-2">
                           <label
-                            className="w-24 text-[#525252] font-poppins text-base font-bold text-center"
+                            className="w-full text-sm font-medium not-italic leading-[140%] flex items-center justify-center"
                             htmlFor="weekendOpen"
                           >
-                            Нээх цаг:
+                            Нээх цаг
                           </label>
                           <Input
                             type="time"
@@ -328,12 +287,12 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                             {...formik.getFieldProps("weekendOpen")} // Зөв хэрэглээ
                           />
                         </div>
-                        <div className="flex items-center justify-center">
+                        <div className="flex flex-col gap-2">
                           <label
-                            className="w-24 text-[#525252] font-poppins text-base font-bold text-center"
+                            className="w-full text-sm font-medium not-italic leading-[140%] flex items-center justify-center"
                             htmlFor="weekendClose"
                           >
-                            Хаах цаг:
+                            Хаах цаг
                           </label>
                           <Input
                             type="time"
@@ -344,7 +303,7 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-2">
                       <p className="w-full text-black font-poppins text-base font-bold text-center">
                         Амрах өдөр
                       </p>
@@ -368,8 +327,52 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                     </div>
                   </div>
                 </TabsContent>
-                <TabsContent value="Image" className="grid grid-cols-2">
-                  <div className="max-w-[210px] w-full h-[122px] p-2 flex flex-col justify-center items-center gap-2 border border-dashed border-[#D6D7DC] bg-[rgba(186,188,196,0.12)] rounded-lg">
+                <TabsContent
+                  value="Location"
+                  className="grid grid-cols-2 gap-4"
+                >
+                  <div className="flex flex-col gap-4">
+                    <Input
+                      id="province"
+                      name="province"
+                      type="text"
+                      placeholder="Хот, аймаг"
+                      className="px-3 h-10 rounded-lg w-full"
+                      value={formik.values.province}
+                      onChange={formik.handleChange}
+                    />
+                    <Select onValueChange={(value) => setDistrictData(value)}>
+                      <SelectTrigger className="w-full px-3 h-10 rounded-lg placeholder-gray-500">
+                        <SelectValue placeholder="Дүүрэг" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {districts.map((district) => {
+                          return (
+                            <SelectItem
+                              key={district?.idName}
+                              value={district?.idName}
+                              onClick={() => setDistrictData(district?.idName)}
+                            >
+                              {district?.name}
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
+                    <Input
+                      id="street"
+                      name="street"
+                      type="text"
+                      placeholder="Гудамж"
+                      className="px-3 h-10 rounded-lg w-full"
+                      value={formik.values.street}
+                      onChange={formik.handleChange}
+                    />
+                  </div>
+                  <div className="">map</div>
+                </TabsContent>
+                <TabsContent value="Image" className="w-full h-full">
+                  <div className="w-full h-full">
                     <p className="text-[#525252] font-poppins text-base font-bold text-center">
                       Газрын зураг аа нэмнэ үү
                     </p>
@@ -378,24 +381,29 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                       id="uploadFile1"
                       name="uploadFile1"
                       className="hidden"
+                      multiple
                       onChange={handleFileChange}
                     />
-                    <label
-                      htmlFor="uploadFile1"
-                      className="px-3 py-2 rounded-lg bg-SecondColor text-white font-inter text-base font-bold cursor-pointer"
-                    >
-                      Зураг нэмэх
+
+                    <label htmlFor="uploadFile1">
+                      <div className="w-[200px] h-[200px] border border-green-800 border-dashed overflow-hidden flex items-center justify-center">
+                        {imagePreview ? (
+                          <div className="">
+                            <img
+                              src={imagePreview}
+                              alt="Image Preview"
+                              className="w-[200px] h-[200px] object-contain "
+                            />
+                          </div>
+                        ) : (
+                          <div className="flex flex-col items-center justify-center">
+                            <AddImageIcon />
+                            <p className="">Зураг оруулах</p>
+                          </div>
+                        )}
+                      </div>
                     </label>
                   </div>
-                  {imagePreview && (
-                    <div className="mt-4">
-                      <img
-                        src={imagePreview}
-                        alt="Food Preview"
-                        className="w-full h-[200px] object-contain border border-black border-dashed p-2"
-                      />
-                    </div>
-                  )}
                 </TabsContent>
               </Tabs>
             </div>

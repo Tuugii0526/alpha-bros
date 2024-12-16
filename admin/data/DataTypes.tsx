@@ -70,7 +70,7 @@ export type TWeeklyhours = {
 
 export type TLocation = {
   _id: string;
-  distruct: string;
+  district: string;
   latitude: string;
   longitude: string;
   province: string;
