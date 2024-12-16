@@ -1,23 +1,19 @@
 "use client";
 import { Calendar } from "@/components/ui/calendar";
-import { useUser } from "@clerk/nextjs";
 import { Input } from "@/components/ui/input";
 import { BACKEND_ENDPOINT } from "@/constant/mockdatas";
 import { useAuth } from "@clerk/nextjs";
-import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
 export const Order = ({ placeId }: { placeId: string }) => {
   const [date, setDate] = useState<Date | undefined>(new Date());
-  const { user, isSignedIn } = useUser();
   const [people, setPeople] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
   const [time, setTime] = useState<string>("");
   const currentUser = useAuth();
-  const router = useRouter();
-
   const handleOrderSubmit = async () => {
-    if (!isSignedIn) {
+    if (!currentUser.isSignedIn) {
       toast("Please sign in");
       return;
     }
@@ -25,35 +21,50 @@ export const Order = ({ placeId }: { placeId: string }) => {
       toast("Өдөр сонгоогүй байна.");
       return;
     }
-    if (parseInt(people) == 0) {
+    console.log("people is:", people);
+    if (people == "") {
       toast("Хүний тоо оруулна уу");
+      return;
+    }
+    if (parseInt(people) < 1) {
+      toast("0 -ээс их хүн оруулна уу");
       return;
     }
     if (!time) {
       toast("Цаг оруулна уу !");
+      return;
     }
+
     try {
-      const userId = currentUser.userId;
+      const clerkId = currentUser.userId;
       const stringDate = date.toString();
-      console.log({ userId, stringDate, people, time, placeId });
       const options = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userId, stringDate, people, time, placeId }),
+        body: JSON.stringify({ clerkId, stringDate, people, time, placeId }),
       };
-      const response = await fetch(`${BACKEND_ENDPOINT}/order`, options);
-      const result = await response.json();
+      setIsLoading(true);
+      const response = await fetch(`${BACKEND_ENDPOINT}/api/order`, options);
+      setIsLoading(false);
+      if (response.status == 201) {
+        toast(
+          `Захиалга амжилттай: ${date.toLocaleDateString()} - ${people} хүн - ${time}`
+        );
+        return;
+      }
+      if (response.status == 404) {
+        toast("User not found");
+        return;
+      }
+      if (response.status == 500) {
+        const json = await response.json();
+        toast(`error :${json.error}`);
+      }
     } catch (error) {
-      throw new Error();
+      toast(`error: ${error}`);
     }
-
-    alert(
-      `Захиалга амжилттай: ${date.toLocaleDateString()} - ${people} хүн - ${
-        time || "Цаг оруулаагүй"
-      }`
-    );
     setDate(new Date());
     setPeople("");
     setTime("");
@@ -98,7 +109,7 @@ export const Order = ({ placeId }: { placeId: string }) => {
         className="bg-MainColor text-white font-semibold p-4 rounded-lg w-full hover:shadow-2xl"
         onClick={handleOrderSubmit}
       >
-        Захиалга өгөх
+        {isLoading ? "Уншиж байна" : " Захиалга өгөх"}
       </button>
       <button
         className="bg-gray-300 text-gray-700 font-semibold p-4 rounded-lg w-full hover:bg-gray-200"
