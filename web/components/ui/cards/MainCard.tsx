@@ -1,6 +1,5 @@
 "use client";
 
-import { Now, weekDay } from "@/constant/mockdatas";
 import { TPlaces, TWorkingHours } from "@/types/DataTypes";
 import {
   BookOpenTextIcon,
@@ -24,7 +23,7 @@ const MainCard = (data: TPlaces) => {
       const selectedPlace = data; // Assuming you want to check the first place
 
       // Check if it's a closed day
-      if (selectedPlace.workingHours.closedDay === currentDay.toString()) {
+      if (selectedPlace?.workingHours.closedDay === currentDay.toString()) {
         setOpen("Хаалттай");
         return;
       }
@@ -32,8 +31,8 @@ const MainCard = (data: TPlaces) => {
       // Determine if it's a weekend or weekday
       const isWeekend = currentDay === 0 || currentDay === 6;
       const hours = isWeekend
-        ? selectedPlace.workingHours.weekend
-        : selectedPlace.workingHours.weekdays;
+        ? selectedPlace?.workingHours.weekend
+        : selectedPlace?.workingHours.weekdays;
 
       const [openHour, openMinute] = hours.open.split(":").map(Number);
       const [closeHour, closeMinute] = hours.close.split(":").map(Number);
@@ -84,7 +83,7 @@ const MainCard = (data: TPlaces) => {
           </div>
           <div className="flex items-center justify-center gap-1 border-b border-MainWhite ">
             <UsersIcon size={16} />
-            <p className="">{data.capacity}</p>
+            <p>{data.capacity}</p>
           </div>
         </div>
         <div className={`flex justify-between`}>

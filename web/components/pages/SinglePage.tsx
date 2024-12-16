@@ -1,6 +1,6 @@
 "use client";
 
-import { BACKEND_ENDPOINT, mockPlaces } from "@/constant/mockdatas";
+import { BACKEND_ENDPOINT } from "@/constant/mockdatas";
 import { TPlaces } from "@/types/DataTypes";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -12,29 +12,29 @@ export default function SinglePage() {
 
   useEffect(() => {
     setPlace(
-      mockPlaces.filter((data) => {
+      place.filter((data) => {
         return data._id == params.place;
       })
     );
   }, []);
 
-  // const fetchPlaces = async () => {
-  //   try {
-  //     const response = await fetch(`${BACKEND_ENDPOINT}/api/places`);
-  //     const result = await response.json();
-  //     const places = result.data;
-  //     const correctPlace = places.filter((place: TPlaces) => {
-  //       return place._id === params.place;
-  //     });
-  //     setPlace(correctPlace);
-  //   } catch (error) {
-  //     throw new Error();
-  //   }
-  // };
+  const fetchPlaces = async () => {
+    try {
+      const response = await fetch(`${BACKEND_ENDPOINT}/api/places`);
+      const result = await response.json();
+      const places = result.data;
+      const correctPlace = places.filter((place: TPlaces) => {
+        return place._id === params.place;
+      });
+      setPlace(correctPlace);
+    } catch (error) {
+      throw new Error();
+    }
+  };
 
-  // useEffect(() => {
-  //   fetchPlaces();
-  // }, []);
+  useEffect(() => {
+    fetchPlaces();
+  }, []);
 
   return <main>{<PageBuild place={place} />}</main>;
 }

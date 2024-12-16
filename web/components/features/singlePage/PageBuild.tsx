@@ -1,6 +1,4 @@
 import { TPlaces } from "@/types/DataTypes";
-import { useState } from "react";
-import { TimeSchedule } from "./TimeSchedule";
 import { Order } from "./Order";
 import { SinglePageDetails } from "./SinglePageDetails";
 type TSinglePageProps = {
@@ -65,7 +63,7 @@ export const PageBuild = ({ place }: TSinglePageProps) => {
                   <SinglePageDetails data={data} />
                 </div>
                 <div className="w-1/3 flex">
-                  <Order />
+                  <Order placeId={data._id} />
                 </div>
               </div>
             </div>

@@ -26,10 +26,12 @@ export const TimeSchedule = ({
           />
         </div>
         <div className="flex  flex-col gap-4">
-          <div>Амралтын өдөр :</div>
           <div>
             {workingHours.closedDay && (
-              <ClosedDay closedDay={workingHours.closedDay} />
+              <div>
+                <div>Амралтын өдөр :</div>
+                <ClosedDay closedDay={workingHours.closedDay} />
+              </div>
             )}
           </div>
         </div>
