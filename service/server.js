@@ -8,6 +8,7 @@ import placesRoute from "./routes/places.route.js";
 import categoryRouter from "./routes/category.route.js";
 import locationRouter from "./routes/location.route.js";
 import cloudinary from "cloudinary";
+import OrderRouter from "./routes/order.route.js";
 
 const server = express();
 const Port = 8000;
@@ -30,7 +31,8 @@ server.use("/api", locationRouter);
 server.use("/api", categoryRouter);
 server.use("/api", userRouter);
 server.use("/api", placesRoute);
+server.use("/api", OrderRouter);
 
 server.listen(Port, () => {
-  console.log(`Server started http:localhost:${Port}`);
+  console.log(`Server started http://localhost:${Port}`);
 });

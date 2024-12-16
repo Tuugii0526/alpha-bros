@@ -9,6 +9,7 @@ const createPlaces = async (req, response) => {
       category,
       capacity,
       description,
+      phoneNumber,
       province,
       district,
       street,
@@ -47,6 +48,7 @@ const createPlaces = async (req, response) => {
       category,
       capacity,
       description,
+      phoneNumber,
       location: addLocation?._id,
       ambiance,
       workingHours: {
