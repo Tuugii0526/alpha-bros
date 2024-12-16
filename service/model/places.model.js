@@ -49,7 +49,7 @@ const placesSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      closedday: String,
+      closedDay: String,
     },
   },
 });
