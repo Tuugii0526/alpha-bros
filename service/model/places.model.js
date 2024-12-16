@@ -22,6 +22,10 @@ const placesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  phoneNumber: {
+    type: String,
+    required: true,
+  },
   location: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "Location",
@@ -49,7 +53,10 @@ const placesSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      closedDay: String,
+      closedDay: {
+        type: String,
+        required: true,
+      },
     },
   },
 });
