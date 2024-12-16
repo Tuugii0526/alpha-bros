@@ -3,7 +3,7 @@ import { TDistributor, distributorData } from "@/constant/mockdatas";
 
 export const LogoSection = () => {
   return (
-    <div className="w-screen bg-[#F9FBFC] flex flex-col rounded-b-3xl">
+    <div className="w-screen bg-[#F9FBFC] flex flex-col rounded-b-3xl pt-20">
       <div className="max-w-screen-xl  container flex justify-center items-center self-center flex-col gap-10 pb-20">
         <h1 className="text-2xl font-Roboto font-semibold italic">
           Дурсамжаа хайраар дүүргэх орчинг хайж олцгооё.

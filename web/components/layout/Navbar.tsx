@@ -20,12 +20,12 @@ const paths = [
 export const Navbar = () => {
   const router = useRouter();
   return (
-    <div className="w-screen flex  justify-center bg-[#F9FBFC] py-2">
-      <div className="max-w-screen-xl container justify-between w-full flex">
+    <div className="w-screen flex  justify-center py-2 relative z-10 text-MainWhite ">
+      <div className="max-w-screen-xl container flex justify-between  items-center w-full">
         <div className="flex gap-4 justify-start">
           {paths.map((path) => (
             <button
-              className="border p-2 rounded-lg"
+              className="p-2 px-4"
               onClick={() => router.push(`${path.path}`)}
               key={path.id}
             >
@@ -33,12 +33,7 @@ export const Navbar = () => {
             </button>
           ))}
         </div>
-        <div className="flex justify-center items-end">
-          <Link href="/" className="flex items-center ">
-            <LightTower />
-            <span>Луужин</span>
-          </Link>
-        </div>
+
         <div className="flex items-center justify-end gap-4">
           <SignedOut>
             <SignInButton>
@@ -53,7 +48,7 @@ export const Navbar = () => {
               showName
               appearance={{
                 elements: {
-                  userButtonBox: "bg-green-200 border border-2 rounded-md",
+                  userButtonBox: "bg-MainWhite rounded-x px-4 py-2 rounded-md ",
                 },
               }}
             />
