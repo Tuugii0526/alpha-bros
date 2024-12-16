@@ -71,6 +71,10 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
     }
   };
 
+  console.log(categoryId, "categoryId");
+  console.log(restDayData, "restDayData");
+  console.log(districtData, "districtData");
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -102,7 +106,7 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
       formData.append("weekendClose", requestData.weekendClose);
 
       if (restDayData) {
-        formData.append("closeDay", restDayData);
+        formData.append("closedDay", restDayData);
       }
 
       if (districtData) {
@@ -126,8 +130,9 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
 
         if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
-      } catch (e) {
-        console.log(e);
+      } catch (error) {
+        console.log(error);
+        // throw new Error();
       }
     },
   });
@@ -202,7 +207,7 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                     value={formik.values.ambiance}
                     onChange={formik.handleChange}
                   />
-                  <Select>
+                  <Select onValueChange={(value) => setCategoryId(value)}>
                     <SelectTrigger className="w-full px-3 h-10 rounded-lg placeholder-gray-500">
                       <SelectValue placeholder="Ангилал" />
                     </SelectTrigger>
@@ -211,10 +216,10 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                         return (
                           <SelectItem
                             key={category?._id}
-                            onClick={() => {
-                              setCategoryId(category?._id);
-                            }}
                             value={category?._id}
+                            // onChange={() => {
+                            //   setCategoryId(category?._id);
+                            // }}
                           >
                             {category?.name}
                           </SelectItem>
@@ -236,7 +241,7 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                     value={formik.values.province}
                     onChange={formik.handleChange}
                   />
-                  <Select>
+                  <Select onValueChange={(value) => setDistrictData(value)}>
                     <SelectTrigger className="w-full px-3 h-10 rounded-lg placeholder-gray-500">
                       <SelectValue placeholder="Дүүрэг" />
                     </SelectTrigger>
@@ -245,10 +250,8 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                         return (
                           <SelectItem
                             key={district?.idName}
-                            onClick={() => {
-                              setDistrictData(district?.idName);
-                            }}
                             value={district?.idName}
+                            onClick={() => setDistrictData(district?.idName)}
                           >
                             {district?.name}
                           </SelectItem>
@@ -345,7 +348,7 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                       <p className="w-full text-black font-poppins text-base font-bold text-center">
                         Амрах өдөр
                       </p>
-                      <Select>
+                      <Select onValueChange={(value) => setRestDayData(value)}>
                         <SelectTrigger className="w-full px-3 h-10 rounded-lg placeholder-gray-500">
                           <SelectValue placeholder="Өдрөө сонгоно уу" />
                         </SelectTrigger>
@@ -354,10 +357,7 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                             return (
                               <SelectItem
                                 key={restDay?.name}
-                                onClick={() => {
-                                  setRestDayData(restDay?.valueRestDay);
-                                }}
-                                value={restDay?.name}
+                                value={restDay?.valueRestDay}
                               >
                                 {restDay?.name}
                               </SelectItem>
