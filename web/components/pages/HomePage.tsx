@@ -4,7 +4,7 @@ import { Hero } from "../features/homepage/Hero";
 import { LogoSection } from "../features/homepage/LogoSection";
 import { RecommendedSpaces } from "../features/homepage/RecommendedSpaces";
 import { BACKEND_ENDPOINT } from "@/constant/mockdatas";
-import { TPlaces } from "@/data/DataTypes";
+import { TPlaces } from "@/types/DataTypes";
 
 export default function HomePage() {
   const [fetchData, setFetchData] = useState<TPlaces[]>([]);

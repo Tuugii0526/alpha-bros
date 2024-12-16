@@ -1,5 +1,5 @@
 "use client";
-import { PathType } from "@/data/DataTypes";
+import { PathType } from "@/types/DataTypes";
 import { usePathname } from "next/navigation";
 export const NavigationLink = ({ path }: { path: PathType }) => {
   const pathName = usePathname();

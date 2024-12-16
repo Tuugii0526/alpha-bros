@@ -15,7 +15,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { BACKEND_ENDPOINT, districts } from "@/constant/mockdatas";
-import { TCategories } from "@/data/DataTypes";
+import { TCategories } from "@/types/DataTypes";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -123,7 +123,7 @@ export const Search = () => {
         <div className="flex items-center gap-3 py-6 px-4">
           <GuestsIcon />
           <Input
-            className="w-16 text-[#333]"
+            className="w-16 text-[#333] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             type="number"
             placeholder="2"
             onChange={(e) => {

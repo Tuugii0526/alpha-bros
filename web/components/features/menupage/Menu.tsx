@@ -1,6 +1,6 @@
 "use client";
 
-import { TCategories, TPlaces } from "@/data/DataTypes";
+import { TCategories, TPlaces } from "@/types/DataTypes";
 import { VibeCard } from "./VibeCategoryCard";
 import { Dispatch, SetStateAction } from "react";
 import MainCard from "@/components/ui/cards/MainCard";
@@ -21,17 +21,17 @@ export const Menu = ({
   return (
     <main className="w-screen flex  items-center flex-col py-10">
       <div className="max-w-screen-xl container flex justify-center flex-col">
-        <h1 className="text-2xl italic underline sm:text-center text-left ">
-          Select by Vibe
+        <h1 className="text-2xl italic  sm:text-center text-left ">
+          Хайж буй орчиноо сонгоно уу
         </h1>
         <div className="grid grid-cols-2 md:grid-cols-4 lg:flex w-full lg:justify-between gap-2 p-10">
           {categories.map((data: TCategories) => {
             return (
               <button
-                onClick={() => setSelectedCategory(`${data.CategoryName}`)}
+                onClick={() => setSelectedCategory(`${data.name}`)}
                 key={data._id}
               >
-                <VibeCard vibe={`${data.CategoryName}`} />
+                <VibeCard vibe={`${data.name}`} />
               </button>
             );
           })}
@@ -40,7 +40,7 @@ export const Menu = ({
           {selectedCategory
             ? places
                 .filter((filtData) => {
-                  return filtData.category.CategoryName === selectedCategory;
+                  return filtData.category.name === selectedCategory;
                 })
                 .map((data: TPlaces) => {
                   return (
@@ -52,7 +52,7 @@ export const Menu = ({
                       category={data.category}
                       capacity={data.capacity}
                       description={data.description}
-                      // location={data.location}
+                      location={data.location}
                       workingHours={data.workingHours}
                     />
                   );
@@ -67,7 +67,7 @@ export const Menu = ({
                     category={data.category}
                     capacity={data.capacity}
                     description={data.description}
-                    // location={data.location}
+                    location={data.location}
                     workingHours={data.workingHours}
                   />
                 );

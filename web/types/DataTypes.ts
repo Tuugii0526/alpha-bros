@@ -7,7 +7,6 @@ export type PathType = {
 export type TCategories = {
   _id: string;
   name: string;
-  icon?: string;
 };
 
 export type TWorkingHours = {
@@ -17,7 +16,7 @@ export type TWorkingHours = {
 export type TWeekhours = {
   weekdays: TWorkingHours;
   weekend: TWorkingHours;
-  closedDay: string;
+  closedDay?: string;
 };
 
 export type TLocation = {
@@ -37,6 +36,6 @@ export type TPlaces = {
   capacity: number;
   image: string;
   category: TCategories;
-  location?: TLocation;
-  workingHours?: TWeekhours;
+  location: TLocation;
+  workingHours: TWeekhours;
 };

@@ -1,6 +1,7 @@
 "use client";
 
-import { TPlaces } from "@/data/DataTypes";
+import { Now, weekDay } from "@/constant/mockdatas";
+import { TPlaces, TWorkingHours } from "@/types/DataTypes";
 import {
   BookOpenTextIcon,
   MapPinIcon,
@@ -8,18 +9,50 @@ import {
   UsersIcon,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
 const MainCard = (data: TPlaces) => {
   const router = useRouter();
-  const date = new Date();
-  const day = date.getDay();
-  const hour = date.getHours();
-  const min = date.getMinutes();
-  const now = `${hour.toString().padStart(2, "0")}:${min
-    .toString()
-    .padStart(2, "0")}`;
+  const [open, setOpen] = useState("");
+
+  useEffect(() => {
+    const checkOpenStatus = () => {
+      const now = new Date();
+      const currentDay = now.getDay(); // 0 (Sunday) to 6 (Saturday)
+      const currentTime = now.getHours() * 60 + now.getMinutes();
+
+      const selectedPlace = data; // Assuming you want to check the first place
+
+      // Check if it's a closed day
+      if (selectedPlace.workingHours.closedDay === currentDay.toString()) {
+        setOpen("Хаалттай");
+        return;
+      }
+
+      // Determine if it's a weekend or weekday
+      const isWeekend = currentDay === 0 || currentDay === 6;
+      const hours = isWeekend
+        ? selectedPlace.workingHours.weekend
+        : selectedPlace.workingHours.weekdays;
+
+      const [openHour, openMinute] = hours.open.split(":").map(Number);
+      const [closeHour, closeMinute] = hours.close.split(":").map(Number);
+
+      const openTime = openHour * 60 + openMinute;
+      const closeTime = closeHour * 60 + closeMinute;
+
+      setOpen(
+        currentTime >= openTime && currentTime <= closeTime
+          ? "Нээлттэй"
+          : "Хаалттай"
+      );
+    };
+
+    checkOpenStatus();
+  }, [data]);
 
   return (
-    <div className="w-[300px] h-[500px] rounded-xl flex flex-col items-center">
+    <div className="w-[300px] h-[500px] rounded-xl flex flex-col items-center border">
       <div
         className="rounded-t-xl"
         style={{
@@ -55,9 +88,7 @@ const MainCard = (data: TPlaces) => {
           </div>
         </div>
         <div className={`flex justify-between`}>
-          {/* <div className={`${ ? "text-green-600" : "text-red-600"}`}>
-            { ? "Нээлттэй" : "Хаалттай"}
-          </div> */}
+          <div className="font-bold text-xl">{open}</div>
           <div
             onClick={() => router.push(`/place/${data._id}`)}
             className="flex gap-1 items-center justify-center  cursor-pointer   "
