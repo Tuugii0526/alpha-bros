@@ -1,18 +1,25 @@
 import { Order } from "../model/order.model.js";
+import { User } from "../model/user.model.js";
 
 const createOrder = async (req, res) => {
   try {
-    const { orderDate, orderNumber, orderDetail } = req.body;
-    const PlacesId = req.params["id"];
+    const { clerkId, stringDate, people, placeId } = req.body;
+    const user = await User.findOne({ clerk_id: clerkId });
+    if (!user) {
+      return res.status(404);
+    }
+    const id = user._id;
     const result = await Order.create({
-      orderNumber,
-      placesId: PlacesId,
-      orderDate,
-      orderDetail,
+      userId: id,
+      placeId: placeId,
+      orderDate: new Date(stringDate),
+      people: people,
     });
-    res.status(200).json({ success: true, data: result });
+    if (result) {
+      return res.status(201).json();
+    }
   } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
+    res.status(500).json({ error });
   }
 };
 
