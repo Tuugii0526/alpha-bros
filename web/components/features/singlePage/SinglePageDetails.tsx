@@ -4,6 +4,8 @@ import { PhoneCall } from "lucide-react";
 import { TimeSchedule } from "./TimeSchedule";
 
 export const SinglePageDetails = ({ data }: { data: TPlaces }) => {
+  console.log("data", data);
+
   return (
     <div className="flex flex-col w-full">
       <div className=" flex  justify-between gap-6">
@@ -46,7 +48,7 @@ export const SinglePageDetails = ({ data }: { data: TPlaces }) => {
           </div>
         </div>
         <div className="w-1/4 h-full">
-          <TimeSchedule workingHours={data?.workingHours} />
+          <TimeSchedule workingHours={data.workingHours} />
         </div>
       </div>
       <div className="w-full mt-12 ">

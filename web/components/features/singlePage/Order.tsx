@@ -1,16 +1,20 @@
 "use client";
-import { RedirectToSignIn } from "@clerk/nextjs";
 import { Calendar } from "@/components/ui/calendar";
 import { useUser } from "@clerk/nextjs";
 import { Input } from "@/components/ui/input";
+import { BACKEND_ENDPOINT } from "@/constant/mockdatas";
+import { useAuth } from "@clerk/nextjs";
+import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 
-export const Order = () => {
+export const Order = ({ placeId }: { placeId: string }) => {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const { user, isSignedIn } = useUser();
   const [people, setPeople] = useState<string>("");
   const [time, setTime] = useState<string>("");
+  const currentUser = useAuth();
+  const router = useRouter();
 
   const handleOrderSubmit = async () => {
     if (!isSignedIn) {
@@ -28,6 +32,28 @@ export const Order = () => {
     if (!time) {
       toast("Цаг оруулна уу !");
     }
+    try {
+      const userId = currentUser.userId;
+      const stringDate = date.toString();
+      console.log({ userId, stringDate, people, time, placeId });
+      const options = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId, stringDate, people, time, placeId }),
+      };
+      const response = await fetch(`${BACKEND_ENDPOINT}/order`, options);
+      const result = await response.json();
+    } catch (error) {
+      throw new Error();
+    }
+
+    alert(
+      `Захиалга амжилттай: ${date.toLocaleDateString()} - ${people} хүн - ${
+        time || "Цаг оруулаагүй"
+      }`
+    );
     setDate(new Date());
     setPeople("");
     setTime("");
