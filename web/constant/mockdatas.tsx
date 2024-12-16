@@ -51,9 +51,9 @@ export const districts: District[] = [
 ///////////////////////////////////////////////////////////////////////////////
 
 export const mockCategories: TCategories[] = [
-  { _id: "cat1", name: "Restaurant" },
-  { _id: "cat2", name: "Park" },
-  { _id: "cat3", name: "Museum" },
+  { _id: "cat1", name: "Meeting" },
+  { _id: "cat2", name: "Food" },
+  { _id: "cat3", name: "Enjoy" },
 ];
 
 export const mockWorkingHours: TWeekhours = {
@@ -65,7 +65,7 @@ export const mockWorkingHours: TWeekhours = {
 export const mockLocations: TLocation[] = [
   {
     _id: "loc1",
-    district: "Downtown",
+    district: "Bayangol",
     latitude: "47.6062",
     longitude: "-122.3321",
     province: "Washington",
@@ -97,7 +97,7 @@ export const mockLocations: TLocation[] = [
   },
   {
     _id: "loc5",
-    district: "UB City",
+    district: "Bayanzurkh",
     latitude: "47.9151",
     longitude: "106.9155",
     province: "Ulaanbaatar",

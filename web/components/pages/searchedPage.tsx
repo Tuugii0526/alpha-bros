@@ -57,6 +57,7 @@ export const SearchedPage = () => {
                 name={data?.name}
                 description={data?.description}
                 capacity={data?.capacity}
+                location={data?.location}
                 image={data?.image}
                 category={data?.category}
                 workingHours={data?.workingHours}
