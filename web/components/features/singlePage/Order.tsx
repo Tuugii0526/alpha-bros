@@ -1,28 +1,33 @@
 "use client";
-
+import { RedirectToSignIn } from "@clerk/nextjs";
 import { Calendar } from "@/components/ui/calendar";
+import { useUser } from "@clerk/nextjs";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export const Order = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
+  const { user, isSignedIn } = useUser();
   const [people, setPeople] = useState<string>("");
   const [time, setTime] = useState<string>("");
 
-  const handleOrderSubmit = () => {
+  const handleOrderSubmit = async () => {
+    if (!isSignedIn) {
+      toast("Please sign in");
+      return;
+    }
     if (!date) {
-      alert("Өдөр сонгоогүй байна.");
+      toast("Өдөр сонгоогүй байна.");
       return;
     }
     if (parseInt(people) == 0) {
-      alert("Хүний тоо оруулна уу");
+      toast("Хүний тоо оруулна уу");
       return;
     }
-    alert(
-      `Захиалга амжилттай: ${date.toLocaleDateString()} - ${people} хүн - ${
-        time || "Цаг оруулаагүй"
-      }`
-    );
+    if (!time) {
+      toast("Цаг оруулна уу !");
+    }
     setDate(new Date());
     setPeople("");
     setTime("");
