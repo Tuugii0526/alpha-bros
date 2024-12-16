@@ -88,3 +88,14 @@ export type TPlaces = {
   location?: TLocation;
   workingHours: TWeeklyhours;
 };
+
+export type TDistrict = {
+  id: number;
+  name: string;
+  idName: string;
+};
+
+export type restDayType = {
+  valueRestDay: string;
+  name: string;
+};

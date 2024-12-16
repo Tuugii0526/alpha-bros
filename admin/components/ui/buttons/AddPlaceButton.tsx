@@ -16,22 +16,46 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import { Calendar } from "@/components/ui/calendar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import { TCategories } from "@/data/DataTypes";
-import { useFormik } from "formik";
+import { useFormik, Field } from "formik";
 import { PlaceImageType } from "@/data/DataTypes";
+import { TDistrict } from "@/data/DataTypes";
+import { restDayType } from "@/data/DataTypes";
+
+const districts: TDistrict[] = [
+  { id: 1, name: "Сүхбаатар", idName: "Sukhbaatar" },
+  { id: 2, name: "Чингэлтэй", idName: "chingeltei" },
+  { id: 3, name: "Баянзүрх", idName: "baynzurkh" },
+  { id: 4, name: "Баянгол", idName: "bayangol" },
+  { id: 5, name: "Сонгино-Хайрхан", idName: "songino-khairkhan" },
+  { id: 6, name: "Хан-уул", idName: "khan-uul" },
+  { id: 7, name: "Налайх", idName: "nalaih" },
+  { id: 8, name: "Багануур", idName: "baganuur" },
+  { id: 9, name: "Багахангай", idName: "bagahangai" },
+];
+
+const restDays: restDayType[] = [
+  { valueRestDay: "1", name: "Даваа" },
+  { valueRestDay: "2", name: "Мягмар" },
+  { valueRestDay: "3", name: "Лхагва" },
+  { valueRestDay: "4", name: "Пүрэв" },
+  { valueRestDay: "5", name: "Баасан" },
+  { valueRestDay: "6", name: "Бямба" },
+  { valueRestDay: "7", name: "Ням" },
+];
 
 type AddPlaceButtonProps = {
   categoryData: TCategories[];
 };
 
 export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
-  const [date, setDate] = useState<Date | undefined>(new Date());
   const [placeImage, setPlaceImage] = useState<PlaceImageType>({ image: null });
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [districtData, setDistrictData] = useState("");
   const [categoryId, setCategoryId] = useState("");
+  const [restDayData, setRestDayData] = useState("");
 
   const BACKEND_END_POINT = process.env.BACKEND_URL;
 
@@ -49,33 +73,44 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
 
   const formik = useFormik({
     initialValues: {
-      // Place data--------------------------
       name: "",
       capacity: "",
       description: "",
       ambiance: "",
-
       province: "",
-      distruct: "",
       street: "",
-      //Workinghours  data--------------------------
+      weekdaysOpen: "",
+      weekdaysClose: "",
+      weekendOpen: "",
+      weekendClose: "",
     },
     onSubmit: async (value) => {
       const requestData = {
         ...value,
       };
+
       const formData = new FormData();
       formData.append("name", requestData.name);
       formData.append("capacity", requestData.capacity);
       formData.append("description", requestData.description);
       formData.append("ambiance", requestData.ambiance);
       formData.append("province", requestData.province);
-      formData.append("distruct", requestData.distruct);
       formData.append("street", requestData.street);
-      console.log(requestData, "requestData");
+      formData.append("weekdaysOpen", requestData.weekdaysOpen);
+      formData.append("weekdaysClose", requestData.weekdaysClose);
+      formData.append("weekendOpen", requestData.weekendOpen);
+      formData.append("weekendClose", requestData.weekendClose);
+
+      if (restDayData) {
+        formData.append("closeDay", restDayData);
+      }
+
+      if (districtData) {
+        formData.append("district", districtData);
+      }
 
       if (categoryId) {
-        formData.append("categoryId", categoryId);
+        formData.append("category", categoryId);
       }
 
       if (placeImage.image) {
@@ -201,33 +236,26 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                     value={formik.values.province}
                     onChange={formik.handleChange}
                   />
-                  <Input
-                    id="distruct"
-                    name="distruct"
-                    type="text"
-                    placeholder="Дүүрэг"
-                    className="px-3 h-10 rounded-lg w-full"
-                    value={formik.values.distruct}
-                    onChange={formik.handleChange}
-                  />
-                  <Input
-                    id="street"
-                    name="street"
-                    type="text"
-                    placeholder="Гудамж"
-                    className="px-3 h-10 rounded-lg w-full"
-                    value={formik.values.street}
-                    onChange={formik.handleChange}
-                  />
-                  {/* <Input
-                    id="log"
-                    name="log"
-                    type="text"
-                    placeholder="Гудамж"
-                    className="px-3 h-10 rounded-lg w-full"
-                    value={formik.values.log}
-                    onChange={formik.handleChange}
-                  />
+                  <Select>
+                    <SelectTrigger className="w-full px-3 h-10 rounded-lg placeholder-gray-500">
+                      <SelectValue placeholder="Дүүрэг" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {districts.map((district) => {
+                        return (
+                          <SelectItem
+                            key={district?.idName}
+                            onClick={() => {
+                              setDistrictData(district?.idName);
+                            }}
+                            value={district?.idName}
+                          >
+                            {district?.name}
+                          </SelectItem>
+                        );
+                      })}
+                    </SelectContent>
+                  </Select>
                   <Input
                     id="street"
                     name="street"
@@ -236,18 +264,109 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                     className="px-3 h-10 rounded-lg w-full"
                     value={formik.values.street}
                     onChange={formik.handleChange}
-                  /> */}
+                  />
                 </TabsContent>
                 <TabsContent
                   value="Workinghours"
-                  className="w-full flex items-center justify-center gap-4"
+                  className="w-full flex flex-col items-center justify-center gap-4"
                 >
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    onSelect={setDate}
-                    className="rounded-md border"
-                  />
+                  <div className="flex flex-col gap-4 w-full">
+                    <div className="flex flex-col gap-3">
+                      <p className="w-full text-black font-poppins text-base font-bold text-center">
+                        Ажлын өдрүүд
+                      </p>
+                      <div className="flex justify-between px-3">
+                        <div className="flex items-center justify-center">
+                          <label
+                            className="w-24 text-[#525252] font-poppins text-base font-bold text-center"
+                            htmlFor="weekdaysOpen"
+                          >
+                            Нээх цаг:
+                          </label>
+                          <Input
+                            type="time"
+                            id="weekdaysOpen"
+                            className="px-3 h-10 rounded-lg w-auto"
+                            {...formik.getFieldProps("weekdaysOpen")} // Зөв хэрэглээ
+                          />
+                        </div>
+                        <div className="flex items-center justify-center">
+                          <label
+                            className="w-24 text-[#525252] font-poppins text-base font-bold text-center"
+                            htmlFor="weekdaysClose"
+                          >
+                            Хаах цаг:
+                          </label>
+                          <Input
+                            type="time"
+                            id="weekdaysClose"
+                            className="px-3 h-10 rounded-lg w-auto"
+                            {...formik.getFieldProps("weekdaysClose")} // Зөв хэрэглээ
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <p className="w-full text-black font-poppins text-base font-bold text-center">
+                        Амралтын өдрүүд
+                      </p>
+                      <div className="flex justify-between px-3">
+                        <div className="flex items-center justify-center">
+                          <label
+                            className="w-24 text-[#525252] font-poppins text-base font-bold text-center"
+                            htmlFor="weekendOpen"
+                          >
+                            Нээх цаг:
+                          </label>
+                          <Input
+                            type="time"
+                            id="weekendOpen"
+                            className="px-3 h-10 rounded-lg w-auto"
+                            {...formik.getFieldProps("weekendOpen")} // Зөв хэрэглээ
+                          />
+                        </div>
+                        <div className="flex items-center justify-center">
+                          <label
+                            className="w-24 text-[#525252] font-poppins text-base font-bold text-center"
+                            htmlFor="weekendClose"
+                          >
+                            Хаах цаг:
+                          </label>
+                          <Input
+                            type="time"
+                            id="weekendClose"
+                            className="px-3 h-10 rounded-lg w-auto"
+                            {...formik.getFieldProps("weekendClose")} // Зөв хэрэглээ
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <p className="w-full text-black font-poppins text-base font-bold text-center">
+                        Амрах өдөр
+                      </p>
+                      <Select>
+                        <SelectTrigger className="w-full px-3 h-10 rounded-lg placeholder-gray-500">
+                          <SelectValue placeholder="Өдрөө сонгоно уу" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {restDays.map((restDay) => {
+                            return (
+                              <SelectItem
+                                key={restDay?.name}
+                                onClick={() => {
+                                  setRestDayData(restDay?.valueRestDay);
+                                }}
+                                value={restDay?.name}
+                              >
+                                {restDay?.name}
+                              </SelectItem>
+                            );
+                          })}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
                 </TabsContent>
                 <TabsContent value="Image" className="grid grid-cols-2">
                   <div className="max-w-[210px] w-full h-[122px] p-2 flex flex-col justify-center items-center gap-2 border border-dashed border-[#D6D7DC] bg-[rgba(186,188,196,0.12)] rounded-lg">
