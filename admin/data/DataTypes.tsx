@@ -83,7 +83,7 @@ export type TPlaces = {
   description: string;
   ambiance?: string;
   capacity: number;
-  image: string;
+  image: string[];
   category: TCategories;
   location?: TLocation;
   workingHours: TWeeklyhours;

@@ -11,6 +11,8 @@ export const AdminPlaceCard = (data: TPlaces) => {
     (district) => district.idName === districtData
   );
 
+  console.log(filterDistricts, "filterDistricts");
+
   return (
     <div className="w-full border border-spacing-x-7 py-3 px-5 flex gap-2 justify-between rounded-lg">
       <div className="flex gap-3 items-center">
@@ -18,7 +20,7 @@ export const AdminPlaceCard = (data: TPlaces) => {
           className="w-20 h-20 rounded"
           style={{
             backgroundSize: "cover",
-            backgroundImage: `url(${data?.image})`,
+            backgroundImage: `url(${data?.image[0]})`,
           }}
         ></div>
         <div className="w-[400px] ">
