@@ -1,7 +1,7 @@
 export const FacebookIcon = () => {
   return (
     <svg
-      fill="#ffffff"
+      fill="blue"
       width="24"
       height="24"
       viewBox="0 0 24 24"

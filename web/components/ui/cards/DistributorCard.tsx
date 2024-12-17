@@ -1,13 +1,22 @@
+"use client";
+import { useRouter } from "next/navigation";
+
 type DistributerTypeProps = {
   name: string;
-  icon: string;
+  id: string;
 };
 
-export const DistributorCard = ({ name, icon }: DistributerTypeProps) => {
+export const DistributorCard = ({ name, id }: DistributerTypeProps) => {
+  const router = useRouter();
   return (
-    <main className="h-[200px] w-[200px] flex flex-col justify-center items-center gap-4 rounded-lg bg-MainWhite">
-      <div className="size-5 w-5 h-5">{icon}</div>
-      <p>{name}</p>
+    <main className="px-4 py-2 flex flex-col justify-center items-center gap-4 rounded-lg bg-MainWhite">
+      <button
+        onClick={() => {
+          router.push(`/menu/${name}`);
+        }}
+      >
+        {name}
+      </button>
     </main>
   );
 };

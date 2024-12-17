@@ -1,14 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Hero } from "../features/homepage/Hero";
-import { LogoSection } from "../features/homepage/LogoSection";
+import { CategorySection } from "../features/homepage/CategorySection";
 import { RecommendedSpaces } from "../features/homepage/RecommendedSpaces";
 import { BACKEND_ENDPOINT } from "@/constant/mockdatas";
-import { TPlaces } from "@/types/DataTypes";
+import { TCategories, TPlaces } from "@/types/DataTypes";
 
 export default function HomePage() {
   const [fetchData, setFetchData] = useState<TPlaces[]>([]);
-
+  const [categories, setCategory] = useState<TCategories[]>([]);
   const fetchdataFunc = async () => {
     try {
       const response = await fetch(`${BACKEND_ENDPOINT}/api/places`);
@@ -18,14 +18,24 @@ export default function HomePage() {
       throw new Error();
     }
   };
-
+  const fetchCategory = async () => {
+    try {
+      const response = await fetch(`${BACKEND_ENDPOINT}/api/category`);
+      const result = await response.json();
+      setCategory(result.data);
+    } catch (error) {
+      throw new Error();
+    }
+  };
   useEffect(() => {
     fetchdataFunc();
+    fetchCategory();
   }, []);
+
   return (
-    <div className="w-screen flex flex-col justify-center  absolute top-0 left-0 pb-10">
+    <div className="w-screen flex flex-col absolute top-0 right-0">
       <Hero />
-      <LogoSection />
+      <CategorySection categories={categories} />
       <RecommendedSpaces data={fetchData} />
     </div>
   );
