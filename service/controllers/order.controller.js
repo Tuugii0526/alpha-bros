@@ -19,8 +19,32 @@ const createOrder = async (req, res) => {
       return res.status(201).json();
     }
   } catch (error) {
-    res.status(500).json({ error });
+    res.status(500).json({ error: error.message });
   }
 };
 
-export { createOrder };
+const getSelectedUsersOrder = async (req, res) => {
+  try {
+    const clerkId = req.params["id"];
+    const user = await User.findOne({ clerk_id: clerkId });
+    if (!user) {
+      return res.status(404);
+    }
+    const userId = user?._id;
+    const result = await Order.find({ userId });
+    res.status(200).json({ success: true, data: result });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const getAllOrder = async (req, res) => {
+  try {
+    const result = await Order.find();
+    res.status(200).json({ success: true, data: result });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+export { createOrder, getAllOrder, getSelectedUsersOrder };
