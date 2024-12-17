@@ -19,13 +19,12 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import { TCategories } from "@/data/DataTypes";
-import { ErrorMessage, useFormik } from "formik";
+import { useFormik } from "formik";
 import { PlaceImageType } from "@/data/DataTypes";
 import { TDistrict } from "@/data/DataTypes";
 import { restDayType } from "@/data/DataTypes";
 import { AddImageIcon } from "../icons";
 import * as Yup from "yup";
-import { Label } from "@radix-ui/react-select";
 
 export const districts: TDistrict[] = [
   { id: 1, name: "Сүхбаатар", idName: "Sukhbaatar" },
@@ -61,6 +60,8 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
   const [districtData, setDistrictData] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [restDayData, setRestDayData] = useState("");
+  const [loeder, setLoeder] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const BACKEND_END_POINT = process.env.BACKEND_URL;
 
@@ -107,6 +108,7 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
       weekdaysClose: "",
       weekendOpen: "",
       weekendClose: "",
+      phoneNumber: "",
     },
     onSubmit: async (value) => {
       const requestData = {
@@ -118,6 +120,7 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
       formData.append("capacity", requestData.capacity);
       formData.append("description", requestData.description);
       formData.append("ambiance", requestData.ambiance);
+      formData.append("phoneNumber", requestData.phoneNumber);
       formData.append("province", requestData.province);
       formData.append("street", requestData.street);
       formData.append("weekdaysOpen", requestData.weekdaysOpen);
@@ -146,22 +149,29 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
       }
 
       try {
+        setLoeder(true);
         const response = await fetch(`${BACKEND_END_POINT}/places`, {
           method: "POST",
           body: formData,
         });
         const data = await response.json();
+        if (data.success) {
+          setIsDialogOpen(false);
+        }
 
         if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
+        setLoeder(false);
       } catch (error) {
         console.log(error);
       }
     },
   });
 
+  console.log("-------!------", categoryId);
+
   return (
-    <Dialog>
+    <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger>
         <div className="py-2 px-4 bg-SecondColor text-white rounded">
           <span className="font-normal leading-normal not-italic text-base">
@@ -232,7 +242,19 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                       value={formik.values.ambiance}
                       onChange={formik.handleChange}
                     />
-                    <Select onValueChange={(value) => setCategoryId(value)}>
+                    <Input
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      type="text"
+                      placeholder="Холбогдох утасны дугаар"
+                      className="px-3 h-10 rounded-lg w-full"
+                      value={formik.values.phoneNumber}
+                      onChange={formik.handleChange}
+                    />
+                    <Select
+                      value={categoryId}
+                      onValueChange={(value) => setCategoryId(value)}
+                    >
                       <SelectTrigger className="w-full px-3 h-10 rounded-lg placeholder-gray-500">
                         <SelectValue placeholder="Ангилал" />
                       </SelectTrigger>
@@ -267,7 +289,7 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                             type="time"
                             id="weekdaysOpen"
                             className="px-3 h-10 rounded-lg w-auto"
-                            {...formik.getFieldProps("weekdaysOpen")} // Зөв хэрэглээ
+                            {...formik.getFieldProps("weekdaysOpen")}
                           />
                         </div>
                         <div className="flex flex-col gap-2">
@@ -281,7 +303,7 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                             type="time"
                             id="weekdaysClose"
                             className="px-3 h-10 rounded-lg w-auto"
-                            {...formik.getFieldProps("weekdaysClose")} // Зөв хэрэглээ
+                            {...formik.getFieldProps("weekdaysClose")}
                           />
                         </div>
                       </div>
@@ -302,7 +324,7 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                             type="time"
                             id="weekendOpen"
                             className="px-3 h-10 rounded-lg w-auto"
-                            {...formik.getFieldProps("weekendOpen")} // Зөв хэрэглээ
+                            {...formik.getFieldProps("weekendOpen")}
                           />
                         </div>
                         <div className="flex flex-col gap-2">
@@ -316,7 +338,7 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                             type="time"
                             id="weekendClose"
                             className="px-3 h-10 rounded-lg w-auto"
-                            {...formik.getFieldProps("weekendClose")} // Зөв хэрэглээ
+                            {...formik.getFieldProps("weekendClose")}
                           />
                         </div>
                       </div>
@@ -439,12 +461,25 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
               >
                 Арилгах
               </button>
-              <button
-                type="submit"
-                className="px-4 py-2 rounded-[4px] bg-SecondColor text-white font-inter text-base font-bold"
-              >
-                Үргэлжлүүлэх
-              </button>
+              <div>
+                {loeder === false ? (
+                  <button
+                    type="submit"
+                    className="flex px-4 py-2 min-w-[145px] rounded-[4px] bg-SecondColor text-white font-inter text-base font-bold"
+                  >
+                    Үргэлжлүүлэх
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="flex items-center justify-center px-4 py-2 min-w-[145px] rounded-[4px] bg-SecondColor/70 text-white font-inter text-base font-bold"
+                  >
+                    <div className="flex items-center justify-center">
+                      <div className="w-6 h-6 border-4 border-white border-solid rounded-full animate-spin border-t-transparent"></div>
+                    </div>
+                  </button>
+                )}
+              </div>
             </div>
           </form>
         </DialogHeader>

@@ -21,6 +21,8 @@ const AdminPage = () => {
     }
   };
 
+  console.log(placesData, "placesData");
+
   const fetchDataCategory = async () => {
     try {
       const response = await fetch(`${BACKEND_END_POINT}/category`);
