@@ -2,9 +2,15 @@
 
 import { TPlaces } from "@/data/DataTypes";
 import { EDButton } from "../buttons";
-import { TLocation } from "@/data/DataTypes";
+import { districts } from "../buttons";
 
 export const AdminPlaceCard = (data: TPlaces) => {
+  const districtData = data?.location?.district;
+
+  const filterDistricts = districts.filter(
+    (district) => district.idName === districtData
+  );
+
   return (
     <div className="w-full border border-spacing-x-7 py-3 px-5 flex gap-2 justify-between rounded-lg">
       <div className="flex gap-3 items-center">
@@ -53,9 +59,7 @@ export const AdminPlaceCard = (data: TPlaces) => {
           Дүүрэг:{" "}
           <span className="text-[#121316] font-normal">
             {" "}
-            {data?.location?.distruct
-              ? data?.location?.distruct
-              : "Хоосон байна"}
+            {filterDistricts[0].name ? filterDistricts[0].name : "Хоосон байна"}
           </span>
         </p>
         <p className="font-Inter text-sm font-semibold not-italic leading-5 tracking-[-0.28px] ">

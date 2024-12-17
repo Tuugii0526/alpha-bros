@@ -1,21 +1,26 @@
 import { User } from "../model/user.model.js";
 
-const createUser = async (req, response) => {
+const getUser = async (req, res) => {
+  const { clerk_id } = req.query;
   try {
-    const { name, email, password, phoneNumber } = req.body;
-    const result = await User.create({
-      name,
-      email,
-      password,
-      phoneNumber,
-    });
-    response.status(201).json({
-      success: true,
-      data: result,
-    });
+    const user = await User.find({ clerk_id: clerk_id });
+
+    if (user) {
+      const mongo_id = user[0]._id;
+      return res.status(200).json({ mongo_id });
+    } else {
+      return res.status(404);
+    }
   } catch (error) {
-    response.status(501).json({ error: "can't , create user " });
+    return res.status(500).json(error);
   }
 };
-
-export { createUser };
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    return res.status(200).json({ users });
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+};
+export { getUser, getUsers };

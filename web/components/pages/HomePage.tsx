@@ -23,7 +23,7 @@ export default function HomePage() {
     fetchdataFunc();
   }, []);
   return (
-    <div className="w-screen flex flex-col justify-center pb-10">
+    <div className="w-screen flex flex-col justify-center  absolute top-0 left-0 pb-10">
       <Hero />
       <LogoSection />
       <RecommendedSpaces data={fetchData} />

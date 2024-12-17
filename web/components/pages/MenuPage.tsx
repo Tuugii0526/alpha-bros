@@ -37,7 +37,7 @@ export default function Menupage() {
   return (
     <div>
       <Menu
-        places={mockPlaces}
+        places={places}
         categories={categories}
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}

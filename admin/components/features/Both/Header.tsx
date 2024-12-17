@@ -21,7 +21,11 @@ export const Header = () => {
                   showName
                   appearance={{
                     elements: {
-                      userButtonBox: "bg-green-200 border border-2 rounded-md",
+                      userButtonBox: "bg-white ",
+                      userButtonOuterIdentifier:
+                        "font-medium font-Inter text-lg",
+
+                      userButtonAvatarBox: "w-10 h-10",
                     },
                   }}
                 />

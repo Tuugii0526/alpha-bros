@@ -8,7 +8,7 @@ export const TimeSchedule = ({
   workingHours: TWeekhours;
 }) => {
   return (
-    <div className="w-full flex flex-col bg-MainWhite p-4 rounded-2xl  ">
+    <div className="w-full  h-full flex flex-col p-4 rounded-2xl  ">
       <div className="flex flex-col text-xl gap-4">
         <div className="w-full  font-semibold not-italic">Цагийн хуваарь</div>
         <div className="flex flex-col">
@@ -26,10 +26,12 @@ export const TimeSchedule = ({
           />
         </div>
         <div className="flex  flex-col gap-4">
-          <div>Амралтын өдөр :</div>
           <div>
             {workingHours.closedDay && (
-              <ClosedDay closedDay={workingHours.closedDay} />
+              <div>
+                <div>Амралтын өдөр :</div>
+                <ClosedDay closedDay={workingHours.closedDay} />
+              </div>
             )}
           </div>
         </div>

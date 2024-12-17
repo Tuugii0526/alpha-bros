@@ -96,7 +96,7 @@ export const AddSpaceButton = () => {
           <form action="" onSubmit={formik.handleSubmit}>
             <DialogTitle>
               <span className="font-bold leading-[130%] text-2xl">
-                Газар үүсгэх
+                Газар үүсгэхwq
               </span>
             </DialogTitle>
             <DialogDescription>

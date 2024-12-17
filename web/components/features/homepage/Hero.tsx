@@ -2,7 +2,7 @@ import { Search } from "./Search";
 
 export const Hero = () => {
   return (
-    <main>
+    <main className="h-screen w-screen">
       <div
         className="flex flex-col items-center justify-between w-full h-[860px] bg-MainColor"
         style={{
@@ -25,7 +25,7 @@ export const Hero = () => {
             {/*  */}
           </div>
         </div>
-        <div className="w-full h-[80px] bg-[#F9FBFC] rounded-t-[60px]"></div>
+        {/* <div className="w-full h-[80px] bg-[#F9FBFC] rounded-t-[60px]"></div> */}
       </div>
     </main>
   );
