@@ -9,10 +9,10 @@ import {
   updatePlaces,
 } from "../controllers/places.Controller.js";
 
-const upload = multer({ dest: "./uploads/" });
+const upload = multer({ dest: "uploads/" });
 const placesRoute = express.Router();
 
-placesRoute.post("/places", upload.single("image"), createPlaces);
+placesRoute.post("/places", upload.array("image"), createPlaces);
 placesRoute.get("/places", getAllPlaces);
 placesRoute.put("/places/:id", updatePlaces);
 placesRoute.delete("/places/:id", deletePlaces);
