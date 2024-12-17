@@ -88,13 +88,9 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
     }
   };
 
-  console.log("images urls ", imagePreviews);
-
   const validationSchema = Yup.object({
     name: Yup.string().required("ene name - iig bogoln uu"),
   });
-
-  console.log(validationSchema, "validationSchema");
 
   const formik = useFormik({
     initialValues: {
@@ -140,8 +136,6 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
         formData.append("category", categoryId);
       }
 
-      console.log("hooson bnawdqedqdewde");
-
       if (placeImages && placeImages.images) {
         placeImages.images.forEach((file) => {
           formData.append("image", file); // "images" нь сервер руу илгээх түлхүүр
@@ -167,8 +161,6 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
       }
     },
   });
-
-  console.log("-------!------", categoryId);
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
