@@ -7,6 +7,7 @@ const createPlaces = async (req, response) => {
     const {
       name,
       category,
+
       capacity,
       description,
       phoneNumber,
@@ -24,7 +25,7 @@ const createPlaces = async (req, response) => {
     } = req.body;
     const files = req.files;
 
-    console.log(req.body, "req.body");
+    // console.log(req.body, "req.body");
     // req.body endeed buh medeelel ni orj irj bgaa
     // [Object: null prototype] {
     //   name: 'eqw',
@@ -65,7 +66,7 @@ const createPlaces = async (req, response) => {
     //   'http://res.cloudinary.com/dl5irqaz6/image/upload/v1734419789/places/fvr1zunxmfeqp3mtr08l.jpg'
     // ] uploadedUrls
 
-    console.log(uploadedUrls, "uploadedUrls");
+    // console.log(uploadedUrls, "uploadedUrls");
 
     const addLocation = await Location.create({
       province,
@@ -78,6 +79,7 @@ const createPlaces = async (req, response) => {
     const result = await Places.create({
       name,
       image: uploadedUrls,
+
       category,
       capacity,
       description,
@@ -91,8 +93,6 @@ const createPlaces = async (req, response) => {
       },
     });
 
-    console.log(result, "result");
-
     response.status(200).json({
       success: true,
       data: {
@@ -101,7 +101,7 @@ const createPlaces = async (req, response) => {
       },
     });
   } catch (error) {
-    response.status(500).json({ success: false, error: error.error });
+    response.status(500).json({ success: false, error: error.message });
   }
 };
 
