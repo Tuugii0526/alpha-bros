@@ -55,10 +55,10 @@ const placesSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      closedDay: {
-        type: String,
-        required: true,
-      },
+    },
+    closedDay: {
+      type: String,
+      required: true,
     },
   },
 });
