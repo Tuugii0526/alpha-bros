@@ -54,8 +54,10 @@ type AddPlaceButtonProps = {
 };
 
 export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
-  const [placeImage, setPlaceImage] = useState<PlaceImageType>({ image: null });
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [placeImages, setPlaceImages] = useState<PlaceImageType>({
+    images: [],
+  });
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
   const [districtData, setDistrictData] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [restDayData, setRestDayData] = useState("");
@@ -63,16 +65,29 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
   const BACKEND_END_POINT = process.env.BACKEND_URL;
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setPlaceImage({ image: file });
-      const render = new FileReader();
-      render.onloadend = () => {
-        setImagePreview(render.result as string);
-      };
-      render.readAsDataURL(file);
+    const files = event.target.files;
+    if (files) {
+      const fileArray = Array.from(files); // FileList-ийг массив болгох
+      setPlaceImages({ images: fileArray });
+
+      // Урьдчилсан харагдах байдлыг хадгалах
+      const previewUrls: string[] = [];
+      fileArray.forEach((file) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          previewUrls.push(reader.result as string);
+
+          // Бүх урьдчилсан харагдах байдлыг state-д хадгалах
+          if (previewUrls.length === fileArray.length) {
+            setImagePreviews([...previewUrls]);
+          }
+        };
+        reader.readAsDataURL(file);
+      });
     }
   };
+
+  console.log("images urls ", imagePreviews);
 
   const validationSchema = Yup.object({
     name: Yup.string().required("ene name - iig bogoln uu"),
@@ -376,6 +391,7 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                     <p className="text-[#525252] font-poppins text-base font-bold text-center">
                       Газрын зураг аа нэмнэ үү
                     </p>
+
                     <input
                       type="file"
                       id="uploadFile1"
@@ -386,19 +402,21 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                     />
 
                     <label htmlFor="uploadFile1">
-                      <div className="w-[200px] h-[200px] border border-green-800 border-dashed overflow-hidden flex items-center justify-center">
-                        {imagePreview ? (
-                          <div className="">
-                            <img
-                              src={imagePreview}
-                              alt="Image Preview"
-                              className="w-[200px] h-[200px] object-contain "
-                            />
+                      <div className="flex w-full overflow-hidden items-center justify-start">
+                        {imagePreviews.length > 0 ? (
+                          <div className="image-previews flex flex-wrap gap-2">
+                            {imagePreviews.map((preview, index) => (
+                              <img
+                                className="w-[100px] h-[100px] object-contain border border-green-800 border-dashed"
+                                key={index}
+                                src={preview}
+                                alt={`Preview ${index + 1}`}
+                              />
+                            ))}
                           </div>
                         ) : (
-                          <div className="flex flex-col items-center justify-center">
+                          <div className="flex flex-col items-center justify-center w-[100px] h-[100px] object-contain border border-green-800 border-dashed">
                             <AddImageIcon />
-                            <p className="">Зураг оруулах</p>
                           </div>
                         )}
                       </div>
@@ -413,7 +431,7 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                 className="p-2 text-SecondColor font-inter text-base font-bold"
                 onClick={() => {
                   formik.resetForm();
-                  setImagePreview(null);
+                  setImagePreviews([]);
                 }}
               >
                 Арилгах

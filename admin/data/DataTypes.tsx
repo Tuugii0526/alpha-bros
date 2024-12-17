@@ -39,7 +39,7 @@ export type TSpaceMeetingPlace = {
 };
 
 export type PlaceImageType = {
-  image: File | null;
+  images: File[] | null;
 };
 
 export type PathType = {
