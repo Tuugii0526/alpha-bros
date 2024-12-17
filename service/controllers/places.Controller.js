@@ -80,36 +80,38 @@ const getSelectedPlaces = async (req, res) => {
       .populate("category")
       .populate("location");
 
-    if (categorizedPlaces && placesLocation && parsedCapacity !== null) {
-      const filteredByCategory = filteredPlaces.filter((places) => {
-        const categoryMatch =
-          places.category &&
-          places.category.name &&
-          places.category.name.toLowerCase() ===
-            categorizedPlaces.toLowerCase();
+    let placesToReturn = filteredPlaces;
 
-        const locationMatch =
-          places.location &&
-          places.location.district &&
-          places.location.district.toLowerCase() ===
-            placesLocation.toLowerCase();
-
-        const capacityMatch = places.capacity >= parsedCapacity;
-
-        return categoryMatch && locationMatch && capacityMatch;
+    if (categorizedPlaces) {
+      placesToReturn = placesToReturn.filter((place) => {
+        return (
+          place.category &&
+          place.category.name &&
+          place.category.name.toLowerCase() === categorizedPlaces.toLowerCase()
+        );
       });
+    }
 
-      if (filteredByCategory.length > 0) {
-        res.status(200).json({ success: true, data: filteredByCategory });
-      } else {
-        res.status(200).json({ success: false, data: "Places not found" });
-      }
+    if (placesLocation) {
+      placesToReturn = placesToReturn.filter((place) => {
+        return (
+          place.location &&
+          place.location.district &&
+          place.location.district.toLowerCase() === placesLocation.toLowerCase()
+        );
+      });
+    }
+
+    if (parsedCapacity !== null) {
+      placesToReturn = placesToReturn.filter((place) => {
+        return place.capacity >= parsedCapacity;
+      });
+    }
+
+    if (placesToReturn.length > 0) {
+      res.status(200).json({ success: true, data: placesToReturn });
     } else {
-      res.status(400).json({
-        success: false,
-        message:
-          "Please provide all required parameters: categorizedPlaces, placesLocation, and capacity.",
-      });
+      res.status(200).json({ success: false, data: "Places not found" });
     }
   } catch (error) {
     res.status(500).json({
@@ -118,6 +120,7 @@ const getSelectedPlaces = async (req, res) => {
     });
   }
 };
+
 
 const getSinglePagePlaces = async (req, res) => {
   try {
