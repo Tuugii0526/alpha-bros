@@ -5,10 +5,12 @@ const placesSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  image: {
-    type: String,
-    required: true,
-  },
+  image: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
   category: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "Category",
