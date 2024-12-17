@@ -9,5 +9,5 @@ const OrderRouter = express.Router();
 
 OrderRouter.post("/order", createOrder);
 OrderRouter.get("/order", getAllOrder);
-OrderRouter.get("/userorder", getSelectedUsersOrder);
+OrderRouter.get("/userorder/:id", getSelectedUsersOrder);
 export default OrderRouter;

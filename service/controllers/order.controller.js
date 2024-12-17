@@ -25,9 +25,13 @@ const createOrder = async (req, res) => {
 
 const getSelectedUsersOrder = async (req, res) => {
   try {
-    const { userId } = req.body;
-    const SearchId = userId;
-    const result = await Order.find({ SearchId });
+    const clerkId = req.params["id"];
+    const user = await User.findOne({ clerk_id: clerkId });
+    if (!user) {
+      return res.status(404);
+    }
+    const userId = user?._id;
+    const result = await Order.find({ userId });
     res.status(200).json({ success: true, data: result });
   } catch (error) {
     res.status(500).json({ error: error.message });
