@@ -137,9 +137,13 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
         formData.append("category", categoryId);
       }
 
-      // if (placeImage.image) {
-      //   formData.append("image", placeImage.image);
-      // }
+      console.log("hooson bnawdqedqdewde");
+
+      if (placeImages && placeImages.images) {
+        placeImages.images.forEach((file) => {
+          formData.append("image", file); // "images" нь сервер руу илгээх түлхүүр
+        });
+      }
 
       try {
         const response = await fetch(`${BACKEND_END_POINT}/places`, {
@@ -152,7 +156,6 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
           throw new Error(`HTTP error! status: ${response.status}`);
       } catch (error) {
         console.log(error);
-        // throw new Error();
       }
     },
   });

@@ -22,17 +22,50 @@ const createPlaces = async (req, response) => {
       weekendClose,
       closedDay,
     } = req.body;
-    const file = req.file;
+    const files = req.files;
 
-    if (!file) {
+    console.log(req.body, "req.body");
+    // req.body endeed buh medeelel ni orj irj bgaa
+    // [Object: null prototype] {
+    //   name: 'eqw',
+    //   capacity: '231',
+    //   description: 'manai naiz pinepone angiin ',
+    //   ambiance: 'wqdefrgeth',
+    //   province: 'utaanbaatar',
+    //   street: 'eeqwr',
+    //   weekdaysOpen: '09:00',
+    //   weekdaysClose: '19:00',
+    //   weekendOpen: '12:00',
+    //   weekendClose: '18:00',
+    //   closedDay: '3',
+    //   district: 'chingeltei',
+    //   category: '6757e6d23b4c6bea1e31f8a7'
+    // } req.body
+
+    if (!files || files.length === 0) {
       return response
         .status(400)
-        .json({ success: false, message: "Image is required" });
+        .json({ success: false, message: "Image is required", error: error });
     }
 
-    const uploadResult = await cloudinary.uploader.upload(file.path, {
-      folder: "foods",
-    });
+    const uploadResults = await Promise.all(
+      files.map((file) =>
+        cloudinary.uploader.upload(file.path, {
+          folder: "places", // Cloudinary папканы нэр
+        })
+      )
+    );
+
+    const uploadedUrls = uploadResults.map((result) => result.url);
+
+    // ene deer log deer iim yumuud bgaa
+    // [
+    //   'http://res.cloudinary.com/dl5irqaz6/image/upload/v1734419780/places/pilqoyrnxizvpb9ti4xg.jpg',
+    //   'http://res.cloudinary.com/dl5irqaz6/image/upload/v1734419761/places/x7nswal7ojjfdc4lufip.jpg',
+    //   'http://res.cloudinary.com/dl5irqaz6/image/upload/v1734419789/places/fvr1zunxmfeqp3mtr08l.jpg'
+    // ] uploadedUrls
+
+    console.log(uploadedUrls, "uploadedUrls");
 
     const addLocation = await Location.create({
       province,
@@ -44,7 +77,7 @@ const createPlaces = async (req, response) => {
 
     const result = await Places.create({
       name,
-      image: uploadResult.url,
+      image: uploadedUrls,
       category,
       capacity,
       description,
@@ -57,6 +90,9 @@ const createPlaces = async (req, response) => {
         closedDay,
       },
     });
+
+    console.log(result, "result");
+
     response.status(200).json({
       success: true,
       data: {
@@ -65,7 +101,7 @@ const createPlaces = async (req, response) => {
       },
     });
   } catch (error) {
-    response.status(500).json({ success: false, error: error.message });
+    response.status(500).json({ success: false, error: error.error });
   }
 };
 
@@ -120,7 +156,6 @@ const getSelectedPlaces = async (req, res) => {
     });
   }
 };
-
 
 const getSinglePagePlaces = async (req, res) => {
   try {
