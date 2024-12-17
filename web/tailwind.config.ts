@@ -14,8 +14,8 @@ export default {
       colors: {
         MainColor: "#050B20",
         MainWhite: "#FFFFFF",
-        MainGray: "#E8E8E8",
-        MainLBlue: "#4A6A91",
+        MainBlue: "#E8E8E8",
+        MainGray: "#5D5E60",
       },
       fontFamily: {
         Poppins: ["Poppins", "serif"],

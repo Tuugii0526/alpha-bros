@@ -2,7 +2,15 @@ import { TCategories, TLocation, TPlaces, TWeekhours } from "@/types/DataTypes";
 
 export const BACKEND_ENDPOINT = "http://localhost:8000";
 
-const date = new Date();
+export const FooterData = {
+  phoneNumber: "(976) 9911 7505",
+  mail: "Lighthousemongol@gmail.com",
+  address:
+    "СБД, 1-р хороо, Чингисийн өргөн чөлөө, Гурван гол оффис центр 3 давхар",
+  year: "2024",
+};
+
+export const date = new Date();
 const hour = date.getHours();
 const min = date.getMinutes();
 export const weekDay = date.getDay().toString();
@@ -13,16 +21,15 @@ export const Now = `${hour.toString().padStart(2, "0")}:${min
 export type TDistributor = {
   id: number;
   name: string;
-  icon: string;
 };
 
 export const distributorData: TDistributor[] = [
-  { id: 1, name: "Зоог", icon: "aa" },
-  { id: 2, name: "Амрах", icon: "ass" },
-  { id: 3, name: "Адал явдал", icon: "sds" },
-  { id: 4, name: "Намуухан", icon: "dsad" },
-  { id: 5, name: "Уулзалт", icon: "dsd" },
-  { id: 6, name: "Хөгжилдөх", icon: "dsad" },
+  { id: 1, name: "Зоог" },
+  { id: 2, name: "Амрах" },
+  { id: 3, name: "Адал явдал" },
+  { id: 4, name: "Намуухан" },
+  { id: 5, name: "Уулзалт" },
+  { id: 6, name: "Хөгжилдөх" },
 ];
 
 export type TWorkingHours = {

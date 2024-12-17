@@ -47,7 +47,7 @@ export const SearchedPage = () => {
     );
   }
   return (
-    <main className="w-screen min-h-screen ">
+    <main className="w-screen min-h-screen flex">
       {searchedData &&
         searchedData.map((data: TPlaces) => {
           return (

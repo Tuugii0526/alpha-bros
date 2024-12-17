@@ -3,8 +3,9 @@ import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { FooterData } from "@/constant/mockdatas";
 
-const ContactPage = () => {
+const ContactUs = () => {
   const form = useRef<HTMLFormElement | null>(null);
   const router = useRouter();
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
@@ -43,28 +44,27 @@ const ContactPage = () => {
           Thank you for your interest in our services. Please fill out the form
           below or email us at{" "}
           <a
-            href="mailto: aicode744@gmail.com"
+            href="mailto: lighthousemongol@gmail.com"
             className="text-blue-600 underline"
           >
-            aicode744@gmail.com
+            {FooterData.mail}
           </a>
           .
         </p>
         <ul className="space-y-3 text-gray-700">
           <li>
-            <i className="fas fa-map-marker-alt"></i> office is located in
-            pinecone
+            <i className="fas fa-map-marker-alt"></i> {FooterData.address}
           </li>
           <li>
-            <i className="fas fa-phone-alt"></i> 99119093
+            <i className="fas fa-phone-alt"></i> {FooterData.phoneNumber}
           </li>
           <li>
             <i className="fas fa-envelope"></i>{" "}
             <a
-              href="mailto:       aicode744@gmail.com"
+              href={`mailto:${FooterData.mail}  `}
               className="text-blue-600 underline"
             >
-              aicode744@gmail.com
+              {FooterData.mail}
             </a>
           </li>
         </ul>
@@ -132,4 +132,4 @@ const ContactPage = () => {
   );
 };
 
-export default ContactPage;
+export default ContactUs;
