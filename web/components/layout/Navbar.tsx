@@ -20,7 +20,7 @@ const paths = [
 export const Navbar = () => {
   const router = useRouter();
   return (
-    <div className="w-screen flex  justify-center py-2 relative z-10 text-MainWhite ">
+    <div className="w-screen flex  justify-center py-2 relative z-10 text-gray-400 ">
       <div className="max-w-screen-xl container flex justify-between  items-center w-full">
         <div className="flex gap-4 justify-start">
           {paths.map((path) => (
@@ -37,7 +37,7 @@ export const Navbar = () => {
         <div className="flex items-center justify-end gap-4">
           <SignedOut>
             <SignInButton>
-              <button className="p-1 border border-green-200 rounded-md">
+              <button className="p-1 border border-green-500 rounded-md">
                 Sign in
               </button>
             </SignInButton>
