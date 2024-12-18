@@ -15,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
@@ -25,6 +26,8 @@ import { TDistrict } from "@/data/DataTypes";
 import { restDayType } from "@/data/DataTypes";
 import { AddImageIcon } from "../icons";
 import * as Yup from "yup";
+import { toast } from "sonner";
+import { Map } from "./GoogleMap";
 
 export const districts: TDistrict[] = [
   { id: 1, name: "Сүхбаатар", idName: "Sukhbaatar" },
@@ -62,9 +65,9 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
   const [restDayData, setRestDayData] = useState("");
   const [loeder, setLoeder] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-
+  const [lng, setLng] = useState(106.9162924);
+  const [lat, setLat] = useState(47.9186367);
   const BACKEND_END_POINT = process.env.BACKEND_URL;
-
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
@@ -88,13 +91,9 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
     }
   };
 
-  console.log("images urls ", imagePreviews);
-
   const validationSchema = Yup.object({
     name: Yup.string().required("ene name - iig bogoln uu"),
   });
-
-  console.log(validationSchema, "validationSchema");
 
   const formik = useFormik({
     initialValues: {
@@ -109,11 +108,15 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
       weekendOpen: "",
       weekendClose: "",
       phoneNumber: "",
+      latitude: lat.toString(),
+      longitude: lng.toString(),
     },
     onSubmit: async (value) => {
       const requestData = {
         ...value,
       };
+
+      console.log("lat lng", lng, lat);
 
       const formData = new FormData();
       formData.append("name", requestData.name);
@@ -127,6 +130,8 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
       formData.append("weekdaysClose", requestData.weekdaysClose);
       formData.append("weekendOpen", requestData.weekendOpen);
       formData.append("weekendClose", requestData.weekendClose);
+      formData.append("latitude", requestData.latitude);
+      formData.append("longitude", requestData.longitude);
 
       if (restDayData) {
         formData.append("closedDay", restDayData);
@@ -139,8 +144,6 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
       if (categoryId) {
         formData.append("category", categoryId);
       }
-
-      console.log("hooson bnawdqedqdewde");
 
       if (placeImages && placeImages.images) {
         placeImages.images.forEach((file) => {
@@ -159,17 +162,23 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
           setIsDialogOpen(false);
         }
 
-        if (!response.ok)
+        if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
+        } else {
+          toast("Амжилттай", {
+            description: "Газар амжилттай нэмлээ",
+            action: {
+              label: "Хаах",
+              onClick: () => console.log("ajilah"),
+            },
+          });
+        }
         setLoeder(false);
       } catch (error) {
         console.log(error);
       }
     },
   });
-
-  console.log("-------!------", categoryId);
-
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger>
@@ -409,7 +418,9 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                       onChange={formik.handleChange}
                     />
                   </div>
-                  <div className="">map</div>
+                  <div className="">
+                    <Map lat={lat} lng={lng} setLat={setLat} setLng={setLng} />
+                  </div>
                 </TabsContent>
                 <TabsContent value="Image" className="w-full h-full">
                   <div className="w-full h-full">
