@@ -1,15 +1,14 @@
 import {
   Menubar,
   MenubarContent,
-  MenubarItem,
   MenubarMenu,
-  MenubarSeparator,
-  MenubarShortcut,
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import { EditIcon } from "../icons";
 import { EditButton } from "./EditButton";
 import { DeleteButtom } from "./DeleteButtom";
+import { Dispatch, SetStateAction } from "react";
+import { MenubarItem } from "@radix-ui/react-menubar";
 
 type EDButtonProps = {
   dataName: string;
