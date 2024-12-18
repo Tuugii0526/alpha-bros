@@ -20,6 +20,7 @@ export const RecommendedSpaces = ({ data }: PropsRecommendSpaces) => {
               ambiance={data.ambiance}
               category={data.category}
               capacity={data.capacity}
+              phoneNumber={data.phoneNumber}
               description={data.description}
               location={data.location}
               workingHours={data.workingHours}

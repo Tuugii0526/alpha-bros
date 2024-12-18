@@ -16,9 +16,7 @@ export const EditButton = () => {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            <p className="font-Poppins font-bold leading-[130%] text-2xl">
-              Edit
-            </p>
+            <p className=" font-bold leading-[130%] text-2xl">Edit</p>
           </DialogTitle>
           <DialogDescription>
             Please fill out the fields below to create a new space.

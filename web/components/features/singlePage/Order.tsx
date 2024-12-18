@@ -71,7 +71,7 @@ export const Order = ({ placeId }: { placeId: string }) => {
   };
 
   return (
-    <main className="flex flex-col gap-2 p-6 bg-white rounded-lg shadow-lg max-w-md mx-auto">
+    <main className="flex flex-col gap-2 px-5 bg-white rounded-lg shadow-lg  h-screen w-[300px] ">
       <div className="flex flex-col gap-1">
         <Input
           type="number"

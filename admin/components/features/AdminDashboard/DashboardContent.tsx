@@ -8,7 +8,7 @@ export const DashboardContent = () => {
       <div className="pl-8 pt-8 h-full">
         <div className="bg-white h-full rounded-xl">
           <div className="py-5 px-6 bg-MainWhite rounded-t-xl">
-            <p className="text-[#121316] font-Poppins font-bold leading-normal not-italic text-[22px]">
+            <p className="text-[#121316]  font-bold leading-normal not-italic text-[22px]">
               Admin dashboard
             </p>
           </div>
