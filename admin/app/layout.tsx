@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { AdminCategotyZone } from "@/components/features/AdminHome";
+import { Toaster } from "@/components/ui/sonner";
 import { ClerkProvider } from "@clerk/nextjs";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,28 +31,9 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          {/* <header>
-            <SignedOut>
-              <SignInButton>
-                <button className="p-1 border border-green-200 rounded-md">
-                  Sign in
-                </button>
-              </SignInButton>
-            </SignedOut>
-
-            <SignedIn>
-              <UserButton
-                showName
-                appearance={{
-                  elements: {
-                    userButtonBox: "bg-green-200 border border-2 rounded-md",
-                  },
-                }}
-              />
-            </SignedIn>
-          </header> */}
           <AdminCategotyZone />
           {children}
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

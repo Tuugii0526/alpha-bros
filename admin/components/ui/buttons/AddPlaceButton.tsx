@@ -15,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
@@ -25,6 +26,7 @@ import { TDistrict } from "@/data/DataTypes";
 import { restDayType } from "@/data/DataTypes";
 import { AddImageIcon } from "../icons";
 import * as Yup from "yup";
+import { toast } from "sonner";
 
 export const districts: TDistrict[] = [
   { id: 1, name: "Сүхбаатар", idName: "Sukhbaatar" },
@@ -88,13 +90,9 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
     }
   };
 
-  console.log("images urls ", imagePreviews);
-
   const validationSchema = Yup.object({
     name: Yup.string().required("ene name - iig bogoln uu"),
   });
-
-  console.log(validationSchema, "validationSchema");
 
   const formik = useFormik({
     initialValues: {
@@ -140,8 +138,6 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
         formData.append("category", categoryId);
       }
 
-      console.log("hooson bnawdqedqdewde");
-
       if (placeImages && placeImages.images) {
         placeImages.images.forEach((file) => {
           formData.append("image", file); // "images" нь сервер руу илгээх түлхүүр
@@ -159,16 +155,23 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
           setIsDialogOpen(false);
         }
 
-        if (!response.ok)
+        if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
+        } else {
+          toast("Амжилттай", {
+            description: "Газар амжилттай нэмлээ",
+            action: {
+              label: "Хаах",
+              onClick: () => console.log("ajilah"),
+            },
+          });
+        }
         setLoeder(false);
       } catch (error) {
         console.log(error);
       }
     },
   });
-
-  console.log("-------!------", categoryId);
 
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>

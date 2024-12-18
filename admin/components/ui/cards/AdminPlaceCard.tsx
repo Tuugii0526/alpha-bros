@@ -11,8 +11,6 @@ export const AdminPlaceCard = (data: TPlaces) => {
     (district) => district.idName === districtData
   );
 
-  console.log(filterDistricts, "filterDistricts");
-
   return (
     <div className="w-full border border-spacing-x-7 py-3 px-5 flex gap-2 justify-between rounded-lg">
       <div className="flex gap-3 items-center">
@@ -24,10 +22,10 @@ export const AdminPlaceCard = (data: TPlaces) => {
           }}
         ></div>
         <div className="w-[400px] ">
-          <p className="font-Poppins font-semibold text-lg not-italic leading-normal">
+          <p className="font-semibold text-lg not-italic leading-normal">
             {data?.name}
           </p>
-          <p className="font-Poppins font-normal text-sm leading-normal not-italic text-[#272727] line-clamp-2">
+          <p className="font-normal text-sm leading-normal not-italic text-[#272727] line-clamp-2">
             {data?.description}
           </p>
         </div>
@@ -73,7 +71,7 @@ export const AdminPlaceCard = (data: TPlaces) => {
         </p>
       </div>
       <div className="flex items-center p-2">
-        <EDButton />
+        <EDButton dataName={data?.name} dateID={data._id} />
       </div>
     </div>
   );
