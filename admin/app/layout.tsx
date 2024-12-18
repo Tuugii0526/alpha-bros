@@ -5,7 +5,6 @@ import { AdminCategotyZone } from "@/components/features/AdminHome";
 import { Toaster } from "@/components/ui/sonner";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ContextProvider } from "@/components/context/Context";
-import { Toaster } from "sonner";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
