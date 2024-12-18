@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type HeaderButtonTypes = {
   text?: string;
   pathname?: string;
@@ -99,3 +101,6 @@ export type restDayType = {
   valueRestDay: string;
   name: string;
 };
+export type TMap = google.maps.Map;
+export type TSetLat = Dispatch<SetStateAction<number>>;
+export type TSetLng = Dispatch<SetStateAction<number>>;
