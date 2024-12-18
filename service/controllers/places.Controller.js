@@ -195,13 +195,14 @@ const updatePlaces = async (req, res) => {
 
 const deletePlaces = async (req, res) => {
   try {
-    const placesId = req.body;
+    const { placesId } = req.body;
     const result = await Places.findByIdAndDelete(placesId);
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       data: result,
     });
   } catch (error) {
+    console.log(`error:${error}`);
     res.status(500).json({ success: false, error: error.message });
   }
 };

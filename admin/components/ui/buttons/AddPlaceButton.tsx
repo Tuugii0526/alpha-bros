@@ -15,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
@@ -25,6 +26,7 @@ import { TDistrict } from "@/data/DataTypes";
 import { restDayType } from "@/data/DataTypes";
 import { AddImageIcon } from "../icons";
 import * as Yup from "yup";
+import { toast } from "sonner";
 
 export const districts: TDistrict[] = [
   { id: 1, name: "Сүхбаатар", idName: "Sukhbaatar" },
@@ -153,8 +155,17 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
           setIsDialogOpen(false);
         }
 
-        if (!response.ok)
+        if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
+        } else {
+          toast("Амжилттай", {
+            description: "Газар амжилттай нэмлээ",
+            action: {
+              label: "Хаах",
+              onClick: () => console.log("ajilah"),
+            },
+          });
+        }
         setLoeder(false);
       } catch (error) {
         console.log(error);

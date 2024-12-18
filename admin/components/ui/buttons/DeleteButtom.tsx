@@ -10,8 +10,9 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useFormik } from "formik";
+import { toast } from "sonner";
 import { useState } from "react";
 
 type DeleteButtomProps = {
@@ -20,47 +21,62 @@ type DeleteButtomProps = {
 };
 
 export const DeleteButtom = ({ dataName, dateID }: DeleteButtomProps) => {
-  const [deletePlaceID, setDeletePlaceID] = useState("");
   const [inputValue, setInputValue] = useState("");
-  const [sefaButton, setSefaButton] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [loeder, setLoeder] = useState(false);
   const BACKEND_END_POINT = process.env.BACKEND_URL;
-  const safaValue = dataName;
 
-  console.log(inputValue, "inputValue");
+  const safaValue = dataName;
+  const placesId = dateID;
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value); // input-ийн утгыг авна
+    setInputValue(event.target.value);
   };
 
-  const formik = useFormik({
-    initialValues: {},
-
-    onSubmit: async (value) => {
-      console.log(value, "value");
-      const valueData = {
-        ...value,
-      };
-
-      const option = {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
+  const handleDelete = async (placesId: string) => {
+    if (safaValue !== inputValue) {
+      toast("Буруу байна", {
+        description: "Газрын нэр таарахгүй байна",
+        action: {
+          label: "Хаах",
+          onClick: () => console.log("ajilah"),
         },
-        body: JSON.stringify(valueData),
-      };
-      try {
-        const response = await fetch(`${BACKEND_END_POINT}/places`, option);
-        const data = await response.json();
-        if (!response.ok)
-          throw new Error(`HTTP error! status: ${response.status}`);
-      } catch (e) {
-        console.log(e);
+      });
+      return;
+    }
+
+    const option = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ placesId }),
+    };
+
+    try {
+      setLoeder(true);
+      const response = await fetch(`${BACKEND_END_POINT}/places`, option);
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      } else {
+        toast("Амжилттай", {
+          description: "Амжилттай Устгалаа",
+          action: {
+            label: "Хаах",
+            onClick: () => console.log("ajilah"),
+          },
+        });
+        setIsDialogOpen(false);
       }
-    },
-  });
+      setLoeder(false);
+    } catch (e) {
+      console.log(`error is:${e}`);
+    }
+  };
 
   return (
-    <AlertDialog>
+    <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <AlertDialogTrigger>Устгах</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
@@ -88,13 +104,23 @@ export const DeleteButtom = ({ dataName, dateID }: DeleteButtomProps) => {
           />
         </main>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction
-            onClick={() => setDeletePlaceID(dateID)}
-            className="bg-red-600 hover:bg-red-400"
-          >
-            Continue
-          </AlertDialogAction>
+          <AlertDialogCancel>Цуцлах</AlertDialogCancel>
+          <div>
+            {loeder === false ? (
+              <Button
+                onClick={() => handleDelete(placesId)}
+                className="bg-red-600 hover:bg-red-400"
+              >
+                Устгах
+              </Button>
+            ) : (
+              <Button className="bg-red-400 text-white min-w-[90px]">
+                <div className="flex items-center justify-center">
+                  <div className="w-6 h-6 border-4 border-white border-solid rounded-full animate-spin border-t-transparent"></div>
+                </div>
+              </Button>
+            )}
+          </div>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
