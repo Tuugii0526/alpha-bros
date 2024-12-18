@@ -34,6 +34,7 @@ const createPlaces = async (req, response) => {
       files.map((file) =>
         cloudinary.uploader.upload(file.path, {
           folder: "places",
+          transformation: [{ quality: "auto", fetch_ormat: "auto" }],
         })
       )
     );
@@ -196,16 +197,20 @@ const updatePlaces = async (req, res) => {
 const deletePlaces = async (req, res) => {
   try {
     const { placesId } = req.body;
+    const findedPlace = await Places.findById(placesId).populate("location");
+    const locationId = findedPlace.location._id;
+    console.log(locationId);
+    const deleteLocation = await Location.findByIdAndDelete(locationId);
     const result = await Places.findByIdAndDelete(placesId);
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
-      data: result,
+      data: { deleteLocation, result },
     });
   } catch (error) {
-    console.log(`error:${error}`);
     res.status(500).json({ success: false, error: error.message });
   }
 };
+
 
 export {
   createPlaces,
