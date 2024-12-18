@@ -13,7 +13,7 @@ export default function Page() {
   const fetchdata = async () => {
     try {
       const response = await fetch(
-        `${BACKEND_ENDPOINT}/api/selected?category=${categoryName}`
+        `${BACKEND_ENDPOINT}/api/selected?categorizedPlaces=${categoryName}`
       );
       const result = await response.json();
       setData(result.data);

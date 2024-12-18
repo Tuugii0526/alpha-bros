@@ -170,7 +170,7 @@ export const AddSpaceButton = () => {
               </Select>
               <div className="grid grid-cols-2">
                 <div className="max-w-[210px] w-full h-[122px] p-2 flex flex-col justify-center items-center gap-2 border border-dashed border-[#D6D7DC] bg-[rgba(186,188,196,0.12)] rounded-lg">
-                  <p className="text-[#525252] font-poppins text-base font-bold text-center">
+                  <p className="text-[#525252]  text-base font-bold text-center">
                     Газрын зураг аа нэмнэ үү
                   </p>
                   <input

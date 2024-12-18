@@ -24,10 +24,10 @@ export const AdminPlaceCard = (data: TPlaces) => {
           }}
         ></div>
         <div className="w-[400px] ">
-          <p className="font-Poppins font-semibold text-lg not-italic leading-normal">
+          <p className=" font-semibold text-lg not-italic leading-normal">
             {data?.name}
           </p>
-          <p className="font-Poppins font-normal text-sm leading-normal not-italic text-[#272727] line-clamp-2">
+          <p className=" font-normal text-sm leading-normal not-italic text-[#272727] line-clamp-2">
             {data?.description}
           </p>
         </div>

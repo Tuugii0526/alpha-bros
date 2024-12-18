@@ -2,7 +2,7 @@ export const PeopleIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
+      fill="#333"
       width="24px"
       hanging="24px"
       viewBox="0 0 24 24"

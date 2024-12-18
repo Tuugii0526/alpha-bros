@@ -6,7 +6,7 @@ export const FilterIcon = () => {
       height="28"
       viewBox="0 0 24 24"
       fill="#D1D5DB"
-      stroke="#D1D5DB"
+      stroke="#333"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"

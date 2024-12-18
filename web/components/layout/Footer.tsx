@@ -7,7 +7,7 @@ import { date, FooterData } from "@/constant/mockdatas";
 
 export const Footer = () => {
   return (
-    <main className="flex flex-col items-center mb-20">
+    <main className="flex flex-col items-center my-20">
       <div className="max-w-screen-xl container p-20  rounded-2xl flex flex-col gap-4 bg-MainWhite">
         <div className="w-full h-10 font-semi-bold text-2xl">Луужин</div>
         <div className="w-full  flex justify-between">

@@ -13,10 +13,10 @@ export const Hero = () => {
         <div className="container mx-auto max-w-screen-xl">
           <div className="text-MainWhite pt-[180px]">
             <div className="flex flex-col gap-6 max-w-[559px]">
-              <p className="font-Poppins text-7xl not-italic font-semibold leading-[80px] text-MainWhite">
+              <p className=" text-7xl not-italic font-semibold leading-[80px] text-MainWhite">
                 Өөрт тохирох орчноо олцгооё
               </p>
-              <p className="font-Poppins font-thin not-italic leading-normal text-xl text-MainWhite shadow-lg">
+              <p className=" font-thin not-italic leading-normal text-xl text-MainWhite shadow-lg">
                 Өөрсдийн дурсамжаа бүтээцгээе
               </p>
             </div>

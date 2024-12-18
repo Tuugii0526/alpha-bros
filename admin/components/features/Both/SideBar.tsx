@@ -15,7 +15,7 @@ export const SideBar = () => {
       <div className="flex flex-col gap-10 max-w-[302px] w-[280px] h-full bg-MainWhite py-[26px] rounded-r-[30px]">
         <div className="flex items-end">
           <LightHouseIcon />
-          <p className="font-Poppins font-bold text-[22px] w-auto text-SecondColor not-italic leading-[norma]">
+          <p className=" font-bold text-[22px] w-auto text-SecondColor not-italic leading-[norma]">
             LIGHT HOUSE
           </p>
         </div>

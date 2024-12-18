@@ -274,7 +274,7 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                   </div>
                   <div className="px-4 flex flex-col gap-4">
                     <div className="flex flex-col">
-                      <p className="font-poppins text-base font-bold text-center">
+                      <p className=" text-base font-bold text-center">
                         Ажлын өдрүүд
                       </p>
                       <div className="flex items-center justify-between">
@@ -309,7 +309,7 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                       </div>
                     </div>
                     <div className="flex flex-col">
-                      <p className="font-poppins text-base font-bold text-center">
+                      <p className=" text-base font-bold text-center">
                         Амралтын өдрүүд
                       </p>
                       <div className="flex items-center justify-between">
@@ -344,7 +344,7 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                       </div>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <p className="w-full text-black font-poppins text-base font-bold text-center">
+                      <p className="w-full text-black  text-base font-bold text-center">
                         Амрах өдөр
                       </p>
                       <Select onValueChange={(value) => setRestDayData(value)}>
@@ -413,7 +413,7 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
                 </TabsContent>
                 <TabsContent value="Image" className="w-full h-full">
                   <div className="w-full h-full">
-                    <p className="text-[#525252] font-poppins text-base font-bold text-center">
+                    <p className="text-[#525252]  text-base font-bold text-center">
                       Газрын зураг аа нэмнэ үү
                     </p>
 

@@ -64,14 +64,14 @@ export const Search = () => {
               setLocation(value);
             }}
           >
-            <SelectTrigger className="w-[180px] font-Poppins text-lg border-none font-semibold leading-7 not-italic text-[#333] outline-none">
+            <SelectTrigger className="w-[180px]  text-lg border-none font-semibold leading-7 not-italic text-[#333] outline-none">
               <SelectValue placeholder="Дүүрэг" className="" />
             </SelectTrigger>
             <SelectContent>
               {districts.map((discrict) => {
                 return (
                   <SelectItem
-                    className="w-[200px] font-Poppins text-lg border-none font-thin leading-7  text-[#333] outline-none bg-MainWhite"
+                    className="w-[200px]  text-lg border-none font-thin leading-7  text-[#333] outline-none bg-MainWhite"
                     key={`${discrict?.name}` + discrict?.id + Date.now()}
                     value={discrict?.idName}
                     onClick={() => {
@@ -96,14 +96,14 @@ export const Search = () => {
               setCategory(value);
             }}
           >
-            <SelectTrigger className="w-[200px] font-Poppins text-lg  border-none font-semibold leading-7 not-italic text-[#333]  outline-none">
+            <SelectTrigger className="w-[200px]  text-lg  border-none font-semibold leading-7 not-italic text-[#333]  outline-none">
               <SelectValue placeholder="Орчиноо сонгоно уу" />
             </SelectTrigger>
             <SelectContent>
               {categories?.map((category) => {
                 return (
                   <SelectItem
-                    className="w-[180px] font-Poppins text-lg !border-none  leading-7 not-italic text-[#222] outline-none bg-MainWhite"
+                    className="w-[180px]  text-lg !border-none  leading-7 not-italic text-[#222] outline-none bg-MainWhite"
                     key={category._id}
                     value={category?.name}
                     onClick={() => {

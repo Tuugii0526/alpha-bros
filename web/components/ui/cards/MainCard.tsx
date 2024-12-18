@@ -1,6 +1,6 @@
 "use client";
 
-import { TPlaces, TWorkingHours } from "@/types/DataTypes";
+import { TPlaces } from "@/types/DataTypes";
 import {
   BookOpenTextIcon,
   MapPinIcon,
@@ -50,18 +50,19 @@ const MainCard = (data: TPlaces) => {
 
     checkOpenStatus();
   }, [data]);
-  const mainImageUrl = data?.image[0];
+
+  const imageUrl = data?.image[0];
   return (
-    <div className="w-[300px] h-[500px] rounded-xl flex flex-col items-center border">
+    <div className="w-[300px] h-[500px] rounded-xl flex flex-col items-center border overflow-hidden">
       <div className="rounded-xl w-full h-full relative">
-        <Image
-          src={mainImageUrl}
-          alt={data.name}
+        <img
+          src={imageUrl} // Fallback image
+          alt={"Image"}
           style={{
-            objectFit: "cover",
-            objectPosition: "center",
+            backgroundPosition: "center",
+            width: "300px",
+            height: "330px",
           }}
-          fill
         />
       </div>
       <div className="bg-MainColor p-4 w-[300px] h-[200px] flex flex-col gap-4 text-MainWhite rounded-b-xl">
