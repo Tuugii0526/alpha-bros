@@ -18,7 +18,7 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { TCategories } from "@/data/DataTypes";
 import { useFormik } from "formik";
 import { PlaceImageType } from "@/data/DataTypes";
@@ -53,9 +53,15 @@ const restDays: restDayType[] = [
 
 type AddPlaceButtonProps = {
   categoryData: TCategories[];
+  setDataEffect: Dispatch<SetStateAction<boolean>>;
+  dataEffect: boolean;
 };
 
-export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
+export const AddPlaceButton = ({
+  categoryData,
+  setDataEffect,
+  dataEffect,
+}: AddPlaceButtonProps) => {
   const [placeImages, setPlaceImages] = useState<PlaceImageType>({
     images: [],
   });
@@ -160,6 +166,10 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
         const data = await response.json();
         if (data.success) {
           setIsDialogOpen(false);
+        }
+        // setPlaceImages((prev) => [...prev, []]);
+        if (data.success == true) {
+          setDataEffect(!dataEffect);
         }
 
         if (!response.ok) {
@@ -498,3 +508,4 @@ export const AddPlaceButton = ({ categoryData }: AddPlaceButtonProps) => {
     </Dialog>
   );
 };
+//set90

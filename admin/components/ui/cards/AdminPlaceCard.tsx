@@ -3,6 +3,7 @@
 import { TPlaces } from "@/data/DataTypes";
 import { EDButton } from "../buttons";
 import { districts } from "../buttons";
+import { Dispatch, SetStateAction } from "react";
 
 export const AdminPlaceCard = (data: TPlaces) => {
   const districtData = data?.location?.district;

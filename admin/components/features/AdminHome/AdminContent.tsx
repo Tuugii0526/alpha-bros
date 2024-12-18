@@ -3,15 +3,20 @@ import { AddPlaceButton } from "@/components/ui/buttons";
 import { AdminPlaceCard } from "@/components/ui/cards";
 import { TPlaces } from "@/data/DataTypes";
 import { TCategories } from "@/data/DataTypes";
+import { Dispatch, SetStateAction } from "react";
 
 type AdminContentProps = {
   placesData: TPlaces[];
   categoryData: TCategories[];
+  setDataEffect: Dispatch<SetStateAction<boolean>>;
+  dataEffect: boolean;
 };
 
 export const AdminContent = ({
   placesData,
   categoryData,
+  setDataEffect,
+  dataEffect,
 }: AdminContentProps) => {
   return (
     <main className="w-full h-[90%] pb-3">
@@ -23,7 +28,11 @@ export const AdminContent = ({
               <p className="font-bold leading-normal not-italic text-[22px]">
                 Миний бүх газрууд
               </p>
-              <AddPlaceButton categoryData={categoryData} />
+              <AddPlaceButton
+                categoryData={categoryData}
+                setDataEffect={setDataEffect}
+                dataEffect={dataEffect}
+              />
             </div>
           </div>
           <div className="px-6 w-full h-full overflow-hidden">

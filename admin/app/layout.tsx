@@ -4,6 +4,7 @@ import "./globals.css";
 import { AdminCategotyZone } from "@/components/features/AdminHome";
 import { Toaster } from "@/components/ui/sonner";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ContextProvider } from "@/components/context/Context";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -27,15 +28,17 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <AdminCategotyZone />
-          {children}
-          <Toaster />
-        </body>
-      </html>
+      <ContextProvider>
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            <AdminCategotyZone />
+            {children}
+            <Toaster />
+          </body>
+        </html>
+      </ContextProvider>
     </ClerkProvider>
   );
 }

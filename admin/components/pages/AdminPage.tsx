@@ -4,11 +4,14 @@ import { useEffect, useState } from "react";
 import { AdminPageZone } from "../features/AdminHome";
 import { TPlaces } from "@/data/DataTypes";
 import { TCategories } from "@/data/DataTypes";
+import { useIdContext } from "../context/Context";
 
 const AdminPage = () => {
   const [placesData, setPlacesData] = useState<TPlaces[]>([]);
   const [categoryData, setCategoryData] = useState<TCategories[]>([]);
   const BACKEND_END_POINT = process.env.BACKEND_URL;
+  const [dataEffect, setDataEffect] = useState<boolean>(false);
+  const { deletedId } = useIdContext();
 
   const fatchData = async () => {
     try {
@@ -20,6 +23,7 @@ const AdminPage = () => {
       console.log("error", e);
     }
   };
+  console.log("deletedId:", deletedId);
 
   const fetchDataCategory = async () => {
     try {
@@ -35,10 +39,16 @@ const AdminPage = () => {
   useEffect(() => {
     fatchData();
     fetchDataCategory();
-  }, []);
+  }, [dataEffect, deletedId]);
+
   return (
     <main className="h-screen w-screen bg-slate-100">
-      <AdminPageZone placesData={placesData} categoryData={categoryData} />
+      <AdminPageZone
+        placesData={placesData}
+        categoryData={categoryData}
+        setDataEffect={setDataEffect}
+        dataEffect={dataEffect}
+      />
     </main>
   );
 };

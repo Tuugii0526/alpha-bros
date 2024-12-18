@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useState } from "react";
+import { useIdContext } from "@/components/context/Context";
 
 type DeleteButtomProps = {
   dataName: string;
@@ -25,7 +26,7 @@ export const DeleteButtom = ({ dataName, dateID }: DeleteButtomProps) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [loeder, setLoeder] = useState(false);
   const BACKEND_END_POINT = process.env.BACKEND_URL;
-
+  const { setDeletedId } = useIdContext();
   const safaValue = dataName;
   const placesId = dateID;
 
@@ -68,6 +69,9 @@ export const DeleteButtom = ({ dataName, dateID }: DeleteButtomProps) => {
           },
         });
         setIsDialogOpen(false);
+      }
+      if (data.success == true) {
+        setDeletedId(placesId);
       }
       setLoeder(false);
     } catch (e) {

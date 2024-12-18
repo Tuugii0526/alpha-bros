@@ -104,3 +104,7 @@ export type restDayType = {
 export type TMap = google.maps.Map;
 export type TSetLat = Dispatch<SetStateAction<number>>;
 export type TSetLng = Dispatch<SetStateAction<number>>;
+export type TContextType = {
+  deletedId: string;
+  setDeletedId: Dispatch<SetStateAction<string>>;
+};
