@@ -5,7 +5,7 @@ type PropsRecommendSpaces = {
 };
 export const RecommendedSpaces = ({ data }: PropsRecommendSpaces) => {
   return (
-    <div className="w-screen flex flex-col gap-10 justify-center items-center mt-10">
+    <div className="w-screen flex flex-col gap-10 justify-center items-center">
       <h1 className="text-2xl font-Roboto font-semibold italic">
         Үнэлгээ өндөртэй газрууд
       </h1>

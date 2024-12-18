@@ -7,6 +7,7 @@ import {
   MoveUpRight,
   UsersIcon,
 } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -49,19 +50,20 @@ const MainCard = (data: TPlaces) => {
 
     checkOpenStatus();
   }, [data]);
-
+  const mainImageUrl = data?.image[0];
   return (
     <div className="w-[300px] h-[500px] rounded-xl flex flex-col items-center border">
-      <div
-        className="rounded-t-xl"
-        style={{
-          backgroundImage: `url(${data.image})`,
-          width: "300px",
-          height: "300px",
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-        }}
-      ></div>
+      <div className="rounded-xl w-full h-full relative">
+        <Image
+          src={mainImageUrl}
+          alt={data.name}
+          style={{
+            objectFit: "cover",
+            objectPosition: "center",
+          }}
+          fill
+        />
+      </div>
       <div className="bg-MainColor p-4 w-[300px] h-[200px] flex flex-col gap-4 text-MainWhite rounded-b-xl">
         <div className="flex flex-col border-b border-white">
           <p className="text-2xl">{data.name}</p>
