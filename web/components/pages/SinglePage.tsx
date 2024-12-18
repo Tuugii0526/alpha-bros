@@ -35,6 +35,5 @@ export default function SinglePage() {
   useEffect(() => {
     fetchPlaces();
   }, []);
-
   return <main>{<PageBuild place={place} />}</main>;
 }
