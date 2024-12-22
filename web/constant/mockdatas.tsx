@@ -1,7 +1,3 @@
-import { TCategories, TLocation, TPlaces, TWeekhours } from "@/types/DataTypes";
-
-export const BACKEND_ENDPOINT = "http://localhost:8000";
-
 export const FooterData = {
   phoneNumber: "(976) 9911 7505",
   mail: "Lighthousemongol@gmail.com",
@@ -11,6 +7,9 @@ export const FooterData = {
 };
 
 export const date = new Date();
+export const today = `${date.getFullYear()}-${
+  date.getUTCMonth() + 1
+}-${date.getDate()}-ны өдөр`;
 const hour = date.getHours();
 const min = date.getMinutes();
 export const weekDay = date.getDay().toString();
@@ -21,15 +20,17 @@ export const Now = `${hour.toString().padStart(2, "0")}:${min
 export type TDistributor = {
   id: number;
   name: string;
+  nameId: string;
 };
 
-export const distributorData: TDistributor[] = [
-  { id: 1, name: "Зоог" },
-  { id: 2, name: "Амрах" },
-  { id: 3, name: "Адал явдал" },
-  { id: 4, name: "Намуухан" },
-  { id: 5, name: "Уулзалт" },
-  { id: 6, name: "Хөгжилдөх" },
+export const categoryMockData: TDistributor[] = [
+  { id: 1, name: "Зоог", nameId: "FOOD" },
+  { id: 2, name: "Уулзах", nameId: "Meeting" },
+  { id: 3, name: "Болзоо", nameId: "Dating" },
+  { id: 4, name: "Хөгжилдөх", nameId: "Enjoy" },
+  { id: 5, name: "Сургалт", nameId: "Seminar" },
+  { id: 6, name: "Дасгал", nameId: "Training" },
+  { id: 7, name: "Хүрээлэлээ тэлэх", nameId: "Networking" },
 ];
 
 export type TWorkingHours = {
@@ -56,3 +57,15 @@ export const districts: District[] = [
 ];
 
 ///////////////////////////////////////////////////////////////////////////////
+
+export function dateGenerate(e: string) {
+  const dateString = e;
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = date.getUTCMonth() + 1;
+  const day = date.getUTCDate();
+  const hour = date.getUTCHours();
+  const minute = date.getUTCMinutes();
+  const now = `${year}-${month}-${day} ${hour}:${minute}`;
+  return now;
+}

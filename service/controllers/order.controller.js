@@ -2,11 +2,13 @@ import { Order } from "../model/order.model.js";
 import { User } from "../model/user.model.js";
 
 const createOrder = async (req, res) => {
+  console.log(req.body);
+
   try {
     const { clerkId, stringDate, people, placeId } = req.body;
     const user = await User.findOne({ clerk_id: clerkId });
     if (!user) {
-      return res.status(404);
+      return res.status(404).json({});
     }
     const id = user._id;
     const result = await Order.create({
@@ -16,14 +18,17 @@ const createOrder = async (req, res) => {
       people: people,
     });
     if (result) {
-      return res.status(201).json();
+      return res.status(201).json({
+        success: true,
+        data: result,
+      });
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
 
-const getSelectedUsersOrder = async (req, res) => {
+const getSelectedUsersandLatestOrder = async (req, res) => {
   try {
     const clerkId = req.params["id"];
     const user = await User.findOne({ clerk_id: clerkId });
@@ -31,8 +36,9 @@ const getSelectedUsersOrder = async (req, res) => {
       return res.status(404);
     }
     const userId = user?._id;
-    const result = await Order.find({ userId });
-    res.status(200).json({ success: true, data: result });
+    const OrderData = await Order.find({ userId });
+    const LatestData = await Order.findOne({ userId }).populate("placeId");
+    res.status(200).json({ success: true, data: { OrderData, LatestData } });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -40,11 +46,32 @@ const getSelectedUsersOrder = async (req, res) => {
 
 const getAllOrder = async (req, res) => {
   try {
-    const result = await Order.find();
+    const result = await Order.find().populate("userId").populate("placeId");
     res.status(200).json({ success: true, data: result });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
 };
 
-export { createOrder, getAllOrder, getSelectedUsersOrder };
+const changeOrderRole = async (req, res) => {
+  try {
+    const { orderId, newProcess } = req.body;
+    const result = await Order.findByIdAndUpdate(
+      orderId,
+      {
+        process: newProcess,
+      },
+      { new: true }
+    );
+    res.status(200).json({ success: true, data: result });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+};
+
+export {
+  createOrder,
+  getAllOrder,
+  getSelectedUsersandLatestOrder,
+  changeOrderRole,
+};

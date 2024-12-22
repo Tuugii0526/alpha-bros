@@ -3,7 +3,6 @@
 import { TPlaces } from "@/data/DataTypes";
 import { EDButton } from "../buttons";
 import { districts } from "../buttons";
-import { Dispatch, SetStateAction } from "react";
 
 export const AdminPlaceCard = (data: TPlaces) => {
   const districtData = data?.location?.district;
@@ -31,8 +30,8 @@ export const AdminPlaceCard = (data: TPlaces) => {
           </p>
         </div>
       </div>
-      <div className="flex flex-col gap-2 justify-center items-center">
-        <div className="flex items-center">
+      <div className="flex flex-col gap-2 justify-center items-start">
+        <div className="flex items-start">
           <p className="font-Inter text-sm font-semibold not-italic leading-5 tracking-[-0.28px] ">
             Төрөл:{" "}
             <span className="text-[#121316] font-normal">
@@ -72,7 +71,11 @@ export const AdminPlaceCard = (data: TPlaces) => {
         </p>
       </div>
       <div className="flex items-center p-2">
-        <EDButton dataName={data?.name} dateID={data._id} />
+        <EDButton
+          dataName={data?.name}
+          dateID={data._id}
+          categoryData={data?.categoryData}
+        />
       </div>
     </div>
   );

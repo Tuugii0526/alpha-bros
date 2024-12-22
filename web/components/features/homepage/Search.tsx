@@ -14,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { BACKEND_ENDPOINT, districts } from "@/constant/mockdatas";
+import { categoryMockData, districts } from "@/constant/mockdatas";
 import { TCategories } from "@/types/DataTypes";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -30,11 +30,13 @@ export const Search = () => {
   // //////////////////////////////////////////////////////////
   const fetchCategory = async () => {
     try {
-      const response = await fetch(`${BACKEND_ENDPOINT}/api/category`);
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_KEY}/api/category`
+      );
       const result = await response.json();
       setCategories(result.data);
     } catch (error) {
-      throw new Error();
+      console.log(`error:${error}`);
     }
   };
   const search = () => {
@@ -71,7 +73,7 @@ export const Search = () => {
               {districts.map((discrict) => {
                 return (
                   <SelectItem
-                    className="w-[200px]  text-lg border-none font-thin leading-7  text-[#333] outline-none bg-MainWhite"
+                    className="w-[220px] text-lg border-none font-medium leading-7  text-[#333] outline-none bg-MainWhite"
                     key={`${discrict?.name}` + discrict?.id + Date.now()}
                     value={discrict?.idName}
                     onClick={() => {
@@ -88,29 +90,32 @@ export const Search = () => {
         </div>
         <div className="h-[44px] border-[0.5px] border-[#E5E7EB]"></div>
         <div className="flex items-center gap-3 py-6 px-12">
-          <FilterIcon />
-
           {/* ////////////////////// */}
+          <FilterIcon />
           <Select
             onValueChange={(value) => {
               setCategory(value);
             }}
           >
-            <SelectTrigger className="w-[200px]  text-lg  border-none font-semibold leading-7 not-italic text-[#333]  outline-none">
+            <SelectTrigger className="w-[220px] text-lg  border-none font-medium leading-7 not-italic text-[#333]  outline-none">
               <SelectValue placeholder="Орчиноо сонгоно уу" />
             </SelectTrigger>
             <SelectContent>
               {categories?.map((category) => {
                 return (
                   <SelectItem
-                    className="w-[180px]  text-lg !border-none  leading-7 not-italic text-[#222] outline-none bg-MainWhite"
+                    className="w-[180px] text-lg !border-none  leading-7 not-italic text-[#222] outline-none bg-MainWhite"
                     key={category._id}
                     value={category?.name}
                     onClick={() => {
                       setCategory(category?.name);
                     }}
                   >
-                    {category?.name}
+                    {
+                      categoryMockData.find(
+                        (data) => data.nameId === category.name
+                      )?.name
+                    }
                   </SelectItem>
                 );
               })}
@@ -120,12 +125,12 @@ export const Search = () => {
         </div>
         <div className="h-[44px] border-[0.5px] border-[#E5E7EB]"></div>
         {/* //////////////////////////// */}
-        <div className="flex items-center gap-3 py-6 px-4">
+        <div className="flex items-center gap-3 py-6 px-4 ">
           <GuestsIcon />
           <Input
-            className="w-16 text-[#333] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            className="text-[#333] w-[110px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none outline-none"
             type="number"
-            placeholder="2"
+            placeholder="Хүний тоо"
             onChange={(e) => {
               setPeopleCount(e.target.value);
             }}
