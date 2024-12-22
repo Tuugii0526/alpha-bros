@@ -229,10 +229,20 @@ export const AdminOrderCard: React.FC<AdminOrderCardProps> = ({ order }) => {
             />
           </SelectTrigger>
           <SelectContent defaultValue={progress}>
-            <SelectItem className={`text-green-600 `} value="Батлагдсан">
+            <SelectItem
+              className={`font-Poppins ${
+                progress == "Батлагдсан" ? "text-green-600 " : " "
+              } `}
+              value="Батлагдсан"
+            >
               Батлагдсан
             </SelectItem>
-            <SelectItem className={`text-red-600 `} value="Цуцлагдсан">
+            <SelectItem
+              className={`font-Poppins ${
+                progress == "Цуцлагдсан" ? "text-red-600" : ""
+              }  `}
+              value="Цуцлагдсан"
+            >
               Цуцлагдсан
             </SelectItem>
           </SelectContent>
