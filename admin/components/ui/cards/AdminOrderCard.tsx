@@ -159,9 +159,9 @@ export const AdminOrderCard: React.FC<AdminOrderCardProps> = ({ order }) => {
   //   fetchProcessChange(newProcess);
   // };
 
-  useEffect(() => {
-    fetchProcessChange(newProcess);
-  }, [newProcess]);
+  // useEffect(() => {
+  //   fetchProcessChange(newProcess);
+  // }, [newProcess]);
 
   // const getProcessColor = () => {
   //   switch (process) {
@@ -220,7 +220,7 @@ export const AdminOrderCard: React.FC<AdminOrderCardProps> = ({ order }) => {
         </p>
       </div>
       <div className="px-6 py-4 flex items-center w-[200px]">
-        <Select onValueChange={(value) => setNewProcess(value)}>
+        <Select onValueChange={async (value) => fetchProcessChange(value)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Хүлээгдэж Байна" />
           </SelectTrigger>
