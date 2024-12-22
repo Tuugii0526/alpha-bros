@@ -220,14 +220,11 @@ export const AdminOrderCard: React.FC<AdminOrderCardProps> = ({ order }) => {
         </p>
       </div>
       <div className="px-6 py-4 flex items-center w-[200px]">
-        <Select
-          defaultValue={progress}
-          onValueChange={async (value) => fetchProcessChange(value)}
-        >
+        <Select onValueChange={async (value) => fetchProcessChange(value)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Хүлээгдэж Байна" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent defaultValue={progress}>
             <SelectItem className="text-green-600" value="Батлагдсан">
               Батлагдсан
             </SelectItem>
