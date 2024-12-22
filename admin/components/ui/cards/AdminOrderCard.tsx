@@ -160,10 +160,8 @@ export const AdminOrderCard: React.FC<AdminOrderCardProps> = ({ order }) => {
   // };
 
   useEffect(() => {
-    if (newProcess !== order.process) {
-      fetchProcessChange(newProcess);
-    }
-  }, [newProcess, order.process]);
+    fetchProcessChange(newProcess);
+  }, [newProcess]);
 
   // const getProcessColor = () => {
   //   switch (process) {
